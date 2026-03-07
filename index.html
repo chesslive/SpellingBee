@@ -62,6 +62,33 @@
         .bg-nebula { background: radial-gradient(circle at 30% 50%, #ff6ec4, #7873f5, #3b9f9f); background-size: 200% 200%; animation: nebula 15s ease infinite; color: #fff; text-shadow: 0 0 10px black; }
         .bg-aurora { background: linear-gradient(135deg, #00f260, #0575e6, #00f260); background-size: 400% 400%; animation: aurora 12s ease infinite; color: #fff; text-shadow: 0 0 5px #00f260; }
 
+        /* Premium logo background theme (10,000 points) */
+        .bg-logo { background: #0a0c14; position: relative; color: #fff; }
+        .bg-logo::before {
+            content: "🐝 SPELLING BEE 🐝 ";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            font-size: 80px;
+            font-weight: 900;
+            color: rgba(255, 215, 0, 0.03);
+            white-space: pre;
+            text-align: center;
+            line-height: 1.5;
+            pointer-events: none;
+            transform: rotate(-10deg) scale(1.5);
+            animation: logoFloat 20s linear infinite;
+            z-index: 0;
+        }
+        .bg-logo > * { position: relative; z-index: 1; }
+        @keyframes logoFloat {
+            0% { transform: rotate(-10deg) scale(1.5) translateY(0); }
+            50% { transform: rotate(-10deg) scale(1.5) translateY(-20px); }
+            100% { transform: rotate(-10deg) scale(1.5) translateY(0); }
+        }
+
         /* Keyframes for animations */
         @keyframes neonPulse { 0% { text-shadow:0 0 8px #00ff41; } 50% { text-shadow:0 0 20px #00ff41, 0 0 30px #00ff41; } }
         @keyframes galaxyShift { 0% { background-position:0% 0%; } 100% { background-position:100% 100%; } }
@@ -275,9 +302,11 @@
                 <li>Click "Hear Word" to hear a word.</li>
                 <li>Spell it correctly to earn points and XP.</li>
                 <li>Complete 5 words daily to keep your streak alive!</li>
-                <li>Reach higher levels to unlock Challenge, Ranked, Live Play, and Power-ups.</li>
+                <li>Reach higher levels to unlock Challenge, Ranked, Live Play, and Power-ups (level 35).</li>
                 <li>Customize your profile with avatars, colors, borders, and titles!</li>
                 <li>Claim daily bonus for extra points.</li>
+                <li>After 3 incorrect attempts, the word is revealed.</li>
+                <li>Click "Show Meaning" to see the definition without seeing the word.</li>
             </ul>
             <button id="close-tutorial">Got it!</button>
         </section>
@@ -393,16 +422,19 @@
                 <div class="action-row">
                     <input type="text" id="live-spell" placeholder="Spell...">
                     <button id="live-submit-btn">Check</button>
+                    <button id="live-show-meaning-btn" style="background:var(--info);">📖 Show Meaning</button>
                 </div>
+                <div id="live-meaning-display" class="definition-box hidden"></div>
                 <p id="live-msg" class="msg"></p>
             </div>
             <button id="find-match-btn" class="big-btn">Find Match</button>
         </section>
 
-        <!-- Power-ups -->
-        <section id="powerups-section" class="hidden">
+        <!-- Power-ups (now always visible, but shows unlock message until level 35) -->
+        <section id="powerups-section">
             <h3 class="section-title">⚡ Power-Ups</h3>
-            <div class="powerup-grid">
+            <div id="powerup-unlock-msg" class="msg">Power-ups unlock at level 35. <span id="levels-remaining">X</span> levels remaining.</div>
+            <div class="powerup-grid" id="powerup-grid">
                 <div class="powerup-card">💡 Hint <button id="use-hint" disabled>Use (50 pts)</button></div>
                 <div class="powerup-card">⏱️ Extra Time <button id="use-extratime" disabled>Use (75 pts)</button></div>
                 <div class="powerup-card">✨ Double XP <button id="use-doublexp" disabled>Use (100 pts)</button></div>
@@ -498,7 +530,9 @@
                 </div>
                 <div class="action-row">
                     <button id="skip-word-btn" style="background:var(--warning);">⏭️ Skip (10 pts)</button>
+                    <button id="show-meaning-btn" style="background:var(--info);">📖 Show Meaning (No spoiler)</button>
                 </div>
+                <div id="meaning-display" class="definition-box hidden"></div>
                 <p id="game-msg" class="msg"></p>
                 <div id="deck-info">Loading words...</div>
             </div>
@@ -511,7 +545,9 @@
                 <div class="action-row">
                     <input type="text" id="challenge-spell" placeholder="Spell..." disabled>
                     <button id="submit-challenge-btn" disabled>Submit</button>
+                    <button id="challenge-show-meaning-btn" class="hidden" style="background:var(--info);">📖 Show Meaning</button>
                 </div>
+                <div id="challenge-meaning-display" class="definition-box hidden"></div>
                 <p id="challenge-msg" class="msg"></p>
             </div>
 
@@ -536,20 +572,22 @@
             </div>
         </section>
 
-        <!-- Leaderboards -->
+        <!-- Leaderboards (now includes Net Worth) -->
         <section>
             <h3 class="section-title">🏆 Leaderboards</h3>
             <div class="tabs">
                 <button class="tab active" data-leaderboard="score">Score</button>
                 <button class="tab" data-leaderboard="level">Level</button>
                 <button class="tab" data-leaderboard="rank">Ranked</button>
+                <button class="tab" data-leaderboard="networth">Net Worth</button>
             </div>
             <div id="score-leaderboard"><table><tbody id="scoreboard-body"></tbody></table></div>
             <div id="level-leaderboard" class="hidden"><table><tbody id="levelboard-body"></tbody></table></div>
             <div id="rank-leaderboard" class="hidden"><table><tbody id="rankboard-body"></tbody></table></div>
+            <div id="networth-leaderboard" class="hidden"><table><tbody id="networth-body"></tbody></table></div>
         </section>
 
-        <!-- Themes Shop (30+ themes + Buy XP) -->
+        <!-- Themes Shop (30+ themes + Buy XP + Premium Logo Theme) -->
         <section>
             <h3 class="section-title">🛒 Themes & Skins</h3>
             <div class="shop-grid" id="themes-grid"></div>
@@ -619,6 +657,9 @@
         let correctCount = 0;
         let dailyWords = 0;
         const DAILY_GOAL = 5;
+
+        // New: track incorrect attempts for current word
+        let incorrectAttempts = 0;
 
         // Power-ups
         let powerups = {
@@ -702,6 +743,17 @@
             return 25;
         }
 
+        // ---------- Net Worth Calculation ----------
+        function calculateNetWorth(user) {
+            return (user.points || 0) + (user.rankPoints || 0) * 5 + (user.level || 1) * 10 + (user.streak || 0) * 5;
+        }
+
+        async function updateNetWorth() {
+            const netWorth = calculateNetWorth(currentUser);
+            await updateDoc(doc(db, "users", currentUser.id), { netWorth });
+            currentUser.netWorth = netWorth;
+        }
+
         // ---------- Achievement Functions ----------
         async function checkAndUnlockAchievement(achievementId) {
             if (currentUser.achievements?.[achievementId]) return;
@@ -758,6 +810,8 @@
             }
             updateStreakUI();
             checkNotification();
+            await updateNetWorth();
+            updatePowerupsDisplay();
         }
 
         async function incrementDailyWords() {
@@ -779,6 +833,7 @@
                 }
             }
             updateStreakUI();
+            await updateNetWorth();
         }
 
         function updateStreakUI() {
@@ -807,6 +862,7 @@
             await updateDoc(doc(db, "users", currentUser.id), { points: currentUser.points, streak: 1, dailyWords: 0, lastLogin: currentUser.lastLogin });
             updateStats();
             updateStreakUI();
+            await updateNetWorth();
         }
 
         function checkNotification() {
@@ -900,6 +956,7 @@
             await updateDoc(doc(db, "users", currentUser.id), { points: currentUser.points, lastBonus: today });
             document.getElementById('daily-bonus-msg').innerText = `🎉 You claimed ${bonus} bonus points!`;
             updateStats();
+            await updateNetWorth();
         }
 
         // ---------- Buy XP ----------
@@ -914,6 +971,7 @@
             await updateDoc(doc(db, "users", currentUser.id), { points: currentUser.points });
             updateStats();
             alert("Purchased 10 XP!");
+            await updateNetWorth();
         }
 
         // ---------- Login ----------
@@ -1003,6 +1061,9 @@
                 selectedVoiceURI = currentUser.preferredVoice;
                 document.getElementById('voice-select').value = selectedVoiceURI;
             }
+            // Initialize netWorth
+            currentUser.netWorth = calculateNetWorth(currentUser);
+            await updateDoc(userRef, { netWorth: currentUser.netWorth });
             setupApp();
         });
 
@@ -1043,6 +1104,22 @@
             btn.innerText = panel.classList.contains('hidden') ? '⚙️ Show Settings & Profile' : '⚙️ Hide Settings & Profile';
         });
 
+        // ---------- Power-ups Display ----------
+        function updatePowerupsDisplay() {
+            const unlockMsg = document.getElementById('powerup-unlock-msg');
+            const grid = document.getElementById('powerup-grid');
+            const levelsRemainingSpan = document.getElementById('levels-remaining');
+            const level = currentUser.level || 1;
+            if (level >= 35) {
+                unlockMsg.classList.add('hidden');
+                grid.classList.remove('hidden');
+            } else {
+                unlockMsg.classList.remove('hidden');
+                grid.classList.add('hidden');
+                levelsRemainingSpan.innerText = 35 - level;
+            }
+        }
+
         // ---------- App Setup ----------
         async function setupApp() {
             document.getElementById('login-screen').classList.add('hidden');
@@ -1066,7 +1143,6 @@
             if (currentUser.level >= 15) document.getElementById('challenge-tab').disabled = false;
             if (currentUser.level >= 30) document.getElementById('ranked-tab').disabled = false;
             if (currentUser.level >= 50) document.getElementById('live-tab').disabled = false;
-            if (currentUser.level >= 100) document.getElementById('powerups-section').classList.remove('hidden');
 
             checkSeasonalEvent();
             await loadWordOfDay();
@@ -1089,6 +1165,45 @@
 
             // Chat setup
             setupChat();
+
+            // Show meaning buttons
+            document.getElementById('show-meaning-btn').addEventListener('click', async () => {
+                if (!currentWord) {
+                    document.getElementById('game-msg').innerText = "No word to show meaning for.";
+                    return;
+                }
+                const definition = await fetchDefinition(currentWord);
+                const meaningDiv = document.getElementById('meaning-display');
+                meaningDiv.innerText = `📖 ${definition}`;
+                meaningDiv.classList.remove('hidden');
+            });
+
+            // Challenge mode meaning button
+            document.getElementById('challenge-show-meaning-btn').addEventListener('click', async () => {
+                if (!currentWord) {
+                    document.getElementById('challenge-msg').innerText = "No word to show meaning for.";
+                    return;
+                }
+                const definition = await fetchDefinition(currentWord);
+                const meaningDiv = document.getElementById('challenge-meaning-display');
+                meaningDiv.innerText = `📖 ${definition}`;
+                meaningDiv.classList.remove('hidden');
+            });
+
+            // Live mode meaning button
+            document.getElementById('live-show-meaning-btn').addEventListener('click', async () => {
+                if (!currentWord) {
+                    document.getElementById('live-msg').innerText = "No word to show meaning for.";
+                    return;
+                }
+                const definition = await fetchDefinition(currentWord);
+                const meaningDiv = document.getElementById('live-meaning-display');
+                meaningDiv.innerText = `📖 ${definition}`;
+                meaningDiv.classList.remove('hidden');
+            });
+
+            // Initial power-ups display
+            updatePowerupsDisplay();
         }
 
         function updateStats() {
@@ -1111,13 +1226,15 @@
                 if (currentUser.level === 15) document.getElementById('challenge-tab').disabled = false;
                 if (currentUser.level === 30) document.getElementById('ranked-tab').disabled = false;
                 if (currentUser.level === 50) document.getElementById('live-tab').disabled = false;
-                if (currentUser.level === 100) document.getElementById('powerups-section').classList.remove('hidden');
                 if (currentUser.level >= 10) {
                     await checkAndUnlockAchievement('level-10');
                 }
+                // Update power-ups display when level changes
+                updatePowerupsDisplay();
             }
             await updateDoc(doc(db, "users", currentUser.id), { xp: currentUser.xp, level: currentUser.level });
             updateStats();
+            await updateNetWorth();
         }
 
         // ---------- Achievements ----------
@@ -1218,6 +1335,7 @@
                                 unlockedBorders: currentUser.unlockedBorders 
                             });
                             updateStats();
+                            await updateNetWorth();
                         } else return;
                     }
                     currentUser.border = b.id;
@@ -1271,6 +1389,7 @@
             currentUser.bannerColor = bannerColor;
             await updateDoc(doc(db, "users", currentUser.id), { avatar, bannerColor, title, border, unlockedBorders: currentUser.unlockedBorders });
             updateProfilePreview();
+            await updateNetWorth();
         });
 
         // ---------- Stats Panel ----------
@@ -1375,6 +1494,7 @@
                 const definition = await fetchDefinition(wordOfDay);
                 defDiv.innerText = `📖 ${definition}`;
                 defDiv.classList.remove('hidden');
+                await updateNetWorth();
             } else {
                 msg.innerText = "❌ Incorrect. Try again!";
                 if (soundEnabled) playBeep();
@@ -1475,6 +1595,10 @@
                 if (wordDeck.length === 0) wordDeck = [...wordsList];
                 const rand = Math.floor(Math.random() * wordDeck.length);
                 currentWord = wordDeck.splice(rand, 1)[0];
+                // Reset incorrect attempts for new word
+                incorrectAttempts = 0;
+                // Hide previous meaning
+                document.getElementById('meaning-display').classList.add('hidden');
             }
             speakWord(currentWord);
             document.getElementById('game-msg').innerText = "Listening...";
@@ -1496,6 +1620,7 @@
                 msg.innerText = `🔥 Correct! +${pointsGain} pts, +${xpGain} XP`;
                 input.value = "";
                 currentWord = "";
+                incorrectAttempts = 0; // reset on correct
                 await incrementDailyWords();
 
                 currentUser.totalCorrect = (currentUser.totalCorrect || 0) + 1;
@@ -1514,17 +1639,22 @@
                     setTimeout(() => msg.classList.remove('congrats-animation'), 500);
                 }
 
-                const defBox = document.createElement('div');
-                defBox.className = 'definition-box';
-                const definition = await fetchDefinition(currentWord);
-                defBox.innerText = `📖 ${definition}`;
-                document.getElementById('quiz-area').appendChild(defBox);
-                setTimeout(() => defBox.remove(), 5000);
+                // REMOVED automatic definition box – no longer appears after correct answer.
+                // The meaning button remains for manual use.
             } else {
-                msg.innerText = "❌ Incorrect. Try again!";
+                incorrectAttempts++;
+                if (incorrectAttempts >= 3) {
+                    msg.innerText = `❌ Three incorrect attempts! The word was: "${currentWord}".`;
+                    // Optionally auto-skip or just reveal. We'll reveal and reset.
+                    currentWord = "";
+                    incorrectAttempts = 0;
+                } else {
+                    msg.innerText = `❌ Incorrect. Attempts: ${incorrectAttempts}/3`;
+                }
                 if (soundEnabled) playBeep();
             }
             updateStats();
+            await updateNetWorth();
         });
 
         document.getElementById('skip-word-btn').addEventListener('click', async () => {
@@ -1533,9 +1663,12 @@
             currentUser.points -= 10;
             await updateDoc(doc(db, "users", currentUser.id), { points: currentUser.points });
             currentWord = "";
+            incorrectAttempts = 0;
             document.getElementById('game-msg').innerText = "⏩ Skipped! -10 points";
             document.getElementById('spell-input').value = "";
+            document.getElementById('meaning-display').classList.add('hidden');
             updateStats();
+            await updateNetWorth();
         });
 
         // ---------- Challenge Mode (simplified) ----------
@@ -1547,6 +1680,8 @@
             document.getElementById('start-challenge-btn').disabled = true;
             document.getElementById('challenge-spell').disabled = false;
             document.getElementById('submit-challenge-btn').disabled = false;
+            document.getElementById('challenge-show-meaning-btn').classList.remove('hidden');
+            document.getElementById('challenge-meaning-display').classList.add('hidden');
             nextChallengeWord();
         });
         function nextChallengeWord() {
@@ -1587,6 +1722,7 @@
                 document.getElementById('challenge-spell').value = '';
                 if (challengeIndex < challengeWords.length) nextChallengeWord();
                 else endChallenge(true);
+                await updateNetWorth();
             } else {
                 document.getElementById('challenge-msg').innerText = "❌ Wrong, try again!";
             }
@@ -1596,6 +1732,7 @@
             document.getElementById('start-challenge-btn').disabled = false;
             document.getElementById('challenge-spell').disabled = true;
             document.getElementById('submit-challenge-btn').disabled = true;
+            document.getElementById('challenge-show-meaning-btn').classList.add('hidden');
             document.getElementById('challenge-msg').innerText = completed ? "🎉 Challenge complete!" : "⏰ Time's up!";
         }
 
@@ -1632,12 +1769,14 @@
                 if (currentUser.rankPoints >= 500) {
                     await checkAndUnlockAchievement('ranked-champ');
                 }
+                await updateNetWorth();
             } else {
                 const loss = 5;
                 currentUser.rankPoints = Math.max(0, currentUser.rankPoints - loss);
                 await updateDoc(doc(db, "users", currentUser.id), { rankPoints: currentUser.rankPoints });
                 document.getElementById('ranked-msg').innerText = `❌ Incorrect! -${loss} RP`;
                 document.getElementById('rank-points').innerText = currentUser.rankPoints;
+                await updateNetWorth();
             }
         });
 
@@ -1737,6 +1876,21 @@
                 });
             });
 
+            const netWorthQ = query(collection(db, "users"), orderBy("netWorth", "desc"), limit(10));
+            onSnapshot(netWorthQ, (snap) => {
+                const body = document.getElementById('networth-body');
+                body.innerHTML = "";
+                snap.forEach(u => {
+                    const data = u.data();
+                    const avatar = data.avatar || '😀';
+                    const bannerColor = data.bannerColor || '#0f172a';
+                    const borderStyle = getBorderStyle(data.border || 'none');
+                    body.innerHTML += `<tr style="background-color: ${bannerColor}30;">` +
+                        `<td><span style="display:inline-block; border-radius:50%; padding:2px; ${borderStyle}">${avatar}</span> ${u.id}${data.isAdmin ? ' ⭐' : ''}</td>` +
+                        `<td style="text-align:right;">${data.netWorth || 0}</td></tr>`;
+                });
+            });
+
             document.querySelectorAll('[data-leaderboard]').forEach(btn => {
                 btn.addEventListener('click', () => {
                     document.querySelectorAll('[data-leaderboard]').forEach(b => b.classList.remove('active'));
@@ -1744,9 +1898,11 @@
                     document.getElementById('score-leaderboard').classList.add('hidden');
                     document.getElementById('level-leaderboard').classList.add('hidden');
                     document.getElementById('rank-leaderboard').classList.add('hidden');
+                    document.getElementById('networth-leaderboard').classList.add('hidden');
                     if (btn.dataset.leaderboard === 'score') document.getElementById('score-leaderboard').classList.remove('hidden');
                     if (btn.dataset.leaderboard === 'level') document.getElementById('level-leaderboard').classList.remove('hidden');
                     if (btn.dataset.leaderboard === 'rank') document.getElementById('rank-leaderboard').classList.remove('hidden');
+                    if (btn.dataset.leaderboard === 'networth') document.getElementById('networth-leaderboard').classList.remove('hidden');
                 });
             });
         }
@@ -1905,7 +2061,9 @@
             { className: 'bg-matrix', name: 'Matrix', cost: 250 },
             { className: 'bg-space', name: 'Space', cost: 300 },
             { className: 'bg-nebula', name: 'Nebula', cost: 280 },
-            { className: 'bg-aurora', name: 'Aurora', cost: 220 }
+            { className: 'bg-aurora', name: 'Aurora', cost: 220 },
+            // Premium logo theme
+            { className: 'bg-logo', name: '🐝 Logo Premium', cost: 10000 }
         ];
 
         function renderShop() {
@@ -1933,6 +2091,7 @@
                         document.getElementById('main-body').className = t;
                         await updateDoc(doc(db, "users", currentUser.id), { points: currentUser.points, unlockedThemes: currentUser.unlockedThemes });
                         renderShop();
+                        await updateNetWorth();
                     } else {
                         alert("Not enough points!");
                     }
