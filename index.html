@@ -190,6 +190,17 @@
 
         .daily-bonus-btn { background: var(--warning); width:100%; margin-top:10px; }
 
+        /* Chat styles */
+        .chat-container { background: rgba(0,0,0,0.3); border-radius: 24px; padding: 15px; max-height: 300px; overflow-y: auto; margin-bottom: 10px; }
+        .chat-message { margin: 8px 0; padding: 10px; border-radius: 16px; background: rgba(255,255,255,0.1); }
+        .chat-message.admin { background: rgba(255,215,0,0.2); border-left: 4px solid gold; }
+        .chat-message .sender { font-weight: bold; color: var(--secondary); }
+        .chat-message .time { font-size: 0.7rem; opacity: 0.6; margin-left: 10px; }
+        .chat-input-area { display: flex; gap: 10px; }
+
+        /* Settings toggle button */
+        .settings-toggle-btn { width: 100%; background: var(--info); margin-bottom: 15px; padding: 14px; border-radius: 40px; font-weight: 800; }
+
         @media (min-width: 768px) {
             body { padding:30px; }
             .container { padding:35px; }
@@ -271,75 +282,106 @@
             <button id="close-tutorial">Got it!</button>
         </section>
 
-        <!-- Achievements -->
-        <section id="achievements-section">
-            <h3 class="section-title">🏆 Achievements</h3>
-            <div id="achievements-list" style="display:grid; grid-template-columns:repeat(2,1fr); gap:10px;"></div>
-        </section>
+        <!-- Settings & Profile Toggle Button -->
+        <button id="settings-toggle-btn" class="settings-toggle-btn">⚙️ Show Settings & Profile</button>
 
-        <!-- Profile Customization (expanded) -->
-        <section id="profile-section">
-            <h3 class="section-title">👤 Profile</h3>
-            <div class="profile-header">
-                <div id="avatar-preview" style="font-size:4rem; border-radius:50%; transition:0.2s;"></div>
-                <div>
-                    <p>Nickname: <span id="profile-username"></span></p>
-                    <p>Title: <span id="profile-title">Novice</span></p>
+        <!-- Collapsible Settings & Profile Panel (initially hidden) -->
+        <div id="settings-panel" class="hidden">
+            <!-- Profile Customization -->
+            <section id="profile-section">
+                <h3 class="section-title">👤 Profile</h3>
+                <div class="profile-header">
+                    <div id="avatar-preview" style="font-size:4rem; border-radius:50%; transition:0.2s;"></div>
+                    <div>
+                        <p>Nickname: <span id="profile-username"></span></p>
+                        <p>Title: <span id="profile-title">Novice</span></p>
+                    </div>
                 </div>
-            </div>
-            <h4>Choose Avatar</h4>
-            <div class="avatar-options">
-                <button data-avatar="😀">😀</button>
-                <button data-avatar="😎">😎</button>
-                <button data-avatar="🧙">🧙</button>
-                <button data-avatar="🐼">🐼</button>
-                <button data-avatar="🦊">🦊</button>
-                <button data-avatar="🐨">🐨</button>
-                <button data-avatar="👽">👽</button>
-                <button data-avatar="🤖">🤖</button>
-            </div>
-            <h4>Banner Color</h4>
-            <div class="banner-color-options">
-                <div class="color-swatch" style="background:#0f172a;" data-color="#0f172a"></div>
-                <div class="color-swatch" style="background:#ff7e5f;" data-color="#ff7e5f"></div>
-                <div class="color-swatch" style="background:#22c55e;" data-color="#22c55e"></div>
-                <div class="color-swatch" style="background:#ff5050;" data-color="#ff5050"></div>
-                <div class="color-swatch" style="background:#a855f7;" data-color="#a855f7"></div>
-                <div class="color-swatch" style="background:#f59e0b;" data-color="#f59e0b"></div>
-                <div class="color-swatch" style="background:#3b82f6;" data-color="#3b82f6"></div>
-                <div class="color-swatch" style="background:#ec4899;" data-color="#ec4899"></div>
-            </div>
-            <h4>Profile Border</h4>
-            <div class="border-options" id="border-options">
-                <!-- Populated by JS -->
-            </div>
-            <h4>Title</h4>
-            <div class="title-options" id="title-options">
-                <!-- Populated by JS -->
-            </div>
-            <button id="save-profile">Save Profile</button>
-        </section>
+                <h4>Choose Avatar</h4>
+                <div class="avatar-options">
+                    <button data-avatar="😀">😀</button>
+                    <button data-avatar="😎">😎</button>
+                    <button data-avatar="🧙">🧙</button>
+                    <button data-avatar="🐼">🐼</button>
+                    <button data-avatar="🦊">🦊</button>
+                    <button data-avatar="🐨">🐨</button>
+                    <button data-avatar="👽">👽</button>
+                    <button data-avatar="🤖">🤖</button>
+                </div>
+                <h4>Banner Color</h4>
+                <div class="banner-color-options">
+                    <div class="color-swatch" style="background:#0f172a;" data-color="#0f172a"></div>
+                    <div class="color-swatch" style="background:#ff7e5f;" data-color="#ff7e5f"></div>
+                    <div class="color-swatch" style="background:#22c55e;" data-color="#22c55e"></div>
+                    <div class="color-swatch" style="background:#ff5050;" data-color="#ff5050"></div>
+                    <div class="color-swatch" style="background:#a855f7;" data-color="#a855f7"></div>
+                    <div class="color-swatch" style="background:#f59e0b;" data-color="#f59e0b"></div>
+                    <div class="color-swatch" style="background:#3b82f6;" data-color="#3b82f6"></div>
+                    <div class="color-swatch" style="background:#ec4899;" data-color="#ec4899"></div>
+                </div>
+                <h4>Profile Border</h4>
+                <div class="border-options" id="border-options">
+                    <!-- Populated by JS -->
+                </div>
+                <h4>Title</h4>
+                <div class="title-options" id="title-options">
+                    <!-- Populated by JS -->
+                </div>
+                <button id="save-profile">Save Profile</button>
+            </section>
 
-        <!-- Stats -->
-        <section id="stats-section">
-            <h3 class="section-title">📊 Statistics</h3>
-            <div class="stat-grid">
-                <div class="stat-card">Accuracy: <span id="stat-accuracy">0%</span></div>
-                <div class="stat-card">Avg Time: <span id="stat-avgtime">0s</span></div>
-                <div class="stat-card">Words Today: <span id="stat-wordstoday">0</span></div>
-                <div class="stat-card">Longest Streak: <span id="stat-longeststreak">0</span></div>
-            </div>
-        </section>
+            <!-- Stats -->
+            <section id="stats-section">
+                <h3 class="section-title">📊 Statistics</h3>
+                <div class="stat-grid">
+                    <div class="stat-card">Accuracy: <span id="stat-accuracy">0%</span></div>
+                    <div class="stat-card">Avg Time: <span id="stat-avgtime">0s</span></div>
+                    <div class="stat-card">Words Today: <span id="stat-wordstoday">0</span></div>
+                    <div class="stat-card">Longest Streak: <span id="stat-longeststreak">0</span></div>
+                </div>
+            </section>
 
-        <!-- Friends -->
-        <section id="friends-section">
-            <h3 class="section-title">👥 Friends</h3>
-            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:15px;">
-                <input type="text" id="friend-username" placeholder="Enter username">
-                <button id="add-friend-btn">Add Friend</button>
-            </div>
-            <div id="friend-list" class="friend-list"></div>
-        </section>
+            <!-- Achievements -->
+            <section id="achievements-section">
+                <h3 class="section-title">🏆 Achievements</h3>
+                <div id="achievements-list" style="display:grid; grid-template-columns:repeat(2,1fr); gap:10px;"></div>
+            </section>
+
+            <!-- Friends -->
+            <section id="friends-section">
+                <h3 class="section-title">👥 Friends</h3>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:15px;">
+                    <input type="text" id="friend-username" placeholder="Enter username">
+                    <button id="add-friend-btn">Add Friend</button>
+                </div>
+                <div id="friend-list" class="friend-list"></div>
+            </section>
+
+            <!-- Backup / Export -->
+            <section id="backup-section">
+                <h3 class="section-title">💾 Backup / Export</h3>
+                <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                    <button id="export-data-btn">Export Progress</button>
+                    <label class="file-label" for="import-file">Import Progress</label>
+                    <input type="file" id="import-file" accept=".json" style="display:none;">
+                </div>
+                <p id="backup-msg" class="msg"></p>
+            </section>
+
+            <!-- Settings -->
+            <section>
+                <h3 class="section-title">⚙️ Settings</h3>
+                <div class="settings-panel">
+                    <label class="toggle-switch"><input type="checkbox" id="congrats-toggle" checked><span class="slider"></span></label>
+                    <span>🎉 Congrats Animation</span>
+                    <label class="toggle-switch"><input type="checkbox" id="sound-toggle" checked><span class="slider"></span></label>
+                    <span>🔊 Sound Effects</span>
+                    <label class="toggle-switch"><input type="checkbox" id="auto-theme-toggle"><span class="slider"></span></label>
+                    <span>🌗 Auto Theme (system)</span>
+                    <button id="manage-password-btn" style="background:var(--info);">🔐 Change Password</button>
+                </div>
+            </section>
+        </div>
 
         <!-- Live Play -->
         <section id="live-play-section" class="hidden">
@@ -396,17 +438,6 @@
                 <button data-list="countries">Countries</button>
             </div>
             <p id="import-status" class="msg"></p>
-        </section>
-
-        <!-- Backup / Export -->
-        <section id="backup-section">
-            <h3 class="section-title">💾 Backup / Export</h3>
-            <div style="display:flex; gap:10px; flex-wrap:wrap;">
-                <button id="export-data-btn">Export Progress</button>
-                <label class="file-label" for="import-file">Import Progress</label>
-                <input type="file" id="import-file" accept=".json" style="display:none;">
-            </div>
-            <p id="backup-msg" class="msg"></p>
         </section>
 
         <!-- Admin Panel (hidden by default, toggled by admin button) -->
@@ -528,20 +559,18 @@
             </div>
         </section>
 
-        <!-- Settings -->
-        <section>
-            <h3 class="section-title">⚙️ Settings</h3>
-            <div class="settings-panel">
-                <label class="toggle-switch"><input type="checkbox" id="congrats-toggle" checked><span class="slider"></span></label>
-                <span>🎉 Congrats Animation</span>
-                <label class="toggle-switch"><input type="checkbox" id="sound-toggle" checked><span class="slider"></span></label>
-                <span>🔊 Sound Effects</span>
-                <label class="toggle-switch"><input type="checkbox" id="auto-theme-toggle"><span class="slider"></span></label>
-                <span>🌗 Auto Theme (system)</span>
-                <button id="manage-password-btn" style="background:var(--info);">🔐 Change Password</button>
+        <!-- Chat System (Admins only can send) -->
+        <section id="chat-section">
+            <h3 class="section-title">💬 Admin Chat</h3>
+            <div id="chat-messages" class="chat-container"></div>
+            <div id="chat-input-area" class="chat-input-area hidden">
+                <input type="text" id="chat-message-input" placeholder="Type a message..." maxlength="200">
+                <button id="chat-send-btn">Send</button>
             </div>
+            <p id="chat-msg" class="msg"></p>
         </section>
 
+        <!-- Logout button -->
         <button onclick="location.reload()" style="width:100%; margin-top:15px; background:transparent; color:var(--danger); border:1.5px solid var(--danger); font-weight:800; padding:16px;">LOGOUT SESSION</button>
     </div>
 
@@ -561,7 +590,7 @@
     <script type="module">
         // ---------- Firebase Configuration ----------
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, getDocs, doc, getDoc, setDoc, updateDoc, deleteDoc, query, orderBy, limit, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, getDocs, doc, getDoc, setDoc, updateDoc, deleteDoc, query, orderBy, limit, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBtCy-YbS2LC_cF5LlWRHXqa7SD-Rn5E6k",
@@ -643,6 +672,9 @@
 
         // Seasonal event
         let currentEvent = null;
+
+        // Chat reference
+        const chatsRef = collection(db, "chats");
 
         // ---------- Helper Functions ----------
         function xpForLevel(level) {
@@ -1003,6 +1035,14 @@
             adminPanel.classList.toggle('hidden');
         });
 
+        // ---------- Settings Panel Toggle ----------
+        document.getElementById('settings-toggle-btn').addEventListener('click', () => {
+            const panel = document.getElementById('settings-panel');
+            const btn = document.getElementById('settings-toggle-btn');
+            panel.classList.toggle('hidden');
+            btn.innerText = panel.classList.contains('hidden') ? '⚙️ Show Settings & Profile' : '⚙️ Hide Settings & Profile';
+        });
+
         // ---------- App Setup ----------
         async function setupApp() {
             document.getElementById('login-screen').classList.add('hidden');
@@ -1046,6 +1086,9 @@
 
             // Buy XP button
             document.getElementById('buy-xp-btn').addEventListener('click', buyXP);
+
+            // Chat setup
+            setupChat();
         }
 
         function updateStats() {
@@ -1900,6 +1943,62 @@
 
         // ---------- Recover Streak ----------
         document.getElementById('recover-streak-btn').addEventListener('click', recoverStreak);
+
+        // ---------- Chat System ----------
+        function setupChat() {
+            const chatContainer = document.getElementById('chat-messages');
+            const chatInputArea = document.getElementById('chat-input-area');
+            const chatInput = document.getElementById('chat-message-input');
+            const chatSend = document.getElementById('chat-send-btn');
+            const chatMsg = document.getElementById('chat-msg');
+
+            // Only admins can see the input area
+            if (isAdmin) {
+                chatInputArea.classList.remove('hidden');
+            }
+
+            // Listen for new messages (last 50)
+            const q = query(chatsRef, orderBy("timestamp", "desc"), limit(50));
+            onSnapshot(q, (snap) => {
+                const messages = [];
+                snap.forEach(doc => messages.push({ id: doc.id, ...doc.data() }));
+                messages.reverse(); // show oldest first
+                chatContainer.innerHTML = '';
+                messages.forEach(msg => {
+                    const div = document.createElement('div');
+                    div.className = 'chat-message' + (msg.isAdmin ? ' admin' : '');
+                    const time = msg.timestamp ? new Date(msg.timestamp.toDate()).toLocaleTimeString() : '';
+                    div.innerHTML = `<span class="sender">${msg.username}${msg.isAdmin ? ' ⭐' : ''}</span><span class="time">${time}</span><br>${msg.message}`;
+                    chatContainer.appendChild(div);
+                });
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            });
+
+            chatSend.addEventListener('click', async () => {
+                const message = chatInput.value.trim();
+                if (!message) return;
+                if (message.length > 200) {
+                    chatMsg.innerText = "Message too long (max 200 chars)";
+                    return;
+                }
+                try {
+                    await addDoc(chatsRef, {
+                        username: currentUser.id,
+                        message: message,
+                        timestamp: serverTimestamp(),
+                        isAdmin: isAdmin
+                    });
+                    chatInput.value = '';
+                    chatMsg.innerText = '';
+                } catch (err) {
+                    chatMsg.innerText = "Error sending message.";
+                }
+            });
+
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') chatSend.click();
+            });
+        }
     </script>
 </body>
 </html>
