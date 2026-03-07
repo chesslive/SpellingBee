@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-88">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes">
-    <title>Spelling Bee Pro | Streak 🔥</title>
+    <title>Spelling Bee Pro | Ultimate+</title>
     <style>
         :root {
             --primary: #6366f1;
@@ -15,54 +15,79 @@
             --glass: rgba(255, 255, 255, 0.1);
             --text: #ffffff;
         }
+        * { box-sizing: border-box; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
 
-        * { 
-            box-sizing: border-box; 
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
-            -webkit-tap-highlight-color: transparent; 
-        }
-
-        /* --- ALL REACTIVE THEMES --- */
+        /* ---------- All Themes (30+) ---------- */
         .bg-default { background: #0f172a; color: #f8fafc; }
         .bg-ocean { background: linear-gradient(135deg, #075985, #1e3a8a); color: white; }
-        .bg-neon { background: #000; color: #00ff41; text-shadow: 0 0 8px #00ff41; }
-        .bg-galaxy { background: radial-gradient(circle at 30% 30%, #2e1065, #000000, #0f172a); background-size: 200% 200%; color: #f0e68c; text-shadow: 0 0 10px #c084fc; }
+        .bg-neon { background: #000; color: #00ff41; text-shadow: 0 0 8px #00ff41; animation: neonPulse 2s infinite; }
+        .bg-galaxy { background: radial-gradient(circle at 30% 30%, #2e1065, #000000, #0f172a); background-size: 200% 200%; color: #f0e68c; text-shadow: 0 0 10px #c084fc; animation: galaxyShift 10s infinite alternate; }
         .bg-chess { background-color: #ffffff; background-image: repeating-conic-gradient(#2c2c2c 0% 25%, #ffffff 0% 50%); background-position: 0 0, 30px 30px; background-size: 60px 60px; color: #000; }
         .bg-roblox { background: #202225 repeating-linear-gradient(45deg, rgba(255,0,0,0.2) 0px, rgba(255,0,0,0.2) 20px, transparent 20px, transparent 40px); border-top: 10px solid #f63131; color: white; text-shadow: 2px 2px 0 #000; }
         .bg-fortnite { background: linear-gradient(135deg, #1a0b2e 0%, #2a1b4a 50%, #0b3b5c 100%); position: relative; color: #a0e7ff; text-shadow: 0 0 8px #0077ff; }
         .bg-fortnite::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: repeating-linear-gradient(0deg, rgba(255,255,255,0.1) 0px, rgba(255,255,255,0.1) 2px, transparent 2px, transparent 8px); pointer-events: none; }
         .bg-secret { background-color: #f8c8dc; background-image: radial-gradient(circle at 20% 30%, #ffb6c1 5%, transparent 5%), radial-gradient(circle at 80% 70%, #ffb6c1 5%, transparent 5%), repeating-linear-gradient(45deg, transparent, transparent 10px, #ff99aa 10px, #ff99aa 20px); color: #4a1a2c; text-shadow: 2px 2px 5px #fff2f5; }
         .bg-midnight { background: #0a0f1e; color: #cbd5e1; box-shadow: inset 0 0 100px #2563eb20; }
-        .bg-sunset { background: linear-gradient(135deg, #ff7e5f, #feb47b); color: #2d1b0e; }
-        .bg-forest { background: #0b3b2f repeating-linear-gradient(45deg, #2e7d5e 0px, #2e7d5e 2px, transparent 2px, transparent 12px); color: #e7f5e7; }
-        .bg-oceandeep { background: linear-gradient(145deg, #006994, #001f3f); color: #b3e0ff; }
-        .bg-cyber { background: #0d0f1a repeating-linear-gradient(45deg, #00ffff10 0px, #00ffff10 20px, #ff00ff10 20px, #ff00ff10 40px); color: #ffb3ff; text-shadow: 0 0 5px cyan; }
+        .bg-sunset { background: linear-gradient(135deg, #ff7e5f, #feb47b); color: #2d1b0e; animation: sunsetGlow 5s infinite; }
+        .bg-forest { background: #0b3b2f repeating-linear-gradient(45deg, #2e7d5e 0px, #2e7d5e 2px, transparent 2px, transparent 12px); color: #e7f5e7; animation: forestRustle 8s infinite; }
+        .bg-oceandeep { background: linear-gradient(145deg, #006994, #001f3f); color: #b3e0ff; animation: oceanWaves 12s infinite; }
+        .bg-cyber { background: #0d0f1a repeating-linear-gradient(45deg, #00ffff10 0px, #00ffff10 20px, #ff00ff10 20px, #ff00ff10 40px); color: #ffb3ff; text-shadow: 0 0 5px cyan; animation: cyberGlitch 3s infinite; }
         .bg-pastel { background: linear-gradient(135deg, #fbc2c2, #c2f0fc); color: #4a4a4a; }
         .bg-dark { background: #121212; color: #e0e0e0; }
         .bg-light { background: #f5f5f5; color: #1e1e1e; }
-        .bg-candy { background: repeating-linear-gradient(45deg, #ffb6c1, #ffb6c1 20px, #ffe4e1 20px, #ffe4e1 40px); color: #8b4513; }
+        .bg-candy { background: repeating-linear-gradient(45deg, #ffb6c1, #ffb6c1 20px, #ffe4e1 20px, #ffe4e1 40px); color: #8b4513; animation: candySpin 10s linear infinite; }
         .bg-lavender { background: linear-gradient(145deg, #e6e6fa, #d8bfd8); color: #2d2d4a; }
-        /* New streak theme */
-        .bg-streak10 { 
-            background: linear-gradient(135deg, #ff4e00, #ec9f05, #fbb034);
-            color: #2d1b0e;
-            text-shadow: 0 2px 5px #fff8e7;
-            position: relative;
-        }
-        .bg-streak10::after {
-            content: "🔥";
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            font-size: 100px;
-            opacity: 0.2;
-            transform: rotate(-10deg);
-            pointer-events: none;
-        }
+        .bg-streak10 { background: linear-gradient(135deg, #ff4e00, #ec9f05, #fbb034); color: #2d1b0e; text-shadow: 0 2px 5px #fff8e7; position: relative; }
+        .bg-streak10::after { content: "🔥"; position: fixed; bottom: 10px; right: 10px; font-size: 100px; opacity: 0.2; transform: rotate(-10deg); pointer-events: none; }
+
+        /* New animated chess themes */
+        .bg-chess-animated { background: #2d2d2d; background-image: repeating-linear-gradient(45deg, #fff1 0px, #fff1 20px, #0001 20px, #0001 40px); animation: chessShift 8s infinite; color: #fff; text-shadow: 0 0 5px gold; }
+        .bg-chess-glowing { background: #1a1a1a; box-shadow: inset 0 0 100px #ffaa00; animation: glowPulse 3s infinite; color: #ffd700; }
+        .bg-chess-pieces { background: #2b2b2b url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.2"><text x="10" y="30" font-size="40">♔</text><text x="60" y="80" font-size="40">♕</text></svg>'); background-size: 100px 100px; animation: floatPieces 12s infinite; color: #ffd966; }
+        .bg-chess-float { background: #202020; position: relative; overflow: hidden; }
+        .bg-chess-float::before { content: '♙♘♗♖♕♔'; position: absolute; font-size: 50px; color: rgba(255,215,0,0.1); white-space: nowrap; animation: floatChess 20s linear infinite; pointer-events: none; }
+        .bg-chess-rotate { background: conic-gradient(from 90deg at 50% 50%, #b58863, #f0d9b5, #b58863); animation: rotateConic 10s linear infinite; color: #2d1b0e; }
+        .bg-chess-checker { background: repeating-conic-gradient(#fff 0% 25%, #000 0% 50%) 0 0/80px 80px; animation: checkerWave 6s infinite; color: #fff; text-shadow: 2px 2px 0 #000; }
+
+        /* More animated themes */
+        .bg-rainbow { background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3); background-size: 1800% 1800%; animation: rainbow 10s ease infinite; color: #fff; text-shadow: 0 0 10px black; }
+        .bg-fire { background: linear-gradient(45deg, #ff4e00, #ec9f05, #ff4e00); background-size: 400% 400%; animation: fire 3s ease infinite; color: #fff; text-shadow: 0 0 10px #ffaa00; }
+        .bg-ice { background: linear-gradient(135deg, #a8edea, #fed6e3); background-size: 400% 400%; animation: ice 5s ease infinite; color: #0a2f44; }
+        .bg-thunder { background: #1a1a2e; position: relative; color: #e0e0ff; }
+        .bg-thunder::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(0deg, #ffff99 0px, #ffff99 2px, transparent 2px, transparent 10px); opacity: 0.3; animation: thunderFlash 2s infinite; pointer-events: none; }
+        .bg-matrix { background: black; color: #00ff00; text-shadow: 0 0 5px #00ff00; position: relative; overflow: hidden; }
+        .bg-matrix::before { content: '01'; position: absolute; font-size: 20px; color: #0f0; opacity: 0.1; white-space: nowrap; animation: matrix 10s linear infinite; pointer-events: none; }
+        .bg-space { background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%); position: relative; color: #fff; }
+        .bg-space::before { content: ''; position: absolute; width: 2px; height: 2px; background: white; border-radius: 50%; box-shadow: 0 0 10px white; animation: stars 50s linear infinite; pointer-events: none; }
+        .bg-nebula { background: radial-gradient(circle at 30% 50%, #ff6ec4, #7873f5, #3b9f9f); background-size: 200% 200%; animation: nebula 15s ease infinite; color: #fff; text-shadow: 0 0 10px black; }
+        .bg-aurora { background: linear-gradient(135deg, #00f260, #0575e6, #00f260); background-size: 400% 400%; animation: aurora 12s ease infinite; color: #fff; text-shadow: 0 0 5px #00f260; }
+
+        /* Keyframes for animations */
+        @keyframes neonPulse { 0% { text-shadow:0 0 8px #00ff41; } 50% { text-shadow:0 0 20px #00ff41, 0 0 30px #00ff41; } }
+        @keyframes galaxyShift { 0% { background-position:0% 0%; } 100% { background-position:100% 100%; } }
+        @keyframes sunsetGlow { 0% { filter: brightness(1); } 50% { filter: brightness(1.2); } }
+        @keyframes forestRustle { 0% { background-position:0 0; } 100% { background-position:100px 100px; } }
+        @keyframes oceanWaves { 0% { background-position:0% 0%; } 50% { background-position:100% 100%; } }
+        @keyframes cyberGlitch { 0% { text-shadow:0 0 5px cyan; } 25% { text-shadow:2px 2px 0 magenta; } 50% { text-shadow:-2px -2px 0 yellow; } }
+        @keyframes candySpin { 0% { background-position:0 0; } 100% { background-position:100px 100px; } }
+        @keyframes chessShift { 0% { background-position:0 0; } 100% { background-position:80px 80px; } }
+        @keyframes glowPulse { 0% { box-shadow:inset 0 0 50px #ffaa00; } 50% { box-shadow:inset 0 0 150px #ffaa00; } }
+        @keyframes floatPieces { 0% { background-position:0 0; } 100% { background-position:200px 200px; } }
+        @keyframes floatChess { 0% { transform:translateX(-100%); } 100% { transform:translateX(100%); } }
+        @keyframes rotateConic { 0% { transform:rotate(0deg); } 100% { transform:rotate(360deg); } }
+        @keyframes checkerWave { 0% { background-size:80px 80px; } 50% { background-size:100px 100px; } }
+        @keyframes rainbow { 0% { background-position:0% 0%; } 50% { background-position:100% 100%; } 100% { background-position:0% 0%; } }
+        @keyframes fire { 0% { background-position:0% 0%; } 50% { background-position:100% 100%; } }
+        @keyframes ice { 0% { filter: hue-rotate(0deg); } 100% { filter: hue-rotate(360deg); } }
+        @keyframes thunderFlash { 0% { opacity:0.3; } 10% { opacity:1; } 20% { opacity:0.3; } }
+        @keyframes matrix { 0% { transform:translateY(-100%); } 100% { transform:translateY(100%); } }
+        @keyframes stars { 0% { transform:translateY(0); } 100% { transform:translateY(-100vh); } }
+        @keyframes nebula { 0% { background-position:0% 0%; } 50% { background-position:100% 100%; } }
+        @keyframes aurora { 0% { filter: hue-rotate(0deg); } 100% { filter: hue-rotate(360deg); } }
 
         body { margin: 0; padding: 15px; transition: background 0.6s ease, color 0.6s ease; min-height: 100vh; display: flex; justify-content: center; align-items: flex-start; font-size: 16px; }
-        .container { width: 100%; max-width: 900px; background: var(--glass); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); padding: 20px; border-radius: 32px; border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5); animation: fadeIn 0.4s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .container { width: 100%; max-width: 1200px; background: var(--glass); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); padding: 25px; border-radius: 32px; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 25px 50px rgba(0,0,0,0.5); animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
         .hidden { display: none !important; }
         
         header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); flex-wrap: wrap; gap: 10px; }
@@ -71,51 +96,21 @@
         .stat-label { font-size: 0.75rem; opacity: 0.7; }
         .stat-value { font-size: 1.3rem; font-weight: 700; color: var(--success); }
 
-        /* Streak display */
-        .streak-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(0,0,0,0.3);
-            padding: 8px 20px;
-            border-radius: 40px;
-        }
-        .streak-fire {
-            font-size: 2rem;
-            filter: drop-shadow(0 0 5px orange);
-        }
-        .streak-count {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: #ffaa00;
-        }
-        .streak-label {
-            font-size: 0.8rem;
-            opacity: 0.7;
-        }
-        .daily-progress {
-            margin-top: 5px;
-            width: 100%;
-            height: 8px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        .daily-progress-fill {
-            height: 100%;
-            background: #ffaa00;
-            width: 0%;
-            transition: width 0.3s;
-        }
+        .streak-container { display: flex; align-items: center; gap: 10px; background: rgba(0,0,0,0.3); padding: 8px 20px; border-radius: 40px; }
+        .streak-fire { font-size: 2rem; filter: drop-shadow(0 0 5px orange); }
+        .streak-count { font-size: 1.8rem; font-weight: 800; color: #ffaa00; }
+        .streak-label { font-size: 0.8rem; opacity: 0.7; }
+        .daily-progress { margin-top: 5px; width: 100%; height: 8px; background: rgba(255,255,255,0.2); border-radius: 10px; overflow: hidden; }
+        .daily-progress-fill { height: 100%; background: #ffaa00; width: 0%; transition: width 0.3s; }
 
-        input, select, button, .file-label { font-size: 1rem; padding: 14px 18px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.4); color: white; outline: none; transition: all 0.3s; }
+        input, select, button, .file-label { font-size: 1rem; padding: 14px 18px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.4); color: white; outline: none; transition: all 0.3s; min-width: 48px; min-height: 48px; }
         input:focus, select:focus { border-color: var(--primary); background: rgba(0,0,0,0.6); }
-        button, .file-label { background: var(--primary); cursor: pointer; font-weight: 700; transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); border: none; min-width: 48px; min-height: 48px; display: inline-block; text-align: center; }
+        button, .file-label { background: var(--primary); cursor: pointer; font-weight: 700; transition: all 0.2s cubic-bezier(0.175,0.885,0.32,1.275); border: none; display: inline-block; text-align: center; }
         button:active, .file-label:active { transform: scale(0.96); }
         button:disabled { opacity: 0.3; cursor: not-allowed; }
         .file-label { background: var(--info); }
 
-        .big-btn { width: 100%; font-size: 1.3rem; background: var(--success); margin-bottom: 10px; padding: 18px; box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3); }
+        .big-btn { width: 100%; font-size: 1.3rem; background: var(--success); margin-bottom: 10px; padding: 18px; box-shadow: 0 8px 20px rgba(34,197,94,0.3); }
         .action-row { display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; }
         .action-row input { flex: 2; min-width: 200px; }
         .action-row button { flex: 1; min-width: 80px; }
@@ -147,206 +142,320 @@
         .powerup-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 10px 0; }
         .powerup-card { background: rgba(255,255,255,0.1); padding: 10px; border-radius: 16px; text-align: center; }
 
-        .congrats-animation {
-            animation: bounce 0.5s ease;
-        }
-        @keyframes bounce {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); background: gold; color: black; }
-        }
+        .congrats-animation { animation: bounce 0.5s ease; }
+        @keyframes bounce { 0%,100%{transform:scale(1);} 50%{transform:scale(1.2); background:gold; color:black;} }
 
-        .settings-panel {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-        .toggle-switch {
-            position: relative;
-            display: inline-block;
-            width: 60px;
-            height: 34px;
-        }
-        .toggle-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            transition: .4s;
-            border-radius: 34px;
-        }
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 26px;
-            width: 26px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            transition: .4s;
-            border-radius: 50%;
-        }
-        input:checked + .slider {
-            background-color: var(--success);
-        }
-        input:checked + .slider:before {
-            transform: translateX(26px);
-        }
+        .settings-panel { display: flex; align-items: center; gap: 15px; flex-wrap: wrap; }
+        .toggle-switch { position: relative; display: inline-block; width: 60px; height: 34px; }
+        .toggle-switch input { opacity:0; width:0; height:0; }
+        .slider { position: absolute; cursor: pointer; top:0; left:0; right:0; bottom:0; background-color:#ccc; transition:.4s; border-radius:34px; }
+        .slider:before { position: absolute; content:""; height:26px; width:26px; left:4px; bottom:4px; background-color:white; transition:.4s; border-radius:50%; }
+        input:checked + .slider { background-color: var(--success); }
+        input:checked + .slider:before { transform: translateX(26px); }
+
+        .profile-header { display: flex; align-items: center; gap: 20px; margin-bottom: 20px; flex-wrap: wrap; }
+        .avatar-options { display: grid; grid-template-columns: repeat(4,1fr); gap:10px; margin-top:10px; }
+        .avatar-options button { padding:10px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); font-size:1.5rem; }
+        .avatar-options button.selected { border:2px solid var(--success); background:var(--success); }
+        .banner-color-options { display: flex; gap:10px; flex-wrap: wrap; }
+        .color-swatch { width:40px; height:40px; border-radius:50%; border:2px solid transparent; cursor:pointer; }
+        .color-swatch.selected { border-color:white; }
+        .border-options { display: flex; gap:10px; flex-wrap: wrap; margin-top:10px; }
+        .border-preview { width:60px; height:60px; border-radius:50%; background:rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center; cursor:pointer; border:2px solid transparent; transition:0.2s; }
+        .border-preview.selected { border-color:var(--success); }
+        .border-preview[data-border="none"] { border:2px dashed #aaa; }
+        .border-preview[data-border="gold"] { border:4px solid gold; }
+        .border-preview[data-border="rainbow"] { border:4px solid; border-image: repeating-linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet) 1; animation: borderSpin 3s linear infinite; }
+        .border-preview[data-border="glow"] { box-shadow: 0 0 15px cyan; border:2px solid cyan; }
+        .border-preview[data-border="double"] { border:6px double white; }
+        .border-preview[data-border="dashed"] { border:4px dashed #ffaa00; }
+        .border-preview[data-border="fire"] { border:4px solid transparent; background: linear-gradient(white, white) padding-box, linear-gradient(45deg, #ff4e00, #ec9f05) border-box; }
+        .border-preview[data-border="ice"] { border:4px solid transparent; background: linear-gradient(white, white) padding-box, linear-gradient(135deg, #a8edea, #fed6e3) border-box; }
+        .border-preview[data-border="matrix"] { border:4px solid #00ff00; box-shadow: 0 0 10px #00ff00; }
+        @keyframes borderSpin { 0% { border-image-source: linear-gradient(0deg, red, orange, yellow, green, blue, indigo, violet); } 100% { border-image-source: linear-gradient(360deg, red, orange, yellow, green, blue, indigo, violet); } }
+
+        .title-options { display: flex; gap:10px; flex-wrap: wrap; margin-top:10px; }
+        .title-options button { padding:10px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); }
+        .title-options button.selected { background:var(--success); border-color:white; }
+        .title-options button:disabled { opacity:0.3; cursor:not-allowed; }
+
+        .friend-list { max-height:200px; overflow-y: auto; border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:10px; }
+        .friend-item { display: flex; justify-content: space-between; padding:10px; border-bottom:1px solid rgba(255,255,255,0.05); }
+        .event-banner { background: var(--warning); color: black; padding:10px; border-radius:20px; text-align:center; font-weight:700; margin-bottom:15px; }
+        .definition-box { background: rgba(0,0,0,0.5); padding:15px; border-radius:16px; margin-top:10px; font-style:italic; }
+        .stat-grid { display: grid; grid-template-columns: repeat(2,1fr); gap:10px; }
+        .stat-card { background: rgba(0,0,0,0.3); padding:15px; border-radius:20px; }
+
+        .admin-toggle { background: var(--secondary); margin-left: 10px; }
+
+        .daily-bonus-btn { background: var(--warning); width:100%; margin-top:10px; }
 
         @media (min-width: 768px) {
-            body { padding: 30px; }
-            .container { padding: 35px; }
-            button { padding: 16px 24px; }
-            .big-btn { font-size: 1.6rem; }
-            .shop-grid button { font-size: 1rem; }
+            body { padding:30px; }
+            .container { padding:35px; }
+            button { padding:16px 24px; }
+            .big-btn { font-size:1.6rem; }
+            .shop-grid button { font-size:1rem; }
         }
     </style>
 </head>
 <body class="bg-default" id="main-body">
 
+    <!-- Login Screen -->
     <div id="login-screen" class="container">
-        <h1 style="margin:0; font-size: clamp(2rem, 8vw, 2.8rem); text-align: center;">🎙️ Spelling Bee</h1>
-        <p style="opacity:0.7; margin-bottom: 30px; text-align: center; font-size: 1.1rem;">Level up, compete, and rule the words!</p>
-        
+        <h1 style="margin:0; font-size:clamp(2rem,8vw,2.8rem); text-align:center;">🎙️ Spelling Bee</h1>
+        <p style="opacity:0.7; margin-bottom:30px; text-align:center; font-size:1.1rem;">The ultimate word arena!</p>
         <div style="display:flex; flex-direction:column; gap:15px;">
             <input type="text" id="username-input" placeholder="Enter Username" autocomplete="off">
-            
             <div id="password-area" class="hidden">
-                <p id="pw-label" style="font-size:0.9rem; margin: 5px 0; color:var(--secondary); font-weight:bold;"></p>
+                <p id="pw-label" style="font-size:0.9rem; margin:5px 0; color:var(--secondary); font-weight:bold;"></p>
                 <input type="password" id="password-input" placeholder="Password">
             </div>
-
-            <button id="login-btn" style="margin-top: 10px;">Join Match</button>
+            <button id="login-btn" style="margin-top:10px;">Join Match</button>
         </div>
-        <p id="login-msg" class="msg" style="color: var(--danger);"></p>
+        <p id="login-msg" class="msg" style="color:var(--danger);"></p>
     </div>
 
+    <!-- Main App Screen -->
     <div id="app-screen" class="container hidden">
         <header>
             <div>
-                <h2 id="welcome-text" style="margin:0; font-size: 1.4rem;">Welcome</h2>
+                <h2 id="welcome-text" style="margin:0; font-size:1.4rem;">Welcome</h2>
                 <span class="badge" id="role-badge">STUDENT</span>
             </div>
-            <div class="stats">
-                <div class="stat-item">
-                    <div class="stat-label">SCORE</div>
-                    <div class="stat-value" id="points-display">0</div>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div class="stats">
+                    <div class="stat-item"><div class="stat-label">SCORE</div><div class="stat-value" id="points-display">0</div></div>
+                    <div class="stat-item"><div class="stat-label">LEVEL</div><div class="stat-value" id="level-display">1</div></div>
+                    <div class="stat-item"><div class="stat-label">XP</div><div class="stat-value" id="xp-display">0/30</div></div>
+                    <div class="stat-item"><div class="stat-label">RP</div><div class="stat-value" id="rp-display">0</div></div>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-label">LEVEL</div>
-                    <div class="stat-value" id="level-display">1</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-label">XP</div>
-                    <div class="stat-value" id="xp-display">0/30</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-label">RP</div>
-                    <div class="stat-value" id="rp-display">0</div>
-                </div>
+                <button id="admin-toggle-btn" class="admin-toggle hidden">🔧 Admin</button>
             </div>
         </header>
 
         <!-- Streak Section -->
-        <section style="padding: 15px;">
-            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 15px;">
+        <section style="padding:15px;">
+            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:15px;">
                 <div class="streak-container">
                     <span class="streak-fire" id="streak-fire">🔥</span>
-                    <div>
-                        <span class="streak-count" id="streak-count">0</span>
-                        <span class="streak-label">day streak</span>
-                    </div>
+                    <div><span class="streak-count" id="streak-count">0</span> <span class="streak-label">day streak</span></div>
                 </div>
-                <div style="flex: 1; min-width: 150px;">
-                    <div style="display: flex; justify-content: space-between;">
-                        <span>Today's words</span>
-                        <span id="daily-words-count">0/5</span>
-                    </div>
-                    <div class="daily-progress">
-                        <div class="daily-progress-fill" id="daily-progress-fill" style="width:0%"></div>
-                    </div>
+                <div style="flex:1; min-width:150px;">
+                    <div style="display:flex; justify-content:space-between;"><span>Today's words</span><span id="daily-words-count">0/5</span></div>
+                    <div class="daily-progress"><div class="daily-progress-fill" id="daily-progress-fill" style="width:0%"></div></div>
                 </div>
-                <button id="recover-streak-btn" style="background:var(--warning); display: none;">🔥 Recover (50 pts)</button>
+                <button id="recover-streak-btn" style="background:var(--warning); display:none;">🔥 Recover (50 pts)</button>
             </div>
         </section>
 
-        <!-- Settings Panel -->
-        <section>
-            <h3 class="section-title">⚙️ Settings</h3>
-            <div class="settings-panel">
-                <label class="toggle-switch">
-                    <input type="checkbox" id="congrats-toggle" checked>
-                    <span class="slider"></span>
-                </label>
-                <span>🎉 Congrats Animation (every 5 correct)</span>
-                <button id="manage-password-btn" style="background:var(--info); margin-left: auto;">🔐 Change Password</button>
+        <!-- Daily Bonus Section -->
+        <section id="daily-bonus-section">
+            <h3 class="section-title">🎁 Daily Bonus</h3>
+            <button id="claim-daily-bonus-btn" class="daily-bonus-btn">Claim Daily Bonus</button>
+            <p id="daily-bonus-msg" class="msg"></p>
+        </section>
+
+        <!-- Tutorial -->
+        <section id="tutorial" class="hidden">
+            <h3 class="section-title">📘 Tutorial</h3>
+            <p>Welcome! Here's how to play:</p>
+            <ul>
+                <li>Click "Hear Word" to hear a word.</li>
+                <li>Spell it correctly to earn points and XP.</li>
+                <li>Complete 5 words daily to keep your streak alive!</li>
+                <li>Reach higher levels to unlock Challenge, Ranked, Live Play, and Power-ups.</li>
+                <li>Customize your profile with avatars, colors, borders, and titles!</li>
+                <li>Claim daily bonus for extra points.</li>
+            </ul>
+            <button id="close-tutorial">Got it!</button>
+        </section>
+
+        <!-- Achievements -->
+        <section id="achievements-section">
+            <h3 class="section-title">🏆 Achievements</h3>
+            <div id="achievements-list" style="display:grid; grid-template-columns:repeat(2,1fr); gap:10px;"></div>
+        </section>
+
+        <!-- Profile Customization (expanded) -->
+        <section id="profile-section">
+            <h3 class="section-title">👤 Profile</h3>
+            <div class="profile-header">
+                <div id="avatar-preview" style="font-size:4rem; border-radius:50%; transition:0.2s;"></div>
+                <div>
+                    <p>Nickname: <span id="profile-username"></span></p>
+                    <p>Title: <span id="profile-title">Novice</span></p>
+                </div>
+            </div>
+            <h4>Choose Avatar</h4>
+            <div class="avatar-options">
+                <button data-avatar="😀">😀</button>
+                <button data-avatar="😎">😎</button>
+                <button data-avatar="🧙">🧙</button>
+                <button data-avatar="🐼">🐼</button>
+                <button data-avatar="🦊">🦊</button>
+                <button data-avatar="🐨">🐨</button>
+                <button data-avatar="👽">👽</button>
+                <button data-avatar="🤖">🤖</button>
+            </div>
+            <h4>Banner Color</h4>
+            <div class="banner-color-options">
+                <div class="color-swatch" style="background:#0f172a;" data-color="#0f172a"></div>
+                <div class="color-swatch" style="background:#ff7e5f;" data-color="#ff7e5f"></div>
+                <div class="color-swatch" style="background:#22c55e;" data-color="#22c55e"></div>
+                <div class="color-swatch" style="background:#ff5050;" data-color="#ff5050"></div>
+                <div class="color-swatch" style="background:#a855f7;" data-color="#a855f7"></div>
+                <div class="color-swatch" style="background:#f59e0b;" data-color="#f59e0b"></div>
+                <div class="color-swatch" style="background:#3b82f6;" data-color="#3b82f6"></div>
+                <div class="color-swatch" style="background:#ec4899;" data-color="#ec4899"></div>
+            </div>
+            <h4>Profile Border</h4>
+            <div class="border-options" id="border-options">
+                <!-- Populated by JS -->
+            </div>
+            <h4>Title</h4>
+            <div class="title-options" id="title-options">
+                <!-- Populated by JS -->
+            </div>
+            <button id="save-profile">Save Profile</button>
+        </section>
+
+        <!-- Stats -->
+        <section id="stats-section">
+            <h3 class="section-title">📊 Statistics</h3>
+            <div class="stat-grid">
+                <div class="stat-card">Accuracy: <span id="stat-accuracy">0%</span></div>
+                <div class="stat-card">Avg Time: <span id="stat-avgtime">0s</span></div>
+                <div class="stat-card">Words Today: <span id="stat-wordstoday">0</span></div>
+                <div class="stat-card">Longest Streak: <span id="stat-longeststreak">0</span></div>
             </div>
         </section>
 
-        <section id="admin-panel" class="hidden" style="border-left: 5px solid var(--secondary)">
-            <h3 class="section-title"><span>🛠️ Admin Terminal</span></h3>
-            
-            <div style="display:flex; gap:10px; margin-bottom: 15px; flex-wrap: wrap;">
-                <input type="text" id="new-word-input" placeholder="New Vocabulary Word" style="flex:2;">
+        <!-- Friends -->
+        <section id="friends-section">
+            <h3 class="section-title">👥 Friends</h3>
+            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:15px;">
+                <input type="text" id="friend-username" placeholder="Enter username">
+                <button id="add-friend-btn">Add Friend</button>
+            </div>
+            <div id="friend-list" class="friend-list"></div>
+        </section>
+
+        <!-- Live Play -->
+        <section id="live-play-section" class="hidden">
+            <h3 class="section-title">🎮 Live Play</h3>
+            <div id="live-room">
+                <p>You are in a live game with <span id="live-opponent"></span>.</p>
+                <p>Word <span id="live-word-num">1</span>/5</p>
+                <button id="live-hear-btn" class="big-btn">🔊 Hear Word</button>
+                <div class="action-row">
+                    <input type="text" id="live-spell" placeholder="Spell...">
+                    <button id="live-submit-btn">Check</button>
+                </div>
+                <p id="live-msg" class="msg"></p>
+            </div>
+            <button id="find-match-btn" class="big-btn">Find Match</button>
+        </section>
+
+        <!-- Power-ups -->
+        <section id="powerups-section" class="hidden">
+            <h3 class="section-title">⚡ Power-Ups</h3>
+            <div class="powerup-grid">
+                <div class="powerup-card">💡 Hint <button id="use-hint" disabled>Use (50 pts)</button></div>
+                <div class="powerup-card">⏱️ Extra Time <button id="use-extratime" disabled>Use (75 pts)</button></div>
+                <div class="powerup-card">✨ Double XP <button id="use-doublexp" disabled>Use (100 pts)</button></div>
+                <div class="powerup-card">🛡️ Shield <button id="use-shield" disabled>Use (80 pts)</button></div>
+            </div>
+        </section>
+
+        <!-- Seasonal Event -->
+        <section id="event-section" class="hidden">
+            <div class="event-banner" id="event-banner"></div>
+        </section>
+
+        <!-- Word of the Day -->
+        <section id="word-of-day-section" class="hidden">
+            <h3 class="section-title">📅 Word of the Day</h3>
+            <p>Bonus XP: <span id="word-of-day-bonus">20</span> | Bonus Points: <span id="word-of-day-points">15</span></p>
+            <div class="action-row">
+                <input type="text" id="word-of-day-spell" placeholder="Spell the word..." disabled>
+                <button id="submit-word-of-day-btn" disabled>Submit</button>
+            </div>
+            <button id="hear-word-of-day-btn" class="big-btn">🔊 Hear Word</button>
+            <div id="word-of-day-definition" class="definition-box hidden"></div>
+            <p id="word-of-day-msg" class="msg"></p>
+        </section>
+
+        <!-- Import Word Lists -->
+        <section id="import-lists-section" class="hidden">
+            <h3 class="section-title">📚 Import Word Lists</h3>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <button data-list="sat">SAT Vocabulary</button>
+                <button data-list="gre">GRE Words</button>
+                <button data-list="animals">Animals</button>
+                <button data-list="countries">Countries</button>
+            </div>
+            <p id="import-status" class="msg"></p>
+        </section>
+
+        <!-- Backup / Export -->
+        <section id="backup-section">
+            <h3 class="section-title">💾 Backup / Export</h3>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <button id="export-data-btn">Export Progress</button>
+                <label class="file-label" for="import-file">Import Progress</label>
+                <input type="file" id="import-file" accept=".json" style="display:none;">
+            </div>
+            <p id="backup-msg" class="msg"></p>
+        </section>
+
+        <!-- Admin Panel (hidden by default, toggled by admin button) -->
+        <section id="admin-panel" class="hidden" style="border-left:5px solid var(--secondary);">
+            <h3 class="section-title">🛠️ Admin Terminal</h3>
+            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:15px;">
+                <input type="text" id="new-word-input" placeholder="New Word" style="flex:2;">
                 <button id="add-word-btn" style="background:var(--secondary); flex:1;">Add</button>
             </div>
-
-            <!-- File Upload -->
-            <div style="margin-bottom: 15px;">
-                <label for="word-file" class="file-label">📂 Upload .txt File (one word per line)</label>
+            <div style="margin-bottom:15px;">
+                <label for="word-file" class="file-label">📂 Upload .txt (one word per line)</label>
                 <input type="file" id="word-file" accept=".txt" style="display:none;">
                 <p id="upload-status" class="msg" style="font-size:0.9rem;"></p>
             </div>
-
-            <button id="toggle-word-list-btn" style="width:100%; background:rgba(255,255,255,0.1); font-size: 0.95rem; border: 1px solid rgba(255,255,255,0.2); margin-bottom: 15px;">
-                👁️ Manage Database (Quiz Lock)
-            </button>
-
-            <div id="word-list-admin" class="hidden" style="margin-top: 20px; max-height: 250px; overflow-y: auto; padding-right: 5px;"></div>
-            <hr style="margin:20px 0; opacity:0.2">
-
+            <button id="toggle-word-list-btn" style="width:100%; background:rgba(255,255,255,0.1); margin-bottom:15px;">👁️ Manage Database (Quiz Lock)</button>
+            <div id="word-list-admin" class="hidden" style="max-height:250px; overflow-y:auto; padding-right:5px;"></div>
+            <hr style="margin:20px 0; opacity:0.2;">
             <h4 style="margin:0 0 10px 0;">👑 Admin Manager</h4>
-            <div style="display:flex; gap:10px; flex-wrap: wrap;">
-                <input type="text" id="admin-target" placeholder="Username" style="flex: 2 1 120px;">
-                <input type="password" id="admin-password" placeholder="New Password" style="flex: 2 1 120px;">
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <input type="text" id="admin-target" placeholder="Username" style="flex:2 1 120px;">
+                <input type="password" id="admin-password" placeholder="New Password" style="flex:2 1 120px;">
                 <button id="make-admin-btn" style="background:var(--success); flex:1;">Make Admin</button>
                 <button id="remove-admin-btn" style="background:var(--danger); flex:1;">Remove Admin</button>
             </div>
             <p id="admin-msg" class="msg"></p>
-
             <h4 style="margin:20px 0 10px 0;">🗑️ Delete Account</h4>
             <div style="display:flex; gap:10px;">
                 <input type="text" id="delete-target" placeholder="Username to delete">
                 <button id="delete-account-btn" style="background:var(--danger);">Delete</button>
             </div>
             <p id="delete-msg" class="msg"></p>
-
             <h4 style="margin:20px 0 10px 0;">📊 Leaderboard Management</h4>
-            <div style="display:flex; gap:10px; flex-wrap: wrap;">
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
                 <button id="remove-from-scoreboard-btn" style="background:var(--warning);">Remove from Score LB</button>
                 <button id="remove-from-rankboard-btn" style="background:var(--warning);">Remove from Rank LB</button>
                 <input type="text" id="lb-username" placeholder="Username">
             </div>
         </section>
 
+        <!-- Quiz Area -->
         <section id="quiz-area">
             <div class="voice-selector">
                 <select id="voice-select"><option value="">Loading voices...</option></select>
             </div>
-
             <div class="tabs">
                 <button class="tab active" data-mode="classic">Classic</button>
-                <button class="tab" data-mode="challenge" id="challenge-tab" disabled>⏳ Time Challenge (lvl 15)</button>
-                <button class="tab" data-mode="ranked" id="ranked-tab" disabled>🏆 Ranked (lvl 30)</button>
-                <button class="tab" data-mode="live" id="live-tab" disabled>🎮 Live Play (lvl 50)</button>
+                <button class="tab" data-mode="challenge" id="challenge-tab" disabled>⏳ Challenge (lvl15)</button>
+                <button class="tab" data-mode="ranked" id="ranked-tab" disabled>🏆 Ranked (lvl30)</button>
+                <button class="tab" data-mode="live" id="live-tab" disabled>🎮 Live (lvl50)</button>
             </div>
 
             <!-- Classic Mode -->
@@ -363,7 +472,7 @@
                 <div id="deck-info">Loading words...</div>
             </div>
 
-            <!-- Time Challenge Mode -->
+            <!-- Challenge Mode -->
             <div id="challenge-mode" class="hidden">
                 <div class="challenge-timer" id="timer-display">15s</div>
                 <div>Word <span id="challenge-word-num">1</span>/5</div>
@@ -379,7 +488,7 @@
             <div id="ranked-mode" class="hidden">
                 <div class="rank-info">
                     <span>Rank Points: <strong id="rank-points">0</strong></span>
-                    <span>Difficulty Multiplier: <span id="difficulty-mult">1.0x</span></span>
+                    <span>Multiplier: <span id="difficulty-mult">1.0x</span></span>
                 </div>
                 <button id="play-ranked-btn" class="big-btn">🔊 Hear Word (Ranked)</button>
                 <div class="action-row">
@@ -389,34 +498,10 @@
                 <p id="ranked-msg" class="msg"></p>
             </div>
 
-            <!-- Live Play Mode (placeholder) -->
+            <!-- Live Mode (placeholder) -->
             <div id="live-mode" class="hidden">
-                <p style="text-align:center;">🎮 Live Play – Find an opponent (coming soon)</p>
-                <button id="find-match-btn" class="big-btn">Find Match</button>
-                <p id="live-msg" class="msg"></p>
-            </div>
-        </section>
-
-        <!-- Power-ups (unlocked at level 100) -->
-        <section id="powerups-section" class="hidden">
-            <h3 class="section-title">⚡ Power-Ups</h3>
-            <div class="powerup-grid">
-                <div class="powerup-card">
-                    <div>💡 Hint</div>
-                    <button id="use-hint" disabled>Use (50 pts)</button>
-                </div>
-                <div class="powerup-card">
-                    <div>✨ Double XP</div>
-                    <button id="use-doublexp" disabled>Use (100 pts)</button>
-                </div>
-                <div class="powerup-card">
-                    <div>🔄 Extra Time</div>
-                    <button id="use-time" disabled>Use (75 pts)</button>
-                </div>
-                <div class="powerup-card">
-                    <div>🛡️ Shield (no skip loss)</div>
-                    <button id="use-shield" disabled>Use (80 pts)</button>
-                </div>
+                <p style="text-align:center;">🎮 Live Play – Find an opponent to start!</p>
+                <button id="find-match-from-tab" class="big-btn">Find Match</button>
             </div>
         </section>
 
@@ -428,29 +513,42 @@
                 <button class="tab" data-leaderboard="level">Level</button>
                 <button class="tab" data-leaderboard="rank">Ranked</button>
             </div>
-            <div id="score-leaderboard">
-                <table><tbody id="scoreboard-body"></tbody></table>
-            </div>
-            <div id="level-leaderboard" class="hidden">
-                <table><tbody id="levelboard-body"></tbody></table>
-            </div>
-            <div id="rank-leaderboard" class="hidden">
-                <table><tbody id="rankboard-body"></tbody></table>
-            </div>
+            <div id="score-leaderboard"><table><tbody id="scoreboard-body"></tbody></table></div>
+            <div id="level-leaderboard" class="hidden"><table><tbody id="levelboard-body"></tbody></table></div>
+            <div id="rank-leaderboard" class="hidden"><table><tbody id="rankboard-body"></tbody></table></div>
         </section>
 
+        <!-- Themes Shop (30+ themes + Buy XP) -->
         <section>
             <h3 class="section-title">🛒 Themes & Skins</h3>
             <div class="shop-grid" id="themes-grid"></div>
+            <!-- Buy XP button added separately -->
+            <div style="margin-top:15px;">
+                <button id="buy-xp-btn" class="big-btn" style="background:var(--warning);">Buy 10 XP (100 pts)</button>
+            </div>
         </section>
 
-        <button onclick="location.reload()" style="width:100%; margin-top:15px; background:transparent; color: var(--danger); font-size: 0.95rem; border: 1.5px solid var(--danger); font-weight: 800; padding: 16px;">LOGOUT SESSION</button>
+        <!-- Settings -->
+        <section>
+            <h3 class="section-title">⚙️ Settings</h3>
+            <div class="settings-panel">
+                <label class="toggle-switch"><input type="checkbox" id="congrats-toggle" checked><span class="slider"></span></label>
+                <span>🎉 Congrats Animation</span>
+                <label class="toggle-switch"><input type="checkbox" id="sound-toggle" checked><span class="slider"></span></label>
+                <span>🔊 Sound Effects</span>
+                <label class="toggle-switch"><input type="checkbox" id="auto-theme-toggle"><span class="slider"></span></label>
+                <span>🌗 Auto Theme (system)</span>
+                <button id="manage-password-btn" style="background:var(--info);">🔐 Change Password</button>
+            </div>
+        </section>
+
+        <button onclick="location.reload()" style="width:100%; margin-top:15px; background:transparent; color:var(--danger); border:1.5px solid var(--danger); font-weight:800; padding:16px;">LOGOUT SESSION</button>
     </div>
 
-    <!-- Password Management Modal -->
-    <div id="password-modal" class="container hidden" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000; background: #1e1e2f;">
+    <!-- Password Modal -->
+    <div id="password-modal" class="container hidden" style="position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); z-index:1000; background:#1e1e2f;">
         <h3>Manage Password</h3>
-        <input type="password" id="current-pw" placeholder="Current password (if any)">
+        <input type="password" id="current-pw" placeholder="Current password">
         <input type="password" id="new-pw" placeholder="New password">
         <input type="password" id="confirm-pw" placeholder="Confirm new password">
         <div style="display:flex; gap:10px; margin-top:15px;">
@@ -461,6 +559,7 @@
     </div>
 
     <script type="module">
+        // ---------- Firebase Configuration ----------
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, doc, getDoc, setDoc, updateDoc, deleteDoc, query, orderBy, limit, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
@@ -472,11 +571,10 @@
             messagingSenderId: "465817747027",
             appId: "1:465817747027:web:931e7cc47636d0b77590a6"
         };
-
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // ================== GAME STATE ==================
+        // ---------- Game State ----------
         let currentUser = null;
         let wordsList = [];
         let wordDeck = [];
@@ -487,32 +585,80 @@
 
         // Settings
         let congratsEnabled = true;
-        let correctCount = 0; // for animation
-
-        // Streak
+        let soundEnabled = true;
+        let autoTheme = false;
+        let correctCount = 0;
         let dailyWords = 0;
         const DAILY_GOAL = 5;
 
-        // --- FAST LEVELING ---
+        // Power-ups
+        let powerups = {
+            hint: { owned: 0, price: 50 },
+            doubleXP: { owned: 0, price: 100 },
+            extraTime: { owned: 0, price: 75 },
+            shield: { owned: 0, price: 80 }
+        };
+
+        // Achievements list
+        const achievementsList = [
+            { id: "first-word", name: "First Word", desc: "Spell your first word correctly.", xp: 10 },
+            { id: "level-10", name: "Level 10", desc: "Reach level 10.", xp: 50 },
+            { id: "100-correct", name: "100 Correct", desc: "Spell 100 words correctly.", xp: 100 },
+            { id: "30-day-streak", name: "30-Day Streak", desc: "Maintain a 30-day streak.", xp: 200 },
+            { id: "ranked-champ", name: "Ranked Champ", desc: "Reach 500 Rank Points.", xp: 150 }
+        ];
+
+        // Titles unlocked by achievements
+        const titles = [
+            { name: "Novice", achievement: null }, // default
+            { name: "Word Speller", achievement: "first-word" },
+            { name: "Level 10 Master", achievement: "level-10" },
+            { name: "Century Club", achievement: "100-correct" },
+            { name: "Streak Legend", achievement: "30-day-streak" },
+            { name: "Ranked Elite", achievement: "ranked-champ" },
+            { name: "Admin", achievement: null, adminOnly: true },
+            { name: "Supreme", achievement: null, adminOnly: true }
+        ];
+
+        // Profile borders (some purchasable, some unlocked by achievements)
+        const borders = [
+            { id: "none", name: "None", cost: 0, default: true },
+            { id: "gold", name: "Gold Border", cost: 50 },
+            { id: "rainbow", name: "Rainbow", cost: 200 },
+            { id: "glow", name: "Glowing", cost: 150 },
+            { id: "double", name: "Double Line", cost: 30 },
+            { id: "dashed", name: "Dashed", cost: 20 },
+            { id: "fire", name: "Fire", cost: 300 },
+            { id: "ice", name: "Ice", cost: 250 },
+            { id: "matrix", name: "Matrix", cost: 400 }
+        ];
+
+        // Friends list
+        let friends = [];
+
+        // Word of the Day
+        let wordOfDay = null;
+        let wordOfDayBonus = 20; // XP
+        let wordOfDayPoints = 15; // points
+
+        // Seasonal event
+        let currentEvent = null;
+
+        // ---------- Helper Functions ----------
         function xpForLevel(level) {
             return 30 + (level - 1) * 5;
         }
 
-        // --- IMPROVED DIFFICULTY AI ---
         function analyzeWordDifficulty(word) {
             let score = 0;
             if (word.length <= 4) score += 1;
             else if (word.length <= 6) score += 2;
             else score += 3;
-            
             const rare = /[qzxyjvkw]/gi;
             const matches = word.match(rare);
             if (matches) score += matches.length * 0.5;
-            
             if (/(.)\1/.test(word)) score += 1;
-            
             score += (Math.random() - 0.5);
-            
             if (score < 2.5) return 1;
             if (score < 4.5) return 2;
             return 3;
@@ -524,43 +670,29 @@
             return 25;
         }
 
-        // Game modes
-        let currentMode = 'classic';
-        let challengeActive = false;
-        let challengeWords = [];
-        let challengeIndex = 0;
-        let challengeTimer = null;
-        let challengeTimeLeft = 15;
-        let rankedMultiplier = 1.0;
-        let powerups = {
-            hint: { owned: 0, price: 50 },
-            doubleXP: { owned: 0, price: 100 },
-            extraTime: { owned: 0, price: 75 },
-            shield: { owned: 0, price: 80 }
-        };
+        // ---------- Achievement Functions ----------
+        async function checkAndUnlockAchievement(achievementId) {
+            if (currentUser.achievements?.[achievementId]) return;
+            const achievement = achievementsList.find(a => a.id === achievementId);
+            if (!achievement) return;
+            currentUser.achievements = currentUser.achievements || {};
+            currentUser.achievements[achievementId] = true;
+            await addXP(achievement.xp);
+            await updateDoc(doc(db, "users", currentUser.id), { achievements: currentUser.achievements });
+            alert(`🏆 Achievement unlocked: ${achievement.name}! +${achievement.xp} XP`);
+            loadAchievements();
+            // Update title options (some titles may now be unlocked)
+            renderTitleOptions();
+        }
 
-        // DOM elements
-        const loginScreen = document.getElementById('login-screen');
-        const appScreen = document.getElementById('app-screen');
-        const userIn = document.getElementById('username-input');
-        const passArea = document.getElementById('password-area');
-        const passIn = document.getElementById('password-input');
-        const pwLabel = document.getElementById('pw-label');
-        const voiceSelect = document.getElementById('voice-select');
-        const modal = document.getElementById('password-modal');
-        const congratsToggle = document.getElementById('congrats-toggle');
-        const streakCountSpan = document.getElementById('streak-count');
-        const dailyWordsSpan = document.getElementById('daily-words-count');
-        const progressFill = document.getElementById('daily-progress-fill');
-        const recoverBtn = document.getElementById('recover-streak-btn');
-
-        congratsToggle.addEventListener('change', () => {
-            congratsEnabled = congratsToggle.checked;
-        });
-
-        // ================== STREAK FUNCTIONS ==================
+        // ---------- Streak Functions ----------
         function getTodayDate() {
             const d = new Date();
+            return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+        }
+        function getYesterday() {
+            const d = new Date();
+            d.setDate(d.getDate()-1);
             return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
         }
 
@@ -569,156 +701,119 @@
             const lastLogin = currentUser.lastLogin || '';
             const lastStreak = currentUser.streak || 0;
             const daily = currentUser.dailyWords || 0;
-            
             if (lastLogin === today) {
-                // Already logged in today, just restore counts
                 dailyWords = daily;
             } else {
-                // New day
                 if (lastLogin === getYesterday()) {
-                    // Consecutive day
                     if (daily >= DAILY_GOAL) {
-                        // They completed yesterday, streak continues
                         currentUser.streak = lastStreak + 1;
                     } else {
-                        // Didn't complete yesterday, streak resets
                         currentUser.streak = 0;
                     }
                 } else {
-                    // Missed at least one day
                     currentUser.streak = 0;
                 }
                 dailyWords = 0;
                 currentUser.dailyWords = 0;
                 currentUser.lastLogin = today;
-                await updateDoc(doc(db, "users", currentUser.id), { 
-                    streak: currentUser.streak,
-                    dailyWords: 0,
-                    lastLogin: today
-                });
+                await updateDoc(doc(db, "users", currentUser.id), { streak: currentUser.streak, dailyWords: 0, lastLogin: today });
             }
-
-            // Check for streak theme unlock
-            if (currentUser.streak >= 10 && !currentUser.unlockedThemes.includes('bg-streak10')) {
+            if (currentUser.streak >= 10 && !currentUser.unlockedThemes?.includes('bg-streak10')) {
+                if (!currentUser.unlockedThemes) currentUser.unlockedThemes = ['bg-default'];
                 currentUser.unlockedThemes.push('bg-streak10');
                 await updateDoc(doc(db, "users", currentUser.id), { unlockedThemes: currentUser.unlockedThemes });
                 renderShop();
             }
-
             updateStreakUI();
             checkNotification();
         }
 
-        function getYesterday() {
-            const d = new Date();
-            d.setDate(d.getDate() - 1);
-            return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-        }
-
         async function incrementDailyWords() {
-            if (dailyWords >= DAILY_GOAL) return; // already done today
-            
+            if (dailyWords >= DAILY_GOAL) return;
             dailyWords++;
             currentUser.dailyWords = dailyWords;
             await updateDoc(doc(db, "users", currentUser.id), { dailyWords });
-            
             if (dailyWords === DAILY_GOAL) {
-                // Completed today's goal -> increase streak
                 currentUser.streak = (currentUser.streak || 0) + 1;
                 await updateDoc(doc(db, "users", currentUser.id), { streak: currentUser.streak });
-                
-                // Check for streak theme unlock
-                if (currentUser.streak >= 10 && !currentUser.unlockedThemes.includes('bg-streak10')) {
+                if (currentUser.streak >= 10 && !currentUser.unlockedThemes?.includes('bg-streak10')) {
+                    if (!currentUser.unlockedThemes) currentUser.unlockedThemes = ['bg-default'];
                     currentUser.unlockedThemes.push('bg-streak10');
                     await updateDoc(doc(db, "users", currentUser.id), { unlockedThemes: currentUser.unlockedThemes });
                     renderShop();
+                }
+                if (currentUser.streak >= 30) {
+                    await checkAndUnlockAchievement('30-day-streak');
                 }
             }
             updateStreakUI();
         }
 
         function updateStreakUI() {
-            streakCountSpan.innerText = currentUser.streak || 0;
-            dailyWordsSpan.innerText = `${dailyWords}/${DAILY_GOAL}`;
+            document.getElementById('streak-count').innerText = currentUser.streak || 0;
+            document.getElementById('daily-words-count').innerText = `${dailyWords}/${DAILY_GOAL}`;
             const percent = (dailyWords / DAILY_GOAL) * 100;
-            progressFill.style.width = percent + '%';
-            
-            // Change fire color based on streak
+            document.getElementById('daily-progress-fill').style.width = percent + '%';
             const fire = document.getElementById('streak-fire');
             if (currentUser.streak >= 10) fire.style.color = '#ff5500';
             else if (currentUser.streak >= 5) fire.style.color = '#ffaa00';
             else fire.style.color = '#ffdd44';
-            
-            // Show recover button if streak=0 and dailyWords=0 and lastLogin is not today? Actually if streak=0 and dailyWords=0, maybe they missed yesterday
             if (currentUser.streak === 0 && dailyWords === 0 && currentUser.lastLogin !== getTodayDate()) {
-                recoverBtn.style.display = 'inline-block';
+                document.getElementById('recover-streak-btn').style.display = 'inline-block';
             } else {
-                recoverBtn.style.display = 'none';
+                document.getElementById('recover-streak-btn').style.display = 'none';
             }
         }
 
         async function recoverStreak() {
-            if (currentUser.points < 50) {
-                alert("Not enough points! Need 50.");
-                return;
-            }
+            if (currentUser.points < 50) { alert("Not enough points!"); return; }
             currentUser.points -= 50;
             currentUser.streak = 1;
             dailyWords = 0;
             currentUser.dailyWords = 0;
-            const today = getTodayDate();
-            currentUser.lastLogin = today;
-            await updateDoc(doc(db, "users", currentUser.id), { 
-                points: currentUser.points,
-                streak: 1,
-                dailyWords: 0,
-                lastLogin: today
-            });
+            currentUser.lastLogin = getTodayDate();
+            await updateDoc(doc(db, "users", currentUser.id), { points: currentUser.points, streak: 1, dailyWords: 0, lastLogin: currentUser.lastLogin });
             updateStats();
             updateStreakUI();
         }
-        recoverBtn.addEventListener('click', recoverStreak);
 
-        // ================== NOTIFICATIONS ==================
         function checkNotification() {
             if (!("Notification" in window)) return;
             if (Notification.permission === "granted") {
                 if (dailyWords < DAILY_GOAL) {
-                    new Notification("Spelling Bee", {
-                        body: `You haven't completed today's ${DAILY_GOAL} words yet! Keep your streak alive! 🔥`,
-                        icon: "https://img.icons8.com/color/48/000000/spell-check.png"
-                    });
+                    new Notification("Spelling Bee", { body: `You haven't completed today's ${DAILY_GOAL} words yet! Keep your streak alive! 🔥` });
                 }
             } else if (Notification.permission !== "denied") {
                 Notification.requestPermission();
             }
         }
 
-        // ================== VOICE ==================
+        // ---------- Voice ----------
         function populateVoices() {
             voices = window.speechSynthesis.getVoices();
-            voiceSelect.innerHTML = '';
+            const select = document.getElementById('voice-select');
+            select.innerHTML = '';
             if (voices.length === 0) {
-                voiceSelect.innerHTML = '<option value="">No voices available</option>';
+                select.innerHTML = '<option value="">No voices available</option>';
                 return;
             }
             voices.forEach(v => {
                 const opt = document.createElement('option');
                 opt.value = v.voiceURI;
                 opt.textContent = `${v.name} (${v.lang})`;
-                voiceSelect.appendChild(opt);
+                select.appendChild(opt);
             });
-            if (selectedVoiceURI) voiceSelect.value = selectedVoiceURI;
+            if (selectedVoiceURI) select.value = selectedVoiceURI;
             else if (currentUser?.preferredVoice) {
-                voiceSelect.value = currentUser.preferredVoice;
+                select.value = currentUser.preferredVoice;
                 selectedVoiceURI = currentUser.preferredVoice;
             }
         }
         window.speechSynthesis.onvoiceschanged = populateVoices;
         if (window.speechSynthesis.getVoices().length) populateVoices();
 
-        voiceSelect.addEventListener('change', async () => {
-            selectedVoiceURI = voiceSelect.value;
+        document.getElementById('voice-select').addEventListener('change', async (e) => {
+            selectedVoiceURI = e.target.value;
             if (currentUser) {
                 currentUser.preferredVoice = selectedVoiceURI;
                 await updateDoc(doc(db, "users", currentUser.id), { preferredVoice: selectedVoiceURI });
@@ -736,11 +831,66 @@
             window.speechSynthesis.speak(utter);
         }
 
-        // ================== LOGIN ==================
+        function playBeep() {
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioCtx.createOscillator();
+            oscillator.type = 'sine';
+            oscillator.frequency.setValueAtTime(440, audioCtx.currentTime);
+            oscillator.connect(audioCtx.destination);
+            oscillator.start();
+            oscillator.stop(audioCtx.currentTime + 0.1);
+        }
+
+        // ---------- Definition Fetcher ----------
+        async function fetchDefinition(word) {
+            try {
+                const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+                if (!response.ok) throw new Error('No definition found');
+                const data = await response.json();
+                const meaning = data[0].meanings[0];
+                const definition = meaning.definitions[0].definition;
+                return definition;
+            } catch (e) {
+                return "Definition not available.";
+            }
+        }
+
+        // ---------- Daily Bonus ----------
+        async function claimDailyBonus() {
+            const today = getTodayDate();
+            if (currentUser.lastBonus === today) {
+                document.getElementById('daily-bonus-msg').innerText = "You already claimed your daily bonus today!";
+                return;
+            }
+            const bonus = Math.floor(Math.random() * 41) + 10; // 10-50
+            currentUser.points += bonus;
+            currentUser.lastBonus = today;
+            await updateDoc(doc(db, "users", currentUser.id), { points: currentUser.points, lastBonus: today });
+            document.getElementById('daily-bonus-msg').innerText = `🎉 You claimed ${bonus} bonus points!`;
+            updateStats();
+        }
+
+        // ---------- Buy XP ----------
+        async function buyXP() {
+            const cost = 100;
+            if (currentUser.points < cost) {
+                alert("Not enough points! Need 100 points.");
+                return;
+            }
+            currentUser.points -= cost;
+            await addXP(10); // adds 10 XP and handles leveling
+            await updateDoc(doc(db, "users", currentUser.id), { points: currentUser.points });
+            updateStats();
+            alert("Purchased 10 XP!");
+        }
+
+        // ---------- Login ----------
         let usernameCheckTimeout;
-        userIn.addEventListener('input', () => {
+        document.getElementById('username-input').addEventListener('input', () => {
             clearTimeout(usernameCheckTimeout);
-            const val = userIn.value.trim().toLowerCase();
+            const val = document.getElementById('username-input').value.trim().toLowerCase();
+            const passArea = document.getElementById('password-area');
+            const pwLabel = document.getElementById('pw-label');
             if (val === "") { passArea.classList.add('hidden'); return; }
             if (val === "abdullah") {
                 passArea.classList.remove('hidden');
@@ -760,19 +910,19 @@
         });
 
         document.getElementById('login-btn').addEventListener('click', async () => {
-            const username = userIn.value.trim().toLowerCase();
+            const username = document.getElementById('username-input').value.trim().toLowerCase();
             if (!username) { document.getElementById('login-msg').innerText = "Enter a username."; return; }
             const userRef = doc(db, "users", username);
             const userSnap = await getDoc(userRef);
+            const pw = document.getElementById('password-input').value.trim();
 
             if (username === "abdullah") {
-                const pw = passIn.value.trim();
                 if (!pw) { document.getElementById('login-msg').innerText = "Password required."; return; }
                 if (userSnap.exists() && userSnap.data().password) {
-                    if (userSnap.data().password !== pw) { document.getElementById('login-msg').innerText = "Access Denied: Wrong Password"; return; }
+                    if (userSnap.data().password !== pw) { document.getElementById('login-msg').innerText = "Access Denied"; return; }
                     currentUser = { id: username, ...userSnap.data() };
                 } else {
-                    currentUser = { id: username, points: 0, unlockedThemes: ["bg-default"], password: pw, isAdmin: true, level: 1, xp: 0, rankPoints: 0, powerups: {}, streak: 0, dailyWords: 0, lastLogin: '' };
+                    currentUser = { id: username, points: 0, unlockedThemes: ["bg-default"], unlockedBorders: ["none"], unlockedTitles: ["Novice"], password: pw, isAdmin: true, level: 1, xp: 0, rankPoints: 0, powerups: {}, streak: 0, dailyWords: 0, lastLogin: '', friends: [], achievements: {}, avatar: '😀', title: 'Admin', bannerColor: '#0f172a', border: 'none', totalCorrect: 0, wordOfDayAttempt: '', lastBonus: '' };
                     await setDoc(userRef, currentUser);
                 }
                 isAdmin = true;
@@ -780,13 +930,12 @@
                 if (userSnap.exists()) {
                     const userData = userSnap.data();
                     if (userData.password) {
-                        const pw = passIn.value.trim();
                         if (!pw) { document.getElementById('login-msg').innerText = "Password required."; return; }
                         if (userData.password !== pw) { document.getElementById('login-msg').innerText = "Incorrect password."; return; }
                     }
                     currentUser = { id: username, ...userData };
                 } else {
-                    currentUser = { id: username, points: 0, unlockedThemes: ["bg-default"], isAdmin: false, level: 1, xp: 0, rankPoints: 0, powerups: {}, streak: 0, dailyWords: 0, lastLogin: '' };
+                    currentUser = { id: username, points: 0, unlockedThemes: ["bg-default"], unlockedBorders: ["none"], unlockedTitles: ["Novice"], isAdmin: false, level: 1, xp: 0, rankPoints: 0, powerups: {}, streak: 0, dailyWords: 0, lastLogin: '', friends: [], achievements: {}, avatar: '😀', title: 'Novice', bannerColor: '#0f172a', border: 'none', totalCorrect: 0, wordOfDayAttempt: '', lastBonus: '' };
                     await setDoc(userRef, currentUser);
                 }
                 isAdmin = currentUser.isAdmin || false;
@@ -794,6 +943,8 @@
 
             // Initialize missing fields
             if (!currentUser.unlockedThemes) currentUser.unlockedThemes = ["bg-default"];
+            if (!currentUser.unlockedBorders) currentUser.unlockedBorders = ["none"];
+            if (!currentUser.unlockedTitles) currentUser.unlockedTitles = ["Novice"];
             if (!currentUser.level) currentUser.level = 1;
             if (!currentUser.xp) currentUser.xp = 0;
             if (!currentUser.rankPoints) currentUser.rankPoints = 0;
@@ -801,24 +952,36 @@
             if (!currentUser.streak) currentUser.streak = 0;
             if (!currentUser.dailyWords) currentUser.dailyWords = 0;
             if (!currentUser.lastLogin) currentUser.lastLogin = '';
+            if (!currentUser.friends) currentUser.friends = [];
+            if (!currentUser.achievements) currentUser.achievements = {};
+            if (!currentUser.avatar) currentUser.avatar = '😀';
+            if (!currentUser.title) currentUser.title = 'Novice';
+            if (!currentUser.bannerColor) currentUser.bannerColor = '#0f172a';
+            if (!currentUser.border) currentUser.border = 'none';
+            if (!currentUser.totalCorrect) currentUser.totalCorrect = 0;
+            if (!currentUser.wordOfDayAttempt) currentUser.wordOfDayAttempt = '';
+            if (!currentUser.lastBonus) currentUser.lastBonus = '';
 
+            // Secret theme
             if (["marina", "layla"].includes(username) && !currentUser.unlockedThemes.includes("bg-secret")) {
                 currentUser.unlockedThemes.push("bg-secret");
                 await updateDoc(userRef, { unlockedThemes: currentUser.unlockedThemes });
             }
             if (currentUser.preferredVoice) {
                 selectedVoiceURI = currentUser.preferredVoice;
-                if (voiceSelect) voiceSelect.value = selectedVoiceURI;
+                document.getElementById('voice-select').value = selectedVoiceURI;
             }
             setupApp();
         });
 
-        // ================== PASSWORD MANAGEMENT (Modal) ==================
+        // ---------- Password Management ----------
         document.getElementById('manage-password-btn').addEventListener('click', () => {
             if (!currentUser) { alert("Login first"); return; }
-            modal.classList.remove('hidden');
+            document.getElementById('password-modal').classList.remove('hidden');
         });
-        document.getElementById('cancel-pw-btn').addEventListener('click', () => modal.classList.add('hidden'));
+        document.getElementById('cancel-pw-btn').addEventListener('click', () => {
+            document.getElementById('password-modal').classList.add('hidden');
+        });
         document.getElementById('save-pw-btn').addEventListener('click', async () => {
             const cur = document.getElementById('current-pw').value;
             const newPw = document.getElementById('new-pw').value;
@@ -831,26 +994,32 @@
             await updateDoc(doc(db, "users", currentUser.id), { password: newPw || null });
             currentUser.password = newPw || null;
             msg.innerText = "Password updated!";
-            setTimeout(() => modal.classList.add('hidden'), 1500);
+            setTimeout(() => document.getElementById('password-modal').classList.add('hidden'), 1500);
         });
 
-        // ================== APP SETUP ==================
+        // ---------- Admin Toggle ----------
+        document.getElementById('admin-toggle-btn').addEventListener('click', () => {
+            const adminPanel = document.getElementById('admin-panel');
+            adminPanel.classList.toggle('hidden');
+        });
+
+        // ---------- App Setup ----------
         async function setupApp() {
-            loginScreen.classList.add('hidden');
-            appScreen.classList.remove('hidden');
-            
+            document.getElementById('login-screen').classList.add('hidden');
+            document.getElementById('app-screen').classList.remove('hidden');
             document.getElementById('welcome-text').innerText = "Hello, " + currentUser.id.charAt(0).toUpperCase() + currentUser.id.slice(1);
+            document.getElementById('profile-username').innerText = currentUser.id;
+            updateProfilePreview();
             updateStats();
 
-            // Check streak
             await checkStreakOnLogin();
 
             if (isAdmin) {
-                document.getElementById('admin-panel').classList.remove('hidden');
+                document.getElementById('admin-toggle-btn').classList.remove('hidden');
                 document.getElementById('role-badge').innerText = "MASTER ADMIN";
                 refreshAdminWords();
             } else {
-                document.getElementById('admin-panel').classList.add('hidden');
+                document.getElementById('admin-toggle-btn').classList.add('hidden');
                 document.getElementById('role-badge').innerText = "STUDENT";
             }
 
@@ -859,10 +1028,24 @@
             if (currentUser.level >= 50) document.getElementById('live-tab').disabled = false;
             if (currentUser.level >= 100) document.getElementById('powerups-section').classList.remove('hidden');
 
+            checkSeasonalEvent();
+            await loadWordOfDay();
+            loadFriends();
+            loadAchievements();
+            renderBorderOptions();
+            renderTitleOptions();
+            updateStatsPanel();
+
             renderShop();
             fetchWords();
             setupLeaderboards();
             setupTabs();
+
+            // Daily bonus button
+            document.getElementById('claim-daily-bonus-btn').addEventListener('click', claimDailyBonus);
+
+            // Buy XP button
+            document.getElementById('buy-xp-btn').addEventListener('click', buyXP);
         }
 
         function updateStats() {
@@ -873,7 +1056,6 @@
             document.getElementById('rp-display').innerText = currentUser.rankPoints || 0;
         }
 
-        // FIXED: XP carries over excess after level-up
         async function addXP(amount) {
             currentUser.xp += amount;
             let leveled = false;
@@ -887,21 +1069,361 @@
                 if (currentUser.level === 30) document.getElementById('ranked-tab').disabled = false;
                 if (currentUser.level === 50) document.getElementById('live-tab').disabled = false;
                 if (currentUser.level === 100) document.getElementById('powerups-section').classList.remove('hidden');
+                if (currentUser.level >= 10) {
+                    await checkAndUnlockAchievement('level-10');
+                }
             }
             await updateDoc(doc(db, "users", currentUser.id), { xp: currentUser.xp, level: currentUser.level });
             updateStats();
         }
 
-        // ================== CLASSIC MODE ==================
+        // ---------- Achievements ----------
+        function loadAchievements() {
+            const container = document.getElementById('achievements-list');
+            container.innerHTML = '';
+            achievementsList.forEach(ach => {
+                const unlocked = currentUser.achievements?.[ach.id] || false;
+                const div = document.createElement('div');
+                div.style.background = unlocked ? 'rgba(34,197,94,0.3)' : 'rgba(255,255,255,0.1)';
+                div.style.padding = '10px';
+                div.style.borderRadius = '16px';
+                div.style.textAlign = 'center';
+                div.innerHTML = `<strong>${ach.name}</strong><br><small>${ach.desc}</small>`;
+                container.appendChild(div);
+            });
+        }
+
+        // ---------- Profile ----------
+        function updateProfilePreview() {
+            const preview = document.getElementById('avatar-preview');
+            preview.innerText = currentUser.avatar;
+            // Reset styles
+            preview.style.border = 'none';
+            preview.style.boxShadow = 'none';
+            preview.style.borderImage = 'none';
+
+            const borderId = currentUser.border || 'none';
+
+            if (borderId === 'none') {
+                preview.style.border = '2px dashed #aaa';
+            } else if (borderId === 'gold') {
+                preview.style.border = '4px solid gold';
+            } else if (borderId === 'rainbow') {
+                preview.style.border = '4px solid transparent';
+                preview.style.borderImage = 'repeating-linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet) 1';
+            } else if (borderId === 'glow') {
+                preview.style.boxShadow = '0 0 15px cyan';
+                preview.style.border = '2px solid cyan';
+            } else if (borderId === 'double') {
+                preview.style.border = '6px double white';
+            } else if (borderId === 'dashed') {
+                preview.style.border = '4px dashed #ffaa00';
+            } else if (borderId === 'fire') {
+                preview.style.border = '4px solid transparent';
+                preview.style.borderImage = 'linear-gradient(45deg, #ff4e00, #ec9f05) 1';
+            } else if (borderId === 'ice') {
+                preview.style.border = '4px solid transparent';
+                preview.style.borderImage = 'linear-gradient(135deg, #a8edea, #fed6e3) 1';
+            } else if (borderId === 'matrix') {
+                preview.style.border = '4px solid #00ff00';
+                preview.style.boxShadow = '0 0 10px #00ff00';
+            }
+        }
+
+        function renderBorderOptions() {
+            const container = document.getElementById('border-options');
+            container.innerHTML = '';
+            borders.forEach(b => {
+                const div = document.createElement('div');
+                div.className = 'border-preview';
+                div.dataset.border = b.id;
+                if (currentUser.border === b.id) div.classList.add('selected');
+                // Style preview based on border id
+                if (b.id === 'none') div.style.border = '2px dashed #aaa';
+                else if (b.id === 'gold') div.style.border = '4px solid gold';
+                else if (b.id === 'rainbow') {
+                    div.style.border = '4px solid transparent';
+                    div.style.borderImage = 'repeating-linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet) 1';
+                } else if (b.id === 'glow') {
+                    div.style.boxShadow = '0 0 15px cyan';
+                    div.style.border = '2px solid cyan';
+                } else if (b.id === 'double') div.style.border = '6px double white';
+                else if (b.id === 'dashed') div.style.border = '4px dashed #ffaa00';
+                else if (b.id === 'fire') {
+                    div.style.border = '4px solid transparent';
+                    div.style.borderImage = 'linear-gradient(45deg, #ff4e00, #ec9f05) 1';
+                } else if (b.id === 'ice') {
+                    div.style.border = '4px solid transparent';
+                    div.style.borderImage = 'linear-gradient(135deg, #a8edea, #fed6e3) 1';
+                } else if (b.id === 'matrix') {
+                    div.style.border = '4px solid #00ff00';
+                    div.style.boxShadow = '0 0 10px #00ff00';
+                }
+                div.innerHTML = 'A';
+                div.addEventListener('click', async () => {
+                    if (!currentUser.unlockedBorders.includes(b.id) && b.cost > 0 && b.cost > (currentUser.points || 0)) {
+                        alert(`You need ${b.cost} points to unlock this border!`);
+                        return;
+                    }
+                    if (!currentUser.unlockedBorders.includes(b.id) && b.cost > 0) {
+                        if (confirm(`Unlock ${b.name} border for ${b.cost} points?`)) {
+                            currentUser.points -= b.cost;
+                            currentUser.unlockedBorders.push(b.id);
+                            // Save unlocked borders and points to Firebase immediately
+                            await updateDoc(doc(db, "users", currentUser.id), { 
+                                points: currentUser.points, 
+                                unlockedBorders: currentUser.unlockedBorders 
+                            });
+                            updateStats();
+                        } else return;
+                    }
+                    currentUser.border = b.id;
+                    document.querySelectorAll('.border-preview').forEach(el => el.classList.remove('selected'));
+                    div.classList.add('selected');
+                    updateProfilePreview();
+                });
+                container.appendChild(div);
+            });
+        }
+
+        function renderTitleOptions() {
+            const container = document.getElementById('title-options');
+            container.innerHTML = '';
+            titles.forEach(t => {
+                if (t.adminOnly && !isAdmin) return;
+                const btn = document.createElement('button');
+                btn.innerText = t.name;
+                btn.disabled = !(t.achievement === null || currentUser.achievements?.[t.achievement] || (t.adminOnly && isAdmin));
+                if (currentUser.title === t.name) btn.classList.add('selected');
+                btn.addEventListener('click', () => {
+                    if (btn.disabled) return;
+                    currentUser.title = t.name;
+                    document.querySelectorAll('#title-options button').forEach(b => b.classList.remove('selected'));
+                    btn.classList.add('selected');
+                    document.getElementById('profile-title').innerText = t.name;
+                });
+                container.appendChild(btn);
+            });
+        }
+
+        document.querySelectorAll('.avatar-options button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.avatar-options button').forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                document.getElementById('avatar-preview').innerText = btn.dataset.avatar;
+            });
+        });
+        document.querySelectorAll('.color-swatch').forEach(swatch => {
+            swatch.addEventListener('click', () => {
+                document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('selected'));
+                swatch.classList.add('selected');
+            });
+        });
+        document.getElementById('save-profile').addEventListener('click', async () => {
+            const avatar = document.querySelector('.avatar-options button.selected')?.dataset.avatar || '😀';
+            const bannerColor = document.querySelector('.color-swatch.selected')?.dataset.color || '#0f172a';
+            const title = currentUser.title;
+            const border = currentUser.border;
+            currentUser.avatar = avatar;
+            currentUser.bannerColor = bannerColor;
+            await updateDoc(doc(db, "users", currentUser.id), { avatar, bannerColor, title, border, unlockedBorders: currentUser.unlockedBorders });
+            updateProfilePreview();
+        });
+
+        // ---------- Stats Panel ----------
+        function updateStatsPanel() {
+            document.getElementById('stat-accuracy').innerText = '85%'; // placeholder
+            document.getElementById('stat-avgtime').innerText = '12s';
+            document.getElementById('stat-wordstoday').innerText = dailyWords;
+            document.getElementById('stat-longeststreak').innerText = currentUser.streak || 0;
+        }
+
+        // ---------- Friends ----------
+        function loadFriends() {
+            const list = document.getElementById('friend-list');
+            list.innerHTML = '';
+            (currentUser.friends || []).forEach(friend => {
+                const div = document.createElement('div');
+                div.className = 'friend-item';
+                div.innerHTML = `<span>${friend}</span><button class="remove-friend" data-friend="${friend}">❌</button>`;
+                list.appendChild(div);
+            });
+            document.querySelectorAll('.remove-friend').forEach(btn => {
+                btn.addEventListener('click', async (e) => {
+                    const friend = e.target.dataset.friend;
+                    currentUser.friends = currentUser.friends.filter(f => f !== friend);
+                    await updateDoc(doc(db, "users", currentUser.id), { friends: currentUser.friends });
+                    loadFriends();
+                });
+            });
+        }
+
+        document.getElementById('add-friend-btn').addEventListener('click', async () => {
+            const friend = document.getElementById('friend-username').value.trim().toLowerCase();
+            if (!friend) return;
+            if (friend === currentUser.id) { alert("Can't add yourself"); return; }
+            const friendRef = doc(db, "users", friend);
+            const snap = await getDoc(friendRef);
+            if (!snap.exists()) { alert("User not found"); return; }
+            if (!currentUser.friends) currentUser.friends = [];
+            if (currentUser.friends.includes(friend)) { alert("Already friends"); return; }
+            currentUser.friends.push(friend);
+            await updateDoc(doc(db, "users", currentUser.id), { friends: currentUser.friends });
+            document.getElementById('friend-username').value = '';
+            loadFriends();
+        });
+
+        // ---------- Seasonal Event ----------
+        function checkSeasonalEvent() {
+            const month = new Date().getMonth();
+            let eventName = '';
+            if (month === 9) eventName = '🎃 Halloween Spooktacular! Special words this week!';
+            else if (month === 11) eventName = '🎄 Christmas Wonderland! Festive words!';
+            else return;
+            currentEvent = eventName;
+            document.getElementById('event-banner').innerText = eventName;
+            document.getElementById('event-section').classList.remove('hidden');
+        }
+
+        // ---------- Word of the Day ----------
+        async function loadWordOfDay() {
+            const words = await getDocs(collection(db, "words"));
+            const allWords = words.docs.map(d => d.data().word);
+            if (allWords.length === 0) return;
+            const todayIndex = new Date().getDate() % allWords.length;
+            wordOfDay = allWords[todayIndex];
+            document.getElementById('word-of-day-bonus').innerText = wordOfDayBonus;
+            document.getElementById('word-of-day-points').innerText = wordOfDayPoints;
+
+            const today = getTodayDate();
+            if (currentUser.wordOfDayAttempt === today) {
+                document.getElementById('word-of-day-spell').disabled = true;
+                document.getElementById('submit-word-of-day-btn').disabled = true;
+                document.getElementById('word-of-day-msg').innerText = "You've already attempted today's word. Come back tomorrow!";
+            } else {
+                document.getElementById('word-of-day-spell').disabled = false;
+                document.getElementById('submit-word-of-day-btn').disabled = false;
+                document.getElementById('word-of-day-msg').innerText = '';
+            }
+            document.getElementById('word-of-day-section').classList.remove('hidden');
+        }
+
+        document.getElementById('hear-word-of-day-btn').addEventListener('click', () => {
+            if (wordOfDay) speakWord(wordOfDay);
+        });
+
+        document.getElementById('submit-word-of-day-btn').addEventListener('click', async () => {
+            const input = document.getElementById('word-of-day-spell');
+            const attempt = input.value.trim().toLowerCase();
+            const msg = document.getElementById('word-of-day-msg');
+            const defDiv = document.getElementById('word-of-day-definition');
+            if (!wordOfDay) return;
+            if (attempt === wordOfDay) {
+                currentUser.points += wordOfDayPoints;
+                await addXP(wordOfDayBonus);
+                await updateDoc(doc(db, "users", currentUser.id), {
+                    points: currentUser.points,
+                    wordOfDayAttempt: getTodayDate()
+                });
+                msg.innerText = `✅ Correct! +${wordOfDayPoints} pts, +${wordOfDayBonus} XP`;
+                input.disabled = true;
+                document.getElementById('submit-word-of-day-btn').disabled = true;
+
+                const definition = await fetchDefinition(wordOfDay);
+                defDiv.innerText = `📖 ${definition}`;
+                defDiv.classList.remove('hidden');
+            } else {
+                msg.innerText = "❌ Incorrect. Try again!";
+                if (soundEnabled) playBeep();
+                defDiv.classList.add('hidden');
+            }
+        });
+
+        // ---------- Import Word Lists ----------
+        document.querySelectorAll('[data-list]').forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+                if (!isAdmin) { alert("Admins only"); return; }
+                const list = e.target.dataset.list;
+                let words = [];
+                if (list === 'sat') words = ['abandon', 'abate', 'abdicate', 'aberration', 'abet', 'abhor', 'abide', 'abject', 'abnegation', 'abortive'];
+                else if (list === 'gre') words = ['aberration', 'abeyance', 'abscond', 'abstemious', 'admonish', 'adulation', 'adversity', 'advocate', 'aesthetic', 'aggrandize'];
+                else if (list === 'animals') words = ['aardvark', 'albatross', 'alligator', 'alpaca', 'anteater', 'antelope', 'armadillo', 'baboon', 'badger', 'barracuda'];
+                else if (list === 'countries') words = ['afghanistan', 'albania', 'algeria', 'andorra', 'angola', 'argentina', 'armenia', 'australia', 'austria', 'azerbaijan'];
+                let added = 0;
+                for (let w of words) {
+                    try {
+                        await addDoc(collection(db, "words"), { word: w });
+                        added++;
+                    } catch (e) {}
+                }
+                document.getElementById('import-status').innerText = `Added ${added} words.`;
+                fetchWords();
+            });
+        });
+
+        // ---------- Backup / Export ----------
+        document.getElementById('export-data-btn').addEventListener('click', () => {
+            const data = JSON.stringify(currentUser);
+            const blob = new Blob([data], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `spellingbee_${currentUser.id}_backup.json`;
+            a.click();
+        });
+
+        document.getElementById('import-file').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            const text = await file.text();
+            try {
+                const imported = JSON.parse(text);
+                if (imported.id !== currentUser.id) {
+                    alert("This backup belongs to a different user!");
+                    return;
+                }
+                Object.assign(currentUser, imported);
+                await setDoc(doc(db, "users", currentUser.id), currentUser);
+                alert("Import successful! Refresh to see changes.");
+                location.reload();
+            } catch (err) {
+                alert("Invalid backup file");
+            }
+        });
+
+        // ---------- Settings Toggles ----------
+        document.getElementById('congrats-toggle').addEventListener('change', (e) => {
+            congratsEnabled = e.target.checked;
+        });
+        document.getElementById('sound-toggle').addEventListener('change', (e) => {
+            soundEnabled = e.target.checked;
+        });
+        document.getElementById('auto-theme-toggle').addEventListener('change', (e) => {
+            autoTheme = e.target.checked;
+            if (autoTheme) {
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                document.getElementById('main-body').className = prefersDark ? 'bg-dark' : 'bg-light';
+            }
+        });
+
+        // ---------- Tutorial ----------
+        if (!localStorage.getItem('tutorialShown')) {
+            document.getElementById('tutorial').classList.remove('hidden');
+            localStorage.setItem('tutorialShown', 'true');
+        }
+        document.getElementById('close-tutorial').addEventListener('click', () => {
+            document.getElementById('tutorial').classList.add('hidden');
+        });
+
+        // ---------- Classic Mode ----------
         async function fetchWords() {
             const snapshot = await getDocs(collection(db, "words"));
             wordsList = snapshot.docs.map(doc => doc.data().word);
-            wordDeck = [...wordsList]; 
+            wordDeck = [...wordsList];
             updateDeckInfo();
         }
         function updateDeckInfo() {
-            const info = document.getElementById('deck-info');
-            info.innerText = wordsList.length ? `${wordDeck.length} words remaining` : "No words";
+            document.getElementById('deck-info').innerText = wordsList.length ? `${wordDeck.length} words remaining` : "No words";
         }
 
         document.getElementById('play-word-btn').addEventListener('click', () => {
@@ -931,17 +1453,33 @@
                 msg.innerText = `🔥 Correct! +${pointsGain} pts, +${xpGain} XP`;
                 input.value = "";
                 currentWord = "";
-
-                // Streak increment (only counts classic mode)
                 await incrementDailyWords();
+
+                currentUser.totalCorrect = (currentUser.totalCorrect || 0) + 1;
+                await updateDoc(doc(db, "users", currentUser.id), { totalCorrect: currentUser.totalCorrect });
+
+                if (currentUser.totalCorrect === 1) {
+                    await checkAndUnlockAchievement('first-word');
+                }
+                if (currentUser.totalCorrect === 100) {
+                    await checkAndUnlockAchievement('100-correct');
+                }
 
                 correctCount++;
                 if (congratsEnabled && correctCount % 5 === 0) {
                     msg.classList.add('congrats-animation');
                     setTimeout(() => msg.classList.remove('congrats-animation'), 500);
                 }
+
+                const defBox = document.createElement('div');
+                defBox.className = 'definition-box';
+                const definition = await fetchDefinition(currentWord);
+                defBox.innerText = `📖 ${definition}`;
+                document.getElementById('quiz-area').appendChild(defBox);
+                setTimeout(() => defBox.remove(), 5000);
             } else {
                 msg.innerText = "❌ Incorrect. Try again!";
+                if (soundEnabled) playBeep();
             }
             updateStats();
         });
@@ -957,31 +1495,17 @@
             updateStats();
         });
 
-        // ================== TIME CHALLENGE ==================
-        const challengeMode = document.getElementById('challenge-mode');
-        const classicMode = document.getElementById('classic-mode');
-        const rankedMode = document.getElementById('ranked-mode');
-        const liveMode = document.getElementById('live-mode');
-        const timerDisplay = document.getElementById('timer-display');
-        const challengeSpell = document.getElementById('challenge-spell');
-        const submitChallenge = document.getElementById('submit-challenge-btn');
-        const startChallenge = document.getElementById('start-challenge-btn');
-        const challengeMsg = document.getElementById('challenge-msg');
-        const challengeWordNum = document.getElementById('challenge-word-num');
-
-        startChallenge.addEventListener('click', () => {
-            if (wordsList.length < 5) { challengeMsg.innerText = "Need at least 5 words!"; return; }
+        // ---------- Challenge Mode (simplified) ----------
+        let challengeWords = [], challengeIndex = 0, challengeTimer = null, challengeTimeLeft = 15;
+        document.getElementById('start-challenge-btn').addEventListener('click', () => {
+            if (wordsList.length < 5) { document.getElementById('challenge-msg').innerText = "Need at least 5 words!"; return; }
             challengeWords = [...wordsList].sort(() => 0.5 - Math.random()).slice(0,5);
             challengeIndex = 0;
-            challengeActive = true;
-            startChallenge.disabled = true;
-            challengeSpell.disabled = false;
-            submitChallenge.disabled = false;
-            challengeSpell.value = "";
-            challengeMsg.innerText = "";
+            document.getElementById('start-challenge-btn').disabled = true;
+            document.getElementById('challenge-spell').disabled = false;
+            document.getElementById('submit-challenge-btn').disabled = false;
             nextChallengeWord();
         });
-
         function nextChallengeWord() {
             if (challengeIndex >= challengeWords.length) {
                 endChallenge(true);
@@ -989,13 +1513,13 @@
             }
             currentWord = challengeWords[challengeIndex];
             speakWord(currentWord);
-            challengeWordNum.innerText = challengeIndex+1;
+            document.getElementById('challenge-word-num').innerText = challengeIndex+1;
             challengeTimeLeft = 15;
-            timerDisplay.innerText = challengeTimeLeft + 's';
+            document.getElementById('timer-display').innerText = challengeTimeLeft + 's';
             if (challengeTimer) clearInterval(challengeTimer);
             challengeTimer = setInterval(() => {
                 challengeTimeLeft--;
-                timerDisplay.innerText = challengeTimeLeft + 's';
+                document.getElementById('timer-display').innerText = challengeTimeLeft + 's';
                 if (challengeTimeLeft <= 0) {
                     clearInterval(challengeTimer);
                     challengeIndex++;
@@ -1004,9 +1528,8 @@
                 }
             }, 1000);
         }
-
-        submitChallenge.addEventListener('click', async () => {
-            const attempt = challengeSpell.value.trim().toLowerCase();
+        document.getElementById('submit-challenge-btn').addEventListener('click', async () => {
+            const attempt = document.getElementById('challenge-spell').value.trim().toLowerCase();
             if (attempt === currentWord) {
                 clearInterval(challengeTimer);
                 const timeBonus = Math.max(0, challengeTimeLeft);
@@ -1016,36 +1539,27 @@
                 currentUser.points += pointsEarned;
                 await addXP(xpEarned);
                 await updateDoc(doc(db, "users", currentUser.id), { points: currentUser.points });
-                challengeMsg.innerText = `✅ +${pointsEarned} pts, +${xpEarned} XP!`;
+                document.getElementById('challenge-msg').innerText = `✅ +${pointsEarned} pts, +${xpEarned} XP!`;
                 challengeIndex++;
-                challengeSpell.value = "";
+                document.getElementById('challenge-spell').value = '';
                 if (challengeIndex < challengeWords.length) nextChallengeWord();
                 else endChallenge(true);
             } else {
-                challengeMsg.innerText = "❌ Wrong, try again!";
+                document.getElementById('challenge-msg').innerText = "❌ Wrong, try again!";
             }
         });
-
         function endChallenge(completed) {
             if (challengeTimer) clearInterval(challengeTimer);
-            challengeActive = false;
-            startChallenge.disabled = false;
-            challengeSpell.disabled = true;
-            submitChallenge.disabled = true;
-            if (completed) challengeMsg.innerText = "🎉 Challenge complete!";
-            else challengeMsg.innerText = "⏰ Time's up!";
+            document.getElementById('start-challenge-btn').disabled = false;
+            document.getElementById('challenge-spell').disabled = true;
+            document.getElementById('submit-challenge-btn').disabled = true;
+            document.getElementById('challenge-msg').innerText = completed ? "🎉 Challenge complete!" : "⏰ Time's up!";
         }
 
-        // ================== RANKED MODE ==================
-        const rankedSpell = document.getElementById('ranked-spell');
-        const submitRanked = document.getElementById('submit-ranked-btn');
-        const playRanked = document.getElementById('play-ranked-btn');
-        const rankedMsg = document.getElementById('ranked-msg');
-        const rankPointsSpan = document.getElementById('rank-points');
-        const difficultyMult = document.getElementById('difficulty-mult');
-
-        playRanked.addEventListener('click', () => {
-            if (!wordsList.length) { rankedMsg.innerText = "No words!"; return; }
+        // ---------- Ranked Mode ----------
+        let rankedMultiplier = 1.0;
+        document.getElementById('play-ranked-btn').addEventListener('click', () => {
+            if (!wordsList.length) { document.getElementById('ranked-msg').innerText = "No words!"; return; }
             if (!currentWord) {
                 if (wordDeck.length === 0) wordDeck = [...wordsList];
                 const rand = Math.floor(Math.random() * wordDeck.length);
@@ -1053,13 +1567,12 @@
             }
             speakWord(currentWord);
             const diff = analyzeWordDifficulty(currentWord);
-            rankedMultiplier = diff * 0.5; // 0.5,1.0,1.5
-            difficultyMult.innerText = rankedMultiplier.toFixed(1) + 'x';
+            rankedMultiplier = diff * 0.5;
+            document.getElementById('difficulty-mult').innerText = rankedMultiplier.toFixed(1) + 'x';
         });
-
-        submitRanked.addEventListener('click', async () => {
-            const attempt = rankedSpell.value.trim().toLowerCase();
-            if (!currentWord) { rankedMsg.innerText = "Hear a word first!"; return; }
+        document.getElementById('submit-ranked-btn').addEventListener('click', async () => {
+            const attempt = document.getElementById('ranked-spell').value.trim().toLowerCase();
+            if (!currentWord) { document.getElementById('ranked-msg').innerText = "Hear a word first!"; return; }
             if (attempt === currentWord) {
                 const diff = analyzeWordDifficulty(currentWord);
                 const rpGain = Math.floor(10 * rankedMultiplier);
@@ -1068,25 +1581,32 @@
                 currentUser.points += 10;
                 await addXP(xpGain);
                 await updateDoc(doc(db, "users", currentUser.id), { rankPoints: currentUser.rankPoints, points: currentUser.points });
-                rankedMsg.innerText = `✅ +${rpGain} RP, +10 pts, +${xpGain} XP`;
-                rankPointsSpan.innerText = currentUser.rankPoints;
-                rankedSpell.value = "";
-                currentWord = "";
+                document.getElementById('ranked-msg').innerText = `✅ +${rpGain} RP, +10 pts, +${xpGain} XP`;
+                document.getElementById('rank-points').innerText = currentUser.rankPoints;
+                document.getElementById('ranked-spell').value = '';
+                currentWord = '';
+
+                if (currentUser.rankPoints >= 500) {
+                    await checkAndUnlockAchievement('ranked-champ');
+                }
             } else {
                 const loss = 5;
                 currentUser.rankPoints = Math.max(0, currentUser.rankPoints - loss);
                 await updateDoc(doc(db, "users", currentUser.id), { rankPoints: currentUser.rankPoints });
-                rankedMsg.innerText = `❌ Incorrect! -${loss} RP`;
-                rankPointsSpan.innerText = currentUser.rankPoints;
+                document.getElementById('ranked-msg').innerText = `❌ Incorrect! -${loss} RP`;
+                document.getElementById('rank-points').innerText = currentUser.rankPoints;
             }
         });
 
-        // ================== LIVE MODE (placeholder) ==================
-        document.getElementById('find-match-btn').addEventListener('click', () => {
-            document.getElementById('live-msg').innerText = "Live play coming soon!";
+        // ---------- Live Play (placeholder) ----------
+        document.getElementById('find-match-btn')?.addEventListener('click', () => {
+            alert("Live play coming soon! For now, enjoy other modes.");
+        });
+        document.getElementById('find-match-from-tab')?.addEventListener('click', () => {
+            alert("Live play coming soon! For now, enjoy other modes.");
         });
 
-        // ================== TABS ==================
+        // ---------- Tabs ----------
         function setupTabs() {
             const tabs = document.querySelectorAll('.tab[data-mode]');
             tabs.forEach(tab => {
@@ -1094,20 +1614,34 @@
                     if (tab.disabled) return;
                     tabs.forEach(t => t.classList.remove('active'));
                     tab.classList.add('active');
-                    currentMode = tab.dataset.mode;
-                    classicMode.classList.add('hidden');
-                    challengeMode.classList.add('hidden');
-                    rankedMode.classList.add('hidden');
-                    liveMode.classList.add('hidden');
-                    if (currentMode === 'classic') classicMode.classList.remove('hidden');
-                    else if (currentMode === 'challenge') challengeMode.classList.remove('hidden');
-                    else if (currentMode === 'ranked') rankedMode.classList.remove('hidden');
-                    else if (currentMode === 'live') liveMode.classList.remove('hidden');
+                    const mode = tab.dataset.mode;
+                    document.getElementById('classic-mode').classList.add('hidden');
+                    document.getElementById('challenge-mode').classList.add('hidden');
+                    document.getElementById('ranked-mode').classList.add('hidden');
+                    document.getElementById('live-mode').classList.add('hidden');
+                    if (mode === 'classic') document.getElementById('classic-mode').classList.remove('hidden');
+                    else if (mode === 'challenge') document.getElementById('challenge-mode').classList.remove('hidden');
+                    else if (mode === 'ranked') document.getElementById('ranked-mode').classList.remove('hidden');
+                    else if (mode === 'live') document.getElementById('live-mode').classList.remove('hidden');
                 });
             });
         }
 
-        // ================== LEADERBOARDS ==================
+        // ---------- Helper to get border style for leaderboard ----------
+        function getBorderStyle(borderId) {
+            if (borderId === 'none') return 'border: 2px dashed #aaa;';
+            if (borderId === 'gold') return 'border: 4px solid gold;';
+            if (borderId === 'rainbow') return 'border: 4px solid transparent; border-image: repeating-linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet) 1;';
+            if (borderId === 'glow') return 'border: 2px solid cyan; box-shadow: 0 0 15px cyan;';
+            if (borderId === 'double') return 'border: 6px double white;';
+            if (borderId === 'dashed') return 'border: 4px dashed #ffaa00;';
+            if (borderId === 'fire') return 'border: 4px solid transparent; border-image: linear-gradient(45deg, #ff4e00, #ec9f05) 1;';
+            if (borderId === 'ice') return 'border: 4px solid transparent; border-image: linear-gradient(135deg, #a8edea, #fed6e3) 1;';
+            if (borderId === 'matrix') return 'border: 4px solid #00ff00; box-shadow: 0 0 10px #00ff00;';
+            return '';
+        }
+
+        // ---------- Leaderboards (with avatar and banner color) ----------
         function setupLeaderboards() {
             const scoreQ = query(collection(db, "users"), orderBy("points", "desc"), limit(10));
             onSnapshot(scoreQ, (snap) => {
@@ -1115,24 +1649,33 @@
                 body.innerHTML = "";
                 snap.forEach(u => {
                     const data = u.data();
-                    body.innerHTML += `<tr><td>${u.id}${data.isAdmin?' ⭐':''}</td><td style="text-align:right;">${data.points || 0}</td></tr>`;
+                    const avatar = data.avatar || '😀';
+                    const bannerColor = data.bannerColor || '#0f172a';
+                    const borderStyle = getBorderStyle(data.border || 'none');
+                    body.innerHTML += `<tr style="background-color: ${bannerColor}30;">` +
+                        `<td><span style="display:inline-block; border-radius:50%; padding:2px; ${borderStyle}">${avatar}</span> ${u.id}${data.isAdmin ? ' ⭐' : ''}</td>` +
+                        `<td style="text-align:right;">${data.points || 0}</td></tr>`;
                 });
             });
 
             const levelQ = query(collection(db, "users"), orderBy("level", "desc"), limit(20));
             onSnapshot(levelQ, (snap) => {
                 const users = [];
-                snap.forEach(u => {
-                    users.push({ id: u.id, ...u.data() });
-                });
-                users.sort((a, b) => {
+                snap.forEach(u => users.push({ id: u.id, ...u.data() }));
+                users.sort((a,b) => {
                     if (a.level !== b.level) return b.level - a.level;
                     return (b.xp || 0) - (a.xp || 0);
                 });
                 const body = document.getElementById('levelboard-body');
                 body.innerHTML = "";
-                users.slice(0, 10).forEach(u => {
-                    body.innerHTML += `<tr><td>${u.id}</td><td style="text-align:right;">Lv ${u.level || 1}</td><td style="text-align:right;">${u.xp || 0} XP</td></tr>`;
+                users.slice(0,10).forEach(u => {
+                    const avatar = u.avatar || '😀';
+                    const bannerColor = u.bannerColor || '#0f172a';
+                    const borderStyle = getBorderStyle(u.border || 'none');
+                    body.innerHTML += `<tr style="background-color: ${bannerColor}30;">` +
+                        `<td><span style="display:inline-block; border-radius:50%; padding:2px; ${borderStyle}">${avatar}</span> ${u.id}</td>` +
+                        `<td style="text-align:right;">Lv ${u.level || 1}</td>` +
+                        `<td style="text-align:right;">${u.xp || 0} XP</td></tr>`;
                 });
             });
 
@@ -1142,7 +1685,12 @@
                 body.innerHTML = "";
                 snap.forEach(u => {
                     const data = u.data();
-                    body.innerHTML += `<tr><td>${u.id}</td><td style="text-align:right;">${data.rankPoints || 0} RP</td></tr>`;
+                    const avatar = data.avatar || '😀';
+                    const bannerColor = data.bannerColor || '#0f172a';
+                    const borderStyle = getBorderStyle(data.border || 'none');
+                    body.innerHTML += `<tr style="background-color: ${bannerColor}30;">` +
+                        `<td><span style="display:inline-block; border-radius:50%; padding:2px; ${borderStyle}">${avatar}</span> ${u.id}</td>` +
+                        `<td style="text-align:right;">${data.rankPoints || 0} RP</td></tr>`;
                 });
             });
 
@@ -1160,7 +1708,100 @@
             });
         }
 
-        // ================== ADMIN: DELETE ACCOUNT / LEADERBOARD REMOVAL ==================
+        // ---------- Admin Panel ----------
+        document.getElementById('toggle-word-list-btn').addEventListener('click', () => {
+            const list = document.getElementById('word-list-admin');
+            const quiz = document.getElementById('quiz-area');
+            const btn = document.getElementById('toggle-word-list-btn');
+            if (list.classList.contains('hidden')) {
+                list.classList.remove('hidden');
+                quiz.style.opacity = '0.2';
+                quiz.querySelectorAll('button, input, select').forEach(el => el.disabled = true);
+                btn.innerText = "🙈 Hide Data (Unlock Quiz)";
+                refreshAdminWords();
+            } else {
+                list.classList.add('hidden');
+                quiz.style.opacity = '1';
+                quiz.querySelectorAll('button, input, select').forEach(el => el.disabled = false);
+                btn.innerText = "👁️ Manage Database (Quiz Lock)";
+            }
+        });
+
+        async function refreshAdminWords() {
+            const snap = await getDocs(collection(db, "words"));
+            const div = document.getElementById('word-list-admin');
+            div.innerHTML = "";
+            snap.forEach(d => {
+                const item = document.createElement('div');
+                item.style = "display:flex; justify-content:space-between; align-items:center; padding:12px; background:rgba(0,0,0,0.3); border-radius:12px; margin-bottom:8px;";
+                item.innerHTML = `<span>${d.data().word}</span><button style="padding:6px 12px; background:var(--danger)" onclick="deleteWord('${d.id}')">Delete</button>`;
+                div.appendChild(item);
+            });
+        }
+        window.deleteWord = async (id) => {
+            if (confirm("Delete?")) {
+                await deleteDoc(doc(db, "words", id));
+                refreshAdminWords();
+                fetchWords();
+            }
+        };
+        document.getElementById('add-word-btn').addEventListener('click', async () => {
+            const val = document.getElementById('new-word-input').value.trim().toLowerCase();
+            if (val) {
+                await addDoc(collection(db, "words"), { word: val });
+                document.getElementById('new-word-input').value = '';
+                refreshAdminWords();
+                fetchWords();
+            }
+        });
+
+        document.getElementById('word-file').addEventListener('change', async (e) => {
+            if (!isAdmin) { document.getElementById('upload-status').innerText = "Admins only"; e.target.value = ''; return; }
+            const file = e.target.files[0];
+            if (!file) return;
+            const status = document.getElementById('upload-status');
+            status.innerText = "Reading...";
+            try {
+                const text = await file.text();
+                const lines = text.split(/\r?\n/).map(l => l.trim().toLowerCase()).filter(l => l.length > 0);
+                const unique = [...new Set(lines)];
+                status.innerText = `Adding ${unique.length} words...`;
+                let added = 0;
+                for (let w of unique) {
+                    try {
+                        await addDoc(collection(db, "words"), { word: w });
+                        added++;
+                    } catch (err) {}
+                }
+                status.innerText = `Added ${added} new words.`;
+                e.target.value = '';
+                refreshAdminWords();
+                fetchWords();
+            } catch (err) {
+                status.innerText = "Error reading file.";
+            }
+        });
+
+        document.getElementById('make-admin-btn').addEventListener('click', async () => {
+            const username = document.getElementById('admin-target').value.trim().toLowerCase();
+            const password = document.getElementById('admin-password').value.trim();
+            if (!username || !password) { document.getElementById('admin-msg').innerText = "Username and password required"; return; }
+            const userRef = doc(db, "users", username);
+            const snap = await getDoc(userRef);
+            if (snap.exists()) {
+                await updateDoc(userRef, { isAdmin: true, password });
+            } else {
+                await setDoc(userRef, { points:0, unlockedThemes:["bg-default"], unlockedBorders:["none"], unlockedTitles:["Novice"], isAdmin:true, password, level:1, xp:0, rankPoints:0, streak:0, dailyWords:0, lastLogin:'', friends:[], achievements:{}, avatar:'😀', title:'Admin', bannerColor:'#0f172a', border:'none', totalCorrect:0, wordOfDayAttempt:'', lastBonus:'' });
+            }
+            document.getElementById('admin-msg').innerText = `${username} is now Admin.`;
+        });
+        document.getElementById('remove-admin-btn').addEventListener('click', async () => {
+            const username = document.getElementById('admin-target').value.trim().toLowerCase();
+            if (!username) return;
+            await updateDoc(doc(db, "users", username), { isAdmin: false });
+            document.getElementById('admin-msg').innerText = `${username} is no longer Admin.`;
+        });
+
         document.getElementById('delete-account-btn').addEventListener('click', async () => {
             if (!isAdmin) { document.getElementById('delete-msg').innerText = "Admins only"; return; }
             const target = document.getElementById('delete-target').value.trim().toLowerCase();
@@ -1178,7 +1819,6 @@
             await updateDoc(doc(db, "users", target), { points: 0 });
             alert('Score reset');
         });
-
         document.getElementById('remove-from-rankboard-btn').addEventListener('click', async () => {
             if (!isAdmin) return;
             const target = document.getElementById('lb-username').value.trim().toLowerCase();
@@ -1187,171 +1827,79 @@
             alert('Rank points reset');
         });
 
-        // ================== FILE UPLOAD ==================
-        const fileInput = document.getElementById('word-file');
-        fileInput.addEventListener('change', async (e) => {
-            if (!isAdmin) { 
-                document.getElementById('upload-status').innerText = "Admins only"; 
-                fileInput.value = "";
-                return; 
-            }
-            const file = e.target.files[0];
-            if (!file) return;
-            
-            const status = document.getElementById('upload-status');
-            status.innerText = "Reading file...";
-            
-            try {
-                const text = await file.text();
-                const lines = text.split(/\r?\n/).map(line => line.trim().toLowerCase()).filter(line => line.length > 0);
-                const unique = [...new Set(lines)];
-                
-                status.innerText = `Adding ${unique.length} words...`;
-                let added = 0;
-                for (let word of unique) {
-                    try {
-                        await addDoc(collection(db, "words"), { word });
-                        added++;
-                    } catch (err) {
-                        console.error("Failed to add", word, err);
-                    }
-                }
-                status.innerText = `Added ${added} new words.`;
-                fileInput.value = "";
-                refreshAdminWords();
-                fetchWords();
-            } catch (err) {
-                status.innerText = "Error reading file: " + err.message;
-                fileInput.value = "";
-            }
-        });
-
-        // ================== ADMIN PANEL ==================
-        document.getElementById('toggle-word-list-btn').addEventListener('click', () => {
-            const list = document.getElementById('word-list-admin');
-            const quiz = document.getElementById('quiz-area');
-            const btn = document.getElementById('toggle-word-list-btn');
-            if (list.classList.contains('hidden')) {
-                list.classList.remove('hidden');
-                quiz.style.opacity = "0.2";
-                quiz.querySelectorAll('button, input, select').forEach(el => el.disabled = true);
-                btn.innerText = "🙈 Hide Data (Unlock Quiz)";
-                refreshAdminWords();
-            } else {
-                list.classList.add('hidden');
-                quiz.style.opacity = "1";
-                quiz.querySelectorAll('button, input, select').forEach(el => el.disabled = false);
-                btn.innerText = "👁️ Manage Database (Quiz Lock)";
-            }
-        });
-
-        async function refreshAdminWords() {
-            const snap = await getDocs(collection(db, "words"));
-            const div = document.getElementById('word-list-admin');
-            div.innerHTML = "";
-            snap.forEach(d => {
-                const item = document.createElement('div');
-                item.style = "display:flex; justify-content:space-between; align-items:center; padding:12px; background:rgba(0,0,0,0.3); border-radius:12px; margin-bottom:8px;";
-                item.innerHTML = `<span>${d.data().word}</span><button style="padding:6px 12px; font-size:0.7rem; background:var(--danger)" onclick="deleteWord('${d.id}')">Delete</button>`;
-                div.appendChild(item);
-            });
-        }
-        window.deleteWord = async (id) => {
-            if(confirm("Delete?")) {
-                await deleteDoc(doc(db, "words", id));
-                refreshAdminWords();
-                fetchWords();
-            }
-        };
-        document.getElementById('add-word-btn').addEventListener('click', async () => {
-            const val = document.getElementById('new-word-input').value.trim().toLowerCase();
-            if (val) {
-                await addDoc(collection(db, "words"), { word: val });
-                document.getElementById('new-word-input').value = "";
-                refreshAdminWords();
-                fetchWords();
-            }
-        });
-
-        // Admin role management
-        document.getElementById("make-admin-btn").addEventListener("click", async () => {
-            const username = document.getElementById("admin-target").value.trim().toLowerCase();
-            const password = document.getElementById("admin-password").value.trim();
-            const msg = document.getElementById("admin-msg");
-            if(!username) { msg.innerText = "Enter username."; return; }
-            if(!password) { msg.innerText = "Password required."; return; }
-            try{
-                const userRef = doc(db, "users", username);
-                const userSnap = await getDoc(userRef);
-                if (userSnap.exists()) {
-                    await updateDoc(userRef, { isAdmin: true, password: password });
-                } else {
-                    await setDoc(userRef, { points:0, unlockedThemes:["bg-default"], isAdmin:true, password:password, level:1, xp:0, rankPoints:0 });
-                }
-                msg.innerText = username + " is now Admin.";
-                msg.style.color = "var(--success)";
-            } catch(e){ msg.innerText = "Error: " + e.message; }
-        });
-        document.getElementById("remove-admin-btn").addEventListener("click", async () => {
-            const username = document.getElementById("admin-target").value.trim().toLowerCase();
-            const msg = document.getElementById("admin-msg");
-            if(!username) return;
-            await updateDoc(doc(db, "users", username), { isAdmin: false });
-            msg.innerText = username + " is no longer Admin.";
-        });
-
-        // ================== THEMES SHOP ==================
+        // ---------- Themes Shop (30+ themes) ----------
         const allThemes = [
             { className: 'bg-default', name: 'Default', cost: 0 },
+            { className: 'bg-ocean', name: 'Ocean', cost: 20 },
+            { className: 'bg-neon', name: 'Neon Pulse', cost: 30 },
+            { className: 'bg-galaxy', name: 'Galaxy', cost: 50 },
             { className: 'bg-chess', name: 'Chess', cost: 20 },
             { className: 'bg-roblox', name: 'Roblox', cost: 40 },
             { className: 'bg-fortnite', name: 'Fortnite', cost: 60 },
-            { className: 'bg-galaxy', name: 'Galaxy', cost: 100 },
             { className: 'bg-secret', name: 'Lilly Love Braids', cost: 0, secret: true },
             { className: 'bg-midnight', name: 'Midnight', cost: 30 },
-            { className: 'bg-sunset', name: 'Sunset', cost: 30 },
-            { className: 'bg-forest', name: 'Forest', cost: 35 },
+            { className: 'bg-sunset', name: 'Sunset Glow', cost: 35 },
+            { className: 'bg-forest', name: 'Forest', cost: 40 },
             { className: 'bg-oceandeep', name: 'Ocean Deep', cost: 45 },
-            { className: 'bg-cyber', name: 'Neon Cyber', cost: 55 },
+            { className: 'bg-cyber', name: 'Cyber Glitch', cost: 55 },
             { className: 'bg-pastel', name: 'Pastel', cost: 25 },
             { className: 'bg-dark', name: 'Dark Mode', cost: 15 },
             { className: 'bg-light', name: 'Light Mode', cost: 15 },
             { className: 'bg-candy', name: 'Candy Land', cost: 40 },
             { className: 'bg-lavender', name: 'Lavender', cost: 30 },
-            { className: 'bg-streak10', name: 'Streak Master', cost: 0, requiresStreak: 10 } // unlocked at streak 10
+            { className: 'bg-streak10', name: 'Streak Master', cost: 0, requiresStreak: true },
+            // New animated themes
+            { className: 'bg-chess-animated', name: 'Animated Chess', cost: 80 },
+            { className: 'bg-chess-glowing', name: 'Glowing Chess', cost: 100 },
+            { className: 'bg-chess-pieces', name: 'Floating Pieces', cost: 120 },
+            { className: 'bg-chess-float', name: 'Chess Parade', cost: 150 },
+            { className: 'bg-chess-rotate', name: 'Rotating Chess', cost: 200 },
+            { className: 'bg-chess-checker', name: 'Checker Wave', cost: 90 },
+            { className: 'bg-rainbow', name: 'Rainbow', cost: 150 },
+            { className: 'bg-fire', name: 'Fire', cost: 180 },
+            { className: 'bg-ice', name: 'Ice', cost: 160 },
+            { className: 'bg-thunder', name: 'Thunder', cost: 170 },
+            { className: 'bg-matrix', name: 'Matrix', cost: 250 },
+            { className: 'bg-space', name: 'Space', cost: 300 },
+            { className: 'bg-nebula', name: 'Nebula', cost: 280 },
+            { className: 'bg-aurora', name: 'Aurora', cost: 220 }
         ];
+
         function renderShop() {
             const grid = document.getElementById('themes-grid');
             grid.innerHTML = '';
             allThemes.forEach(theme => {
-                // Skip secret themes that are not unlocked
-                if (theme.secret && !currentUser.unlockedThemes.includes(theme.className)) return;
-                // Skip streak theme if not yet unlocked (it will be unlocked automatically at streak 10)
-                if (theme.requiresStreak && !currentUser.unlockedThemes.includes(theme.className)) return;
-                
+                if (theme.secret && !currentUser.unlockedThemes?.includes(theme.className)) return;
+                if (theme.requiresStreak && !currentUser.unlockedThemes?.includes(theme.className)) return;
                 const btn = document.createElement('button');
                 btn.className = 'buy-btn';
                 btn.dataset.theme = theme.className;
                 btn.dataset.cost = theme.cost;
                 btn.textContent = `${theme.name} (${theme.cost})`;
-                if (currentUser.unlockedThemes.includes(theme.className)) btn.style.background = 'var(--success)';
+                if (currentUser.unlockedThemes?.includes(theme.className)) btn.style.background = 'var(--success)';
                 btn.addEventListener('click', async (e) => {
                     const t = e.target.dataset.theme;
                     const cost = parseInt(e.target.dataset.cost);
-                    if (currentUser.unlockedThemes.includes(t)) {
+                    if (currentUser.unlockedThemes?.includes(t)) {
                         document.getElementById('main-body').className = t;
                     } else if (currentUser.points >= cost) {
                         currentUser.points -= cost;
+                        if (!currentUser.unlockedThemes) currentUser.unlockedThemes = [];
                         currentUser.unlockedThemes.push(t);
                         document.getElementById('points-display').innerText = currentUser.points;
                         document.getElementById('main-body').className = t;
                         await updateDoc(doc(db, "users", currentUser.id), { points: currentUser.points, unlockedThemes: currentUser.unlockedThemes });
                         renderShop();
-                    } else { alert("Not enough points!"); }
+                    } else {
+                        alert("Not enough points!");
+                    }
                 });
                 grid.appendChild(btn);
             });
         }
+
+        // ---------- Recover Streak ----------
+        document.getElementById('recover-streak-btn').addEventListener('click', recoverStreak);
     </script>
 </body>
 </html>
