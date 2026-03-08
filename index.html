@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes">
     <title>Spelling Bee Pro | Ultimate+</title>
+    <!-- PWA / Add to Home Screen meta tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Spelling Bee">
+    <link rel="apple-touch-icon" href="data:image/png;base64,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">
     <style>
         :root {
             --primary: #6366f1;
@@ -15,7 +20,10 @@
             --glass: rgba(255, 255, 255, 0.1);
             --text: #ffffff;
         }
-        * { box-sizing: border-box; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
+        * { box-sizing: border-box; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+        /* Smart board / touch optimizations */
+        button, .tab, .difficulty-btn, .border-preview, .color-swatch, .file-label { cursor: pointer; }
+        button:active, .tab:active, .difficulty-btn:active, .border-preview:active { transform: scale(0.98); }
 
         /* ---------- All Themes (including animated backgrounds) ---------- */
         .bg-default { background: #0f172a; color: #f8fafc; }
@@ -143,7 +151,7 @@
         section { margin-bottom: 20px; padding: 20px; border-radius: 24px; background: rgba(255,255,255,0.06); }
         .section-title { display: flex; align-items: center; gap: 10px; margin-top: 0; margin-bottom: 15px; font-size: 1.2rem; }
 
-        .shop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; }
+        .shop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; }
         .shop-grid button { padding: 14px 6px; font-size: 0.9rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); white-space: normal; line-height: 1.2; }
 
         .msg { font-weight: 700; margin-top: 12px; text-align: center; min-height: 1.5em; font-size: 1rem; }
@@ -151,14 +159,16 @@
         
         #deck-info { font-size: 0.8rem; opacity: 0.6; text-align: center; margin-top: 8px; letter-spacing: 0.5px; }
 
-        table { width: 100%; border-collapse: collapse; }
+        /* Responsive tables */
+        .table-container { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 -1px; }
+        table { width: 100%; border-collapse: collapse; min-width: 300px; }
         td { padding: 12px 8px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.95rem; }
 
         .voice-selector { margin-bottom: 15px; }
         .voice-selector select { width: 100%; padding: 14px; }
 
         .tabs { display: flex; gap: 5px; margin-bottom: 15px; flex-wrap: wrap; }
-        .tab { flex: 1; background: rgba(255,255,255,0.1); border: none; padding: 12px; border-radius: 30px; cursor: pointer; font-weight: 600; }
+        .tab { flex: 1 1 auto; min-width: 80px; background: rgba(255,255,255,0.1); border: none; padding: 12px; border-radius: 30px; cursor: pointer; font-weight: 600; text-align: center; }
         .tab.active { background: var(--primary); }
         .tab.coming-soon { opacity: 0.6; cursor: not-allowed; }
 
@@ -227,6 +237,35 @@
         /* Settings toggle button */
         .settings-toggle-btn { width: 100%; background: var(--info); margin-bottom: 15px; padding: 14px; border-radius: 40px; font-weight: 800; }
 
+        /* Install app modal */
+        .install-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1e1e2f;
+            padding: 30px;
+            border-radius: 32px;
+            z-index: 2000;
+            max-width: 400px;
+            width: 90%;
+            border: 1px solid rgba(255,255,255,0.15);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        }
+        .install-modal h3 { margin-top: 0; }
+        .install-modal .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: white;
+        }
+        .install-modal ul { padding-left: 20px; }
+        .install-modal li { margin: 10px 0; }
+
         /* Unseen mode difficulty selector (hidden now) */
         .difficulty-selector { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px; }
         .difficulty-btn { flex: 1; min-width: 60px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); padding: 10px; border-radius: 30px; cursor: pointer; font-weight: 600; }
@@ -246,12 +285,19 @@
         .custom-word-item .word-info { font-size: 0.9rem; }
         .custom-word-item .word-info small { opacity: 0.7; }
 
-        @media (min-width: 768px) {
-            body { padding:30px; }
-            .container { padding:35px; }
-            button { padding:16px 24px; }
-            .big-btn { font-size:1.6rem; }
-            .shop-grid button { font-size:1rem; }
+        /* Smart board / touch optimizations */
+        button, .tab, .difficulty-btn { touch-action: manipulation; }
+
+        @media (max-width: 600px) {
+            body { padding: 8px; }
+            .container { padding: 15px; }
+            .stats { gap: 8px; }
+            .stat-item { padding: 5px 10px; }
+            .stat-value { font-size: 1rem; }
+            .tabs .tab { font-size: 0.8rem; padding: 8px 4px; }
+            .shop-grid { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); }
+            .shop-grid button { font-size: 0.8rem; padding: 10px 4px; }
+            .table-container { margin: 0; }
         }
     </style>
 </head>
@@ -432,6 +478,9 @@
                     <button id="manage-password-btn" style="background:var(--info);">🔐 Change Password</button>
                 </div>
             </section>
+
+            <!-- Install App Button -->
+            <button id="install-app-btn" style="width:100%; margin-top:15px; background:var(--success);">📱 Install App (Add to Home Screen)</button>
         </div>
 
         <!-- Live Play -->
@@ -457,10 +506,10 @@
             <h3 class="section-title">⚡ Power-Ups</h3>
             <div id="powerup-unlock-msg" class="msg">Power-ups unlock at level 35. <span id="levels-remaining">X</span> levels remaining.</div>
             <div class="powerup-grid" id="powerup-grid">
-                <div class="powerup-card">💡 Hint <button id="use-hint" disabled>Use (50 pts)</button></div>
-                <div class="powerup-card">⏱️ Extra Time <button id="use-extratime" disabled>Use (75 pts)</button></div>
-                <div class="powerup-card">✨ Double XP <button id="use-doublexp" disabled>Use (100 pts)</button></div>
-                <div class="powerup-card">🛡️ Shield <button id="use-shield" disabled>Use (80 pts)</button></div>
+                <div class="powerup-card">💡 Hint <button id="use-hint" class="powerup-btn" data-price="50" data-type="hint" disabled>Use (50 pts)</button></div>
+                <div class="powerup-card">⏱️ Extra Time <button id="use-extratime" class="powerup-btn" data-price="75" data-type="extratime" disabled>Use (75 pts)</button></div>
+                <div class="powerup-card">✨ Double XP <button id="use-doublexp" class="powerup-btn" data-price="100" data-type="doublexp" disabled>Use (100 pts)</button></div>
+                <div class="powerup-card">🛡️ Shield <button id="use-shield" class="powerup-btn" data-price="80" data-type="shield" disabled>Use (80 pts)</button></div>
             </div>
         </section>
 
@@ -649,10 +698,12 @@
                 <button class="tab" data-leaderboard="rank">Ranked</button>
                 <button class="tab" data-leaderboard="networth">Net Worth</button>
             </div>
-            <div id="score-leaderboard"><table><tbody id="scoreboard-body"></tbody></table></div>
-            <div id="level-leaderboard" class="hidden"><table><tbody id="levelboard-body"></tbody></table></div>
-            <div id="rank-leaderboard" class="hidden"><table><tbody id="rankboard-body"></tbody></table></div>
-            <div id="networth-leaderboard" class="hidden"><table><tbody id="networth-body"></tbody></table></div>
+            <div class="table-container">
+                <div id="score-leaderboard"><table><tbody id="scoreboard-body"></tbody></table></div>
+                <div id="level-leaderboard" class="hidden"><table><tbody id="levelboard-body"></tbody></table></div>
+                <div id="rank-leaderboard" class="hidden"><table><tbody id="rankboard-body"></tbody></table></div>
+                <div id="networth-leaderboard" class="hidden"><table><tbody id="networth-body"></tbody></table></div>
+            </div>
         </section>
 
         <!-- Themes Shop (30+ themes + Buy XP + Premium Logo Theme) -->
@@ -693,6 +744,20 @@
         <p id="pw-modal-msg" class="msg"></p>
     </div>
 
+    <!-- Install App Modal -->
+    <div id="install-modal" class="install-modal hidden">
+        <button class="close-btn" id="close-install-modal">&times;</button>
+        <h3>📱 Install Spelling Bee as an App</h3>
+        <p>Add this website to your home screen for a faster, app-like experience.</p>
+        <h4>Instructions:</h4>
+        <ul>
+            <li><strong>iPhone/iPad (Safari):</strong> Tap the Share button <span style="font-size:1.2rem;">⬆️</span> at the bottom of the screen, then scroll down and tap <strong>"Add to Home Screen"</strong>.</li>
+            <li><strong>Android (Chrome):</strong> Tap the menu button <span style="font-size:1.2rem;">⋮</span> (top right), then tap <strong>"Add to Home screen"</strong>.</li>
+            <li><strong>Desktop (Chrome/Edge):</strong> Look for the install icon <span style="font-size:1.2rem;">➕</span> in the address bar, or find <strong>"Install"</strong> in the browser menu.</li>
+        </ul>
+        <p style="margin-top:20px; text-align:center;">Once added, the app will open in its own window, just like a native app!</p>
+    </div>
+
     <script type="module">
         // ---------- Firebase Configuration ----------
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
@@ -728,6 +793,11 @@
 
         // Track incorrect attempts
         let incorrectAttempts = 0;
+
+        // Power-ups state
+        let doubleXpActive = false;
+        let shieldActive = false;
+        let extraTimeUsed = false; // for challenge mode
 
         // Power-ups
         let powerups = {
@@ -1028,6 +1098,10 @@
 
         function speakWord(word) {
             if (!word) return;
+            if (!window.speechSynthesis) {
+                alert("Your browser does not support speech synthesis. The word is: " + word);
+                return;
+            }
             const utter = new SpeechSynthesisUtterance(word);
             utter.rate = 0.8;
             if (selectedVoiceURI) {
@@ -1038,13 +1112,17 @@
         }
 
         function playBeep() {
-            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            const oscillator = audioCtx.createOscillator();
-            oscillator.type = 'sine';
-            oscillator.frequency.setValueAtTime(440, audioCtx.currentTime);
-            oscillator.connect(audioCtx.destination);
-            oscillator.start();
-            oscillator.stop(audioCtx.currentTime + 0.1);
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioCtx.createOscillator();
+                oscillator.type = 'sine';
+                oscillator.frequency.setValueAtTime(440, audioCtx.currentTime);
+                oscillator.connect(audioCtx.destination);
+                oscillator.start();
+                oscillator.stop(audioCtx.currentTime + 0.1);
+            } catch (e) {
+                // Beep not supported, ignore
+            }
         }
 
         // ---------- Definition Fetcher ----------
@@ -1237,21 +1315,75 @@
             btn.innerText = panel.classList.contains('hidden') ? '⚙️ Show Settings & Profile' : '⚙️ Hide Settings & Profile';
         });
 
-        // ---------- Power-ups Display ----------
+        // ---------- Install App Modal ----------
+        document.getElementById('install-app-btn').addEventListener('click', () => {
+            document.getElementById('install-modal').classList.remove('hidden');
+        });
+        document.getElementById('close-install-modal').addEventListener('click', () => {
+            document.getElementById('install-modal').classList.add('hidden');
+        });
+        window.addEventListener('click', (e) => {
+            const modal = document.getElementById('install-modal');
+            if (e.target === modal) {
+                modal.classList.add('hidden');
+            }
+        });
+
+        // ---------- Power-ups Display and Logic ----------
         function updatePowerupsDisplay() {
             const unlockMsg = document.getElementById('powerup-unlock-msg');
             const grid = document.getElementById('powerup-grid');
             const levelsRemainingSpan = document.getElementById('levels-remaining');
             const level = currentUser.level || 1;
+            const powerupBtns = document.querySelectorAll('.powerup-btn');
             if (level >= 35) {
                 unlockMsg.classList.add('hidden');
                 grid.classList.remove('hidden');
+                // Enable buttons (they are still disabled until purchase, but we enable them to be clickable)
+                powerupBtns.forEach(btn => btn.disabled = false);
             } else {
                 unlockMsg.classList.remove('hidden');
                 grid.classList.add('hidden');
-                levelsRemainingSpan.innerText = 35 - level;
+                powerupBtns.forEach(btn => btn.disabled = true);
             }
         }
+
+        // Power-up usage
+        document.querySelectorAll('.powerup-btn').forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+                const type = e.target.dataset.type;
+                const price = parseInt(e.target.dataset.price);
+                // Check if user has enough points
+                if (!await spendPoints(price, `powerup: ${type}`)) {
+                    alert(`Not enough points! Need ${price} points.`);
+                    return;
+                }
+                // Apply effect based on type
+                if (type === 'hint') {
+                    // Show first letter of current word (if any)
+                    if (currentWord) {
+                        alert(`Hint: The word starts with "${currentWord[0].toUpperCase()}"`);
+                    } else {
+                        alert("No active word to hint.");
+                    }
+                } else if (type === 'extratime') {
+                    // Only works in challenge mode
+                    if (challengeTimer) {
+                        challengeTimeLeft += 5;
+                        document.getElementById('timer-display').innerText = challengeTimeLeft + 's';
+                        alert("Added 5 seconds!");
+                    } else {
+                        alert("Extra time can only be used during a challenge.");
+                    }
+                } else if (type === 'doublexp') {
+                    doubleXpActive = true;
+                    alert("Double XP activated for your next correct answer!");
+                } else if (type === 'shield') {
+                    shieldActive = true;
+                    alert("Shield activated! You won't lose rank points on your next incorrect answer.");
+                }
+            });
+        });
 
         // ---------- App Setup ----------
         async function setupApp() {
@@ -1347,6 +1479,10 @@
         }
 
         async function addXP(amount) {
+            if (doubleXpActive) {
+                amount *= 2;
+                doubleXpActive = false;
+            }
             currentUser.xp += amount;
             let leveled = false;
             while (currentUser.xp >= xpForLevel(currentUser.level)) {
@@ -1448,7 +1584,6 @@
                 div.className = 'border-preview';
                 div.dataset.border = b.id;
                 if (currentUser.border === b.id) div.classList.add('selected');
-                // Style preview based on border id (same as above)
                 if (b.id === 'none') div.style.border = '2px dashed #aaa';
                 else if (b.id === 'gold') div.style.border = '4px solid gold';
                 else if (b.id === 'rainbow') {
@@ -1906,10 +2041,15 @@
                     await checkAndUnlockAchievement('ranked-champ');
                 }
             } else {
-                const loss = 5;
-                currentUser.rankPoints = Math.max(0, currentUser.rankPoints - loss);
-                await updateDoc(doc(db, "users", currentUser.id), { rankPoints: currentUser.rankPoints });
-                document.getElementById('ranked-msg').innerText = `❌ Incorrect! -${loss} RP`;
+                if (shieldActive) {
+                    shieldActive = false;
+                    document.getElementById('ranked-msg').innerText = "🛡️ Shield protected you! No RP lost.";
+                } else {
+                    const loss = 5;
+                    currentUser.rankPoints = Math.max(0, currentUser.rankPoints - loss);
+                    await updateDoc(doc(db, "users", currentUser.id), { rankPoints: currentUser.rankPoints });
+                    document.getElementById('ranked-msg').innerText = `❌ Incorrect! -${loss} RP`;
+                }
                 document.getElementById('rank-points').innerText = currentUser.rankPoints;
             }
         });
@@ -2023,14 +2163,11 @@
                 const msg = document.getElementById('public-msg');
                 if (!currentPublicWord) { msg.innerText = "Hear a word first!"; return; }
                 if (attempt === currentPublicWord) {
-                    // Determine rewards based on difficulty (we need to know the difficulty)
-                    // For simplicity, use analyzeWordDifficulty on the word
                     const diff = analyzeWordDifficulty(currentPublicWord);
                     let pointsGain, xpGain;
                     if (diff === 1) { pointsGain = 5; xpGain = 5; }
                     else if (diff === 2) { pointsGain = Math.floor(Math.random() * 6) + 5; xpGain = Math.floor(Math.random() * 6) + 5; }
                     else { pointsGain = Math.floor(Math.random() * 6) + 10; xpGain = Math.floor(Math.random() * 6) + 10; }
-                    // If impossible (word length > 10 etc) give more
                     if (isImpossible(currentPublicWord)) {
                         pointsGain = Math.floor(Math.random() * 6) + 20;
                         xpGain = Math.floor(Math.random() * 6) + 20;
@@ -2405,17 +2542,15 @@
             const chatSend = document.getElementById('chat-send-btn');
             const chatMsg = document.getElementById('chat-msg');
 
-            // Only admins can see the input area
             if (isAdmin) {
                 chatInputArea.classList.remove('hidden');
             }
 
-            // Listen for new messages (last 50)
             const q = query(chatsRef, orderBy("timestamp", "desc"), limit(50));
             onSnapshot(q, (snap) => {
                 const messages = [];
                 snap.forEach(doc => messages.push({ id: doc.id, ...doc.data() }));
-                messages.reverse(); // show oldest first
+                messages.reverse();
                 chatContainer.innerHTML = '';
                 messages.forEach(msg => {
                     const div = document.createElement('div');
