@@ -312,6 +312,21 @@
         .tab.active { background: var(--primary); }
         .tab.coming-soon { opacity: 0.6; cursor: not-allowed; }
 
+        /* List selector */
+        .list-selector {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .list-selector select {
+            flex: 1;
+            min-width: 150px;
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
         .challenge-timer { font-size: 2rem; text-align: center; font-weight: 800; color: var(--warning); margin: 10px 0; }
         .rank-info { display: flex; justify-content: space-between; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 20px; margin-bottom: 10px; }
 
@@ -504,6 +519,48 @@
         }
         .online { background: #22c55e; box-shadow: 0 0 8px #22c55e; }
         .offline { background: #6b7280; }
+
+        /* Admin list management */
+        .list-management {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 16px;
+        }
+        .list-management h4 { margin-top: 0; }
+        .list-management select, .list-management input, .list-management button {
+            margin: 5px;
+        }
+        .word-assign {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        .word-assign-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .word-assign-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+        }
+        /* Search input inside admin panel */
+        #word-search {
+            width: 100%;
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(0,0,0,0.4);
+            color: white;
+        }
 
         @media (max-width: 600px) {
             body { padding: 8px; }
@@ -796,6 +853,35 @@
             </div>
             <button id="toggle-word-list-btn" style="width:100%; background:rgba(255,255,255,0.1); margin-bottom:15px;">👁️ Manage Database (Quiz Lock)</button>
             <div id="word-list-admin" class="hidden" style="max-height:250px; overflow-y:auto; padding-right:5px;"></div>
+
+            <!-- NEW: List Management Section -->
+            <div class="list-management">
+                <h4>📋 Word Lists</h4>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:15px;">
+                    <input type="text" id="new-list-name" placeholder="New list name">
+                    <button id="create-list-btn">Create List</button>
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label for="list-to-delete">Delete list:</label>
+                    <select id="list-to-delete">
+                        <option value="">Select a list</option>
+                    </select>
+                    <button id="delete-list-only" style="background:var(--warning);">Delete list (remove association)</button>
+                    <button id="delete-list-and-words" style="background:var(--danger);">Delete list and all words</button>
+                </div>
+                <div>
+                    <h5>Assign words to list</h5>
+                    <select id="assign-list-select">
+                        <option value="">Select list</option>
+                    </select>
+                    <!-- NEW: Search input -->
+                    <input type="text" id="word-search" placeholder="🔍 Search words..." autocomplete="off">
+                    <div id="word-assign-container" class="word-assign">
+                        <!-- populated dynamically -->
+                    </div>
+                </div>
+            </div>
+
             <hr style="margin:20px 0; opacity:0.2;">
             <h4 style="margin:0 0 10px 0;">👑 Admin Manager</h4>
             <div style="display:flex; gap:10px; flex-wrap:wrap;">
@@ -829,6 +915,15 @@
             <div class="voice-selector">
                 <select id="voice-select"><option value="">Loading voices...</option></select>
             </div>
+
+            <!-- NEW: List selector dropdown -->
+            <div class="list-selector">
+                <label for="list-select">📚 Word List:</label>
+                <select id="list-select">
+                    <option value="all">All</option>
+                </select>
+            </div>
+
             <div class="tabs">
                 <button class="tab active" data-mode="classic">Classic</button>
                 <button class="tab" data-mode="challenge" id="challenge-tab" disabled>⏳ Challenge (lvl15)</button>
@@ -1017,7 +1112,7 @@
     <script type="module">
         // ---------- Firebase Configuration ----------
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, getDocs, doc, getDoc, setDoc, updateDoc, deleteDoc, query, orderBy, limit, onSnapshot, serverTimestamp, where } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, getDocs, doc, getDoc, setDoc, updateDoc, deleteDoc, query, orderBy, limit, onSnapshot, serverTimestamp, where, arrayUnion, arrayRemove } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBtCy-YbS2LC_cF5LlWRHXqa7SD-Rn5E6k",
@@ -1032,13 +1127,18 @@
 
         // ---------- Game State ----------
         let currentUser = null;
-        let wordsList = [];
+        // Store words with their list memberships
+        let wordsData = []; // array of { id, word, lists }
         let wordDeck = [];
         let currentWord = "";
         let lastWord = "";  // to avoid repeats
         let isAdmin = false;
         let selectedVoiceURI = null;
         let voices = [];
+
+        // List selection
+        let listsData = []; // array of { id, name }
+        let currentListId = "all";
 
         // Settings
         let congratsEnabled = true;
@@ -1841,11 +1941,22 @@
         }
 
         // ---------- Weighted Word Selection (avoids last word) ----------
-        function getWeightedWord(avoid = '') {
-            if (!wordsList || wordsList.length === 0) return null;
+        function getFilteredWords() {
+            if (currentListId === "all") {
+                return wordsData.map(w => w.word);
+            } else {
+                return wordsData
+                    .filter(w => w.lists && w.lists.includes(currentListId))
+                    .map(w => w.word);
+            }
+        }
 
-            // If wordDeck is empty, replenish from wordsList
-            if (wordDeck.length === 0) wordDeck = [...wordsList];
+        function getWeightedWord(avoid = '') {
+            const filtered = getFilteredWords();
+            if (filtered.length === 0) return null;
+
+            // If wordDeck is empty, replenish from filtered
+            if (wordDeck.length === 0) wordDeck = [...filtered];
 
             // Build list of candidates (words in wordDeck, possibly excluding avoid if there's more than one)
             let candidates = wordDeck;
@@ -1886,6 +1997,36 @@
             return selected;
         }
 
+        // ---------- List Management ----------
+        async function loadLists() {
+            const snap = await getDocs(collection(db, "lists"));
+            listsData = snap.docs.map(doc => ({ id: doc.id, name: doc.data().name }));
+            renderListSelect();
+        }
+
+        function renderListSelect() {
+            const select = document.getElementById('list-select');
+            select.innerHTML = '<option value="all">All</option>';
+            listsData.forEach(list => {
+                const opt = document.createElement('option');
+                opt.value = list.id;
+                opt.textContent = list.name;
+                select.appendChild(opt);
+            });
+            select.value = currentListId;
+        }
+
+        async function handleListChange() {
+            currentListId = document.getElementById('list-select').value;
+            wordDeck = []; // reset deck so new words are drawn from new list
+            currentWord = ""; // clear current word
+            incorrectAttempts = 0;
+            document.getElementById('game-msg').innerText = '';
+            document.getElementById('spell-input').value = '';
+            document.getElementById('meaning-display').classList.add('hidden');
+            updateDeckInfo();
+        }
+
         // ---------- App Setup ----------
         async function setupApp() {
             document.getElementById('login-screen').classList.add('hidden');
@@ -1903,6 +2044,7 @@
                 refreshAdminWords();
                 document.getElementById('recalc-networth-btn').addEventListener('click', recalcAllNetWorths);
                 loadCustomWordsForAdmin();
+                setupListManagement(); // new admin list functions
             } else {
                 document.getElementById('admin-toggle-btn').classList.add('hidden');
                 document.getElementById('role-badge').innerText = "STUDENT";
@@ -1922,7 +2064,8 @@
             updateProblemWordsList(); // initial display
 
             renderShop();
-            fetchWords();
+            await loadLists();
+            await fetchWords(); // load wordsData
             setupLeaderboards();
             setupTabs();
 
@@ -1964,6 +2107,9 @@
             setupPublicMode();
             setupLivePlay();
             updatePowerupsDisplay();
+
+            // List selector change
+            document.getElementById('list-select').addEventListener('change', handleListChange);
         }
 
         function updateStats() {
@@ -2308,7 +2454,7 @@
                 let added = 0;
                 for (let w of words) {
                     try {
-                        await addDoc(collection(db, "words"), { word: w });
+                        await addDoc(collection(db, "words"), { word: w, lists: [] }); // new words start with no list
                         added++;
                     } catch (e) {}
                 }
@@ -2374,16 +2520,22 @@
         // ---------- Classic Mode ----------
         async function fetchWords() {
             const snapshot = await getDocs(collection(db, "words"));
-            wordsList = snapshot.docs.map(doc => doc.data().word);
-            wordDeck = [...wordsList];
+            wordsData = snapshot.docs.map(doc => ({
+                id: doc.id,
+                word: doc.data().word,
+                lists: doc.data().lists || []
+            }));
+            wordDeck = [...getFilteredWords()];
             updateDeckInfo();
         }
         function updateDeckInfo() {
-            document.getElementById('deck-info').innerText = wordsList.length ? `${wordDeck.length} words remaining` : "No words";
+            const filtered = getFilteredWords();
+            document.getElementById('deck-info').innerText = filtered.length ? `${wordDeck.length} words remaining in list` : "No words in this list";
         }
 
         document.getElementById('play-word-btn').addEventListener('click', () => {
-            if (!wordsList.length) { document.getElementById('game-msg').innerText = "Database is empty!"; return; }
+            const filtered = getFilteredWords();
+            if (filtered.length === 0) { document.getElementById('game-msg').innerText = "No words in this list!"; return; }
             if (!currentWord) {
                 // Use weighted selection, avoiding the last word
                 const nextWord = getWeightedWord(lastWord);
@@ -2478,8 +2630,9 @@
         // ---------- Challenge Mode ----------
         let challengeWords = [], challengeIndex = 0, challengeTimer = null, challengeTimeLeft = 15;
         document.getElementById('start-challenge-btn').addEventListener('click', () => {
-            if (wordsList.length < 5) { document.getElementById('challenge-msg').innerText = "Need at least 5 words!"; return; }
-            challengeWords = [...wordsList].sort(() => 0.5 - Math.random()).slice(0,5);
+            const filtered = getFilteredWords();
+            if (filtered.length < 5) { document.getElementById('challenge-msg').innerText = "Need at least 5 words in this list!"; return; }
+            challengeWords = [...filtered].sort(() => 0.5 - Math.random()).slice(0,5);
             challengeIndex = 0;
             challengeWordsSpelled = [];
             document.getElementById('start-challenge-btn').disabled = true;
@@ -2571,9 +2724,10 @@
         // ---------- Ranked Mode ----------
         let rankedMultiplier = 1.0;
         document.getElementById('play-ranked-btn').addEventListener('click', () => {
-            if (!wordsList.length) { document.getElementById('ranked-msg').innerText = "No words!"; return; }
+            const filtered = getFilteredWords();
+            if (filtered.length === 0) { document.getElementById('ranked-msg').innerText = "No words!"; return; }
             if (!currentWord) {
-                if (wordDeck.length === 0) wordDeck = [...wordsList];
+                if (wordDeck.length === 0) wordDeck = [...filtered];
                 const rand = Math.floor(Math.random() * wordDeck.length);
                 currentWord = wordDeck.splice(rand, 1)[0];
             }
@@ -2661,8 +2815,9 @@
                 document.getElementById('live-lobby').classList.add('hidden');
                 document.getElementById('live-room').classList.remove('hidden');
                 document.getElementById('live-opponent').innerText = onlineUsers[Math.floor(Math.random() * onlineUsers.length)];
-                myWords = wordsList.sort(() => 0.5 - Math.random()).slice(0,5);
-                opponentWords = wordsList.sort(() => 0.5 - Math.random()).slice(0,5);
+                const filtered = getFilteredWords();
+                myWords = filtered.sort(() => 0.5 - Math.random()).slice(0,5);
+                opponentWords = filtered.sort(() => 0.5 - Math.random()).slice(0,5);
                 myTurn = Math.random() < 0.5;
                 currentWordIndex = 0;
                 myScore = 0;
@@ -3067,9 +3222,11 @@
             const div = document.getElementById('word-list-admin');
             div.innerHTML = "";
             snap.forEach(d => {
+                const data = d.data();
+                const listNames = (data.lists || []).map(id => listsData.find(l => l.id === id)?.name || id).join(', ') || 'none';
                 const item = document.createElement('div');
                 item.style = "display:flex; justify-content:space-between; align-items:center; padding:12px; background:rgba(0,0,0,0.3); border-radius:12px; margin-bottom:8px;";
-                item.innerHTML = `<span>${d.data().word}</span><button style="padding:6px 12px; background:var(--danger)" onclick="deleteWord('${d.id}')">Delete</button>`;
+                item.innerHTML = `<span><strong>${data.word}</strong> <small style="opacity:0.7;">[${listNames}]</small></span><button style="padding:6px 12px; background:var(--danger)" onclick="deleteWord('${d.id}')">Delete</button>`;
                 div.appendChild(item);
             });
         }
@@ -3083,7 +3240,7 @@
         document.getElementById('add-word-btn').addEventListener('click', async () => {
             const val = document.getElementById('new-word-input').value.trim().toLowerCase();
             if (val) {
-                await addDoc(collection(db, "words"), { word: val });
+                await addDoc(collection(db, "words"), { word: val, lists: [] });
                 document.getElementById('new-word-input').value = '';
                 refreshAdminWords();
                 fetchWords();
@@ -3104,7 +3261,7 @@
                 let added = 0;
                 for (let w of unique) {
                     try {
-                        await addDoc(collection(db, "words"), { word: w });
+                        await addDoc(collection(db, "words"), { word: w, lists: [] });
                         added++;
                     } catch (err) {}
                 }
@@ -3116,6 +3273,137 @@
                 status.innerText = "Error reading file.";
             }
         });
+
+        // ---------- Admin List Management ----------
+        function setupListManagement() {
+            const createBtn = document.getElementById('create-list-btn');
+            const listToDelete = document.getElementById('list-to-delete');
+            const deleteOnlyBtn = document.getElementById('delete-list-only');
+            const deleteAndWordsBtn = document.getElementById('delete-list-and-words');
+            const assignSelect = document.getElementById('assign-list-select');
+            const assignContainer = document.getElementById('word-assign-container');
+            const wordSearch = document.getElementById('word-search');
+
+            // Store current list's words for filtering
+            let allWordsForList = [];
+
+            // Populate delete and assign dropdowns
+            async function updateListDropdowns() {
+                await loadLists();
+                const deleteSelect = document.getElementById('list-to-delete');
+                deleteSelect.innerHTML = '<option value="">Select a list</option>';
+                listsData.forEach(list => {
+                    const opt = document.createElement('option');
+                    opt.value = list.id;
+                    opt.textContent = list.name;
+                    deleteSelect.appendChild(opt);
+                });
+
+                assignSelect.innerHTML = '<option value="">Select list</option>';
+                listsData.forEach(list => {
+                    const opt = document.createElement('option');
+                    opt.value = list.id;
+                    opt.textContent = list.name;
+                    assignSelect.appendChild(opt);
+                });
+            }
+
+            updateListDropdowns();
+
+            createBtn.addEventListener('click', async () => {
+                const name = document.getElementById('new-list-name').value.trim();
+                if (!name) { alert("Enter a list name"); return; }
+                await addDoc(collection(db, "lists"), { name, createdBy: currentUser.id, createdAt: serverTimestamp() });
+                document.getElementById('new-list-name').value = '';
+                await updateListDropdowns();
+                await loadLists();
+                renderListSelect();
+            });
+
+            deleteOnlyBtn.addEventListener('click', async () => {
+                const listId = listToDelete.value;
+                if (!listId) { alert("Select a list"); return; }
+                if (!confirm("Delete this list? Words will remain (list removed from them).")) return;
+                // Remove list from all words
+                const wordsSnap = await getDocs(query(collection(db, "words"), where("lists", "array-contains", listId)));
+                for (const wordDoc of wordsSnap.docs) {
+                    await updateDoc(doc(db, "words", wordDoc.id), {
+                        lists: arrayRemove(listId)
+                    });
+                }
+                // Delete list doc
+                await deleteDoc(doc(db, "lists", listId));
+                await updateListDropdowns();
+                await loadLists();
+                renderListSelect();
+                fetchWords();
+            });
+
+            deleteAndWordsBtn.addEventListener('click', async () => {
+                const listId = listToDelete.value;
+                if (!listId) { alert("Select a list"); return; }
+                if (!confirm("Delete this list AND ALL WORDS in it? This cannot be undone!")) return;
+                // Find all words in this list
+                const wordsSnap = await getDocs(query(collection(db, "words"), where("lists", "array-contains", listId)));
+                for (const wordDoc of wordsSnap.docs) {
+                    await deleteDoc(doc(db, "words", wordDoc.id));
+                }
+                // Delete list doc
+                await deleteDoc(doc(db, "lists", listId));
+                await updateListDropdowns();
+                await loadLists();
+                renderListSelect();
+                fetchWords();
+            });
+
+            // Render assign words with filter
+            function renderAssignWords(filter = '') {
+                assignContainer.innerHTML = '';
+                const filteredWords = allWordsForList.filter(w => w.word.includes(filter));
+                filteredWords.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'word-assign-item';
+                    div.innerHTML = `
+                        <input type="checkbox" data-word-id="${item.id}" ${item.inList ? 'checked' : ''}>
+                        <span>${item.word}</span>
+                    `;
+                    const cb = div.querySelector('input');
+                    cb.addEventListener('change', async (e) => {
+                        if (e.target.checked) {
+                            await updateDoc(doc(db, "words", item.id), {
+                                lists: arrayUnion(assignSelect.value)
+                            });
+                        } else {
+                            await updateDoc(doc(db, "words", item.id), {
+                                lists: arrayRemove(assignSelect.value)
+                            });
+                        }
+                        // Update local state
+                        item.inList = e.target.checked;
+                        fetchWords(); // update global wordsData
+                    });
+                    assignContainer.appendChild(div);
+                });
+            }
+
+            assignSelect.addEventListener('change', async () => {
+                const listId = assignSelect.value;
+                if (!listId) { assignContainer.innerHTML = ''; return; }
+                // Show all words with checkboxes for this list
+                const wordsSnap = await getDocs(collection(db, "words"));
+                allWordsForList = wordsSnap.docs.map(doc => ({
+                    id: doc.id,
+                    word: doc.data().word,
+                    inList: (doc.data().lists || []).includes(listId)
+                }));
+                renderAssignWords(wordSearch.value.toLowerCase());
+            });
+
+            wordSearch.addEventListener('input', () => {
+                const filter = wordSearch.value.toLowerCase();
+                renderAssignWords(filter);
+            });
+        }
 
         document.getElementById('make-admin-btn').addEventListener('click', async () => {
             const username = document.getElementById('admin-target').value.trim().toLowerCase();
