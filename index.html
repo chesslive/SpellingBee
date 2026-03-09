@@ -1262,39 +1262,92 @@
             return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
         }
 
+        // Add this global variable near the top with other state variables
+        let recoverEligible = false;
+
+        // Replace the old checkStreakOnLogin with this version
         async function checkStreakOnLogin() {
             const today = getTodayDate();
             const lastLogin = currentUser.lastLogin || '';
             const lastStreak = currentUser.streak || 0;
             const daily = currentUser.dailyWords || 0;
+            recoverEligible = false; // reset each login
+
             if (lastLogin === today) {
                 dailyWords = daily;
             } else {
+                // Not today
                 if (lastLogin === getYesterday()) {
                     if (daily >= DAILY_GOAL) {
+                        // Completed yesterday → increase streak
                         currentUser.streak = lastStreak + 1;
                     } else {
+                        // Did not complete yesterday → reset streak & eligible to recover
                         currentUser.streak = 0;
+                        recoverEligible = true;
                     }
                 } else {
+                    // Last login was earlier than yesterday → reset streak & eligible
                     currentUser.streak = 0;
+                    recoverEligible = true;
                 }
                 dailyWords = 0;
                 currentUser.dailyWords = 0;
                 currentUser.lastLogin = today;
-                await updateDoc(doc(db, "users", currentUser.id), { streak: currentUser.streak, dailyWords: 0, lastLogin: today });
+                await updateDoc(doc(db, "users", currentUser.id), { 
+                    streak: currentUser.streak, 
+                    dailyWords: 0, 
+                    lastLogin: today 
+                });
             }
+
+            // Unlock streak theme if needed
             if (currentUser.streak >= 10 && !currentUser.unlockedThemes?.includes('bg-streak10')) {
                 if (!currentUser.unlockedThemes) currentUser.unlockedThemes = ['bg-default'];
                 currentUser.unlockedThemes.push('bg-streak10');
                 await updateDoc(doc(db, "users", currentUser.id), { unlockedThemes: currentUser.unlockedThemes });
                 renderShop();
             }
+
             updateStreakUI();
             checkNotification();
             await updateNetWorth();
             updatePowerupsDisplay();
             await updateLastActive();
+        }
+
+        // Replace the old updateStreakUI with this version
+        function updateStreakUI() {
+            document.getElementById('streak-count').innerText = currentUser.streak || 0;
+            document.getElementById('daily-words-count').innerText = `${dailyWords}/${DAILY_GOAL}`;
+            const percent = (dailyWords / DAILY_GOAL) * 100;
+            document.getElementById('daily-progress-fill').style.width = percent + '%';
+            const fire = document.getElementById('streak-fire');
+            if (currentUser.streak >= 10) fire.style.color = '#ff5500';
+            else if (currentUser.streak >= 5) fire.style.color = '#ffaa00';
+            else fire.style.color = '#ffdd44';
+
+            // Show recover button only if eligible AND no words done today
+            if (recoverEligible && dailyWords === 0) {
+                document.getElementById('recover-streak-btn').style.display = 'inline-block';
+            } else {
+                document.getElementById('recover-streak-btn').style.display = 'none';
+            }
+        }
+
+        // Replace the old recoverStreak with this version
+        async function recoverStreak() {
+            if (!await spendPoints(50, "streak recovery")) {
+                alert("Not enough points!");
+                return;
+            }
+            currentUser.streak = 1;
+            dailyWords = 0;
+            currentUser.dailyWords = 0;
+            currentUser.lastLogin = getTodayDate();
+            recoverEligible = false; // no longer eligible
+            await updateDoc(doc(db, "users", currentUser.id), { streak: 1, dailyWords: 0, lastLogin: currentUser.lastLogin });
+            updateStreakUI();
         }
 
         async function incrementDailyWords() {
@@ -1317,35 +1370,6 @@
             }
             updateStreakUI();
             await updateNetWorth();
-        }
-
-        function updateStreakUI() {
-            document.getElementById('streak-count').innerText = currentUser.streak || 0;
-            document.getElementById('daily-words-count').innerText = `${dailyWords}/${DAILY_GOAL}`;
-            const percent = (dailyWords / DAILY_GOAL) * 100;
-            document.getElementById('daily-progress-fill').style.width = percent + '%';
-            const fire = document.getElementById('streak-fire');
-            if (currentUser.streak >= 10) fire.style.color = '#ff5500';
-            else if (currentUser.streak >= 5) fire.style.color = '#ffaa00';
-            else fire.style.color = '#ffdd44';
-            if (currentUser.streak === 0 && dailyWords === 0 && currentUser.lastLogin !== getTodayDate()) {
-                document.getElementById('recover-streak-btn').style.display = 'inline-block';
-            } else {
-                document.getElementById('recover-streak-btn').style.display = 'none';
-            }
-        }
-
-        async function recoverStreak() {
-            if (!await spendPoints(50, "streak recovery")) {
-                alert("Not enough points!");
-                return;
-            }
-            currentUser.streak = 1;
-            dailyWords = 0;
-            currentUser.dailyWords = 0;
-            currentUser.lastLogin = getTodayDate();
-            await updateDoc(doc(db, "users", currentUser.id), { streak: 1, dailyWords: 0, lastLogin: currentUser.lastLogin });
-            updateStreakUI();
         }
 
         function checkNotification() {
