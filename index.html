@@ -21,9 +21,8 @@
             --text: #ffffff;
         }
         * { box-sizing: border-box; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
-        /* Smart board / touch optimizations */
         button, .tab, .difficulty-btn, .border-preview, .color-swatch, .file-label { cursor: pointer; }
-        button:active, .tab:active, .difficulty-btn:active, .border-preview:active { transform: scale(0.98); }
+        button:active, .tab:active, .difficulty-btn:active { transform: scale(0.98); }
 
         /* ---------- All Themes (including animated backgrounds) ---------- */
         .bg-default { background: #0f172a; color: #f8fafc; }
@@ -34,7 +33,37 @@
         .bg-roblox { background: #202225 repeating-linear-gradient(45deg, rgba(255,0,0,0.2) 0px, rgba(255,0,0,0.2) 20px, transparent 20px, transparent 40px); border-top: 10px solid #f63131; color: white; text-shadow: 2px 2px 0 #000; }
         .bg-fortnite { background: linear-gradient(135deg, #1a0b2e 0%, #2a1b4a 50%, #0b3b5c 100%); position: relative; color: #a0e7ff; text-shadow: 0 0 8px #0077ff; }
         .bg-fortnite::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: repeating-linear-gradient(0deg, rgba(255,255,255,0.1) 0px, rgba(255,255,255,0.1) 2px, transparent 2px, transparent 8px); pointer-events: none; }
-        .bg-secret { background-color: #f8c8dc; background-image: radial-gradient(circle at 20% 30%, #ffb6c1 5%, transparent 5%), radial-gradient(circle at 80% 70%, #ffb6c1 5%, transparent 5%), repeating-linear-gradient(45deg, transparent, transparent 10px, #ff99aa 10px, #ff99aa 20px); color: #4a1a2c; text-shadow: 2px 2px 5px #fff2f5; }
+
+        /* Lilly Love Braids secret theme – crisp, clear, centered image */
+        .bg-secret {
+            background: #f8c8dc; /* soft pink base */
+            background-image: 
+                url('./Lilly.png'),
+                radial-gradient(circle at 20% 30%, #ffb6c1 5%, transparent 5%),
+                radial-gradient(circle at 80% 70%, #ffb6c1 5%, transparent 5%),
+                repeating-linear-gradient(45deg, transparent, transparent 10px, #ff99aa 10px, #ff99aa 20px);
+            background-size: contain, auto, auto, auto; /* contain keeps image sharp, no scaling */
+            background-position: center, 0 0, 0 0, 0 0;
+            background-repeat: no-repeat, repeat, repeat, repeat;
+            background-blend-mode: overlay, normal, normal, normal;
+            color: #4a1a2c;
+            text-shadow: 2px 2px 8px #fff2f5;
+            position: relative;
+            animation: floatHearts 10s infinite ease-in-out;
+            image-rendering: crisp-edges; /* helps keep edges sharp */
+        }
+        .bg-secret::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at center, transparent 40%, rgba(248,200,220,0.5) 90%);
+            pointer-events: none;
+        }
+        @keyframes floatHearts {
+            0% { background-position: center, 0 0, 0 0, 0 0; }
+            50% { background-position: center, 10px 10px, -10px -10px, 5px 5px; }
+        }
+
         .bg-midnight { background: #0a0f1e; color: #cbd5e1; box-shadow: inset 0 0 100px #2563eb20; }
         .bg-sunset { background: linear-gradient(135deg, #ff7e5f, #feb47b); color: #2d1b0e; animation: sunsetGlow 5s infinite; }
         .bg-forest { background: #0b3b2f repeating-linear-gradient(45deg, #2e7d5e 0px, #2e7d5e 2px, transparent 2px, transparent 12px); color: #e7f5e7; animation: forestRustle 8s infinite; }
@@ -48,26 +77,138 @@
         .bg-streak10 { background: linear-gradient(135deg, #ff4e00, #ec9f05, #fbb034); color: #2d1b0e; text-shadow: 0 2px 5px #fff8e7; position: relative; }
         .bg-streak10::after { content: "🔥"; position: fixed; bottom: 10px; right: 10px; font-size: 100px; opacity: 0.2; transform: rotate(-10deg); pointer-events: none; }
 
-        /* Animated themes (safe, no rotation) */
-        .bg-rainbow { background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3); background-size: 1800% 1800%; animation: rainbow 10s ease infinite; color: #fff; text-shadow: 0 0 10px black; }
-        .bg-fire { background: linear-gradient(45deg, #ff4e00, #ec9f05, #ff4e00); background-size: 400% 400%; animation: fire 3s ease infinite; color: #fff; text-shadow: 0 0 10px #ffaa00; }
-        .bg-ice { background: linear-gradient(135deg, #a8edea, #fed6e3); background-size: 400% 400%; animation: ice 5s ease infinite; color: #0a2f44; }
-        .bg-thunder { background: #1a1a2e; position: relative; color: #e0e0ff; }
-        .bg-thunder::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(0deg, #ffff99 0px, #ffff99 2px, transparent 2px, transparent 10px); opacity: 0.3; animation: thunderFlash 2s infinite; pointer-events: none; }
-        .bg-matrix { background: black; color: #00ff00; text-shadow: 0 0 5px #00ff00; position: relative; overflow: hidden; }
-        .bg-matrix::before { content: '01'; position: absolute; font-size: 20px; color: #0f0; opacity: 0.1; white-space: nowrap; animation: matrix 10s linear infinite; pointer-events: none; }
-        .bg-space { background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%); position: relative; color: #fff; }
-        .bg-space::before { content: ''; position: absolute; width: 2px; height: 2px; background: white; border-radius: 50%; box-shadow: 0 0 10px white; animation: stars 50s linear infinite; pointer-events: none; }
-        .bg-nebula { background: radial-gradient(circle at 30% 50%, #ff6ec4, #7873f5, #3b9f9f); background-size: 200% 200%; animation: nebula 15s ease infinite; color: #fff; text-shadow: 0 0 10px black; }
-        .bg-aurora { background: linear-gradient(135deg, #00f260, #0575e6, #00f260); background-size: 400% 400%; animation: aurora 12s ease infinite; color: #fff; text-shadow: 0 0 5px #00f260; }
+        /* deepseek premium theme (10,000 points) */
+        .bg-deepseek {
+            background: #1a2a1a;
+            position: relative;
+            color: #fff8e7;
+            overflow: hidden;
+        }
+        .bg-deepseek::before {
+            content: "🐝🐝🐝";
+            position: absolute;
+            font-size: 40px;
+            color: rgba(255, 215, 0, 0.15);
+            white-space: nowrap;
+            animation: flyBees 20s linear infinite;
+            pointer-events: none;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            text-shadow: 0 0 10px gold;
+            transform: rotate(-5deg);
+        }
+        @keyframes flyBees {
+            0% { transform: translateX(-100%) rotate(-5deg); }
+            100% { transform: translateX(100%) rotate(-5deg); }
+        }
+        .bg-deepseek::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 30% 40%, #ffd70020, transparent 50%),
+                        repeating-linear-gradient(45deg, #ffd70010 0px, #ffd70010 2px, transparent 2px, transparent 10px);
+            pointer-events: none;
+        }
 
-        /* Animated chess themes (no rotation) */
-        .bg-chess-animated { background: #2d2d2d; background-image: repeating-linear-gradient(45deg, #fff1 0px, #fff1 20px, #0001 20px, #0001 40px); animation: chessShift 8s infinite; color: #fff; text-shadow: 0 0 5px gold; }
-        .bg-chess-glowing { background: #1a1a1a; box-shadow: inset 0 0 100px #ffaa00; animation: glowPulse 3s infinite; color: #ffd700; }
-        .bg-chess-pieces { background: #2b2b2b url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.2"><text x="10" y="30" font-size="40">♔</text><text x="60" y="80" font-size="40">♕</text></svg>'); background-size: 100px 100px; animation: floatPieces 12s infinite; color: #ffd966; }
-        .bg-chess-float { background: #202020; position: relative; overflow: hidden; }
-        .bg-chess-float::before { content: '♙♘♗♖♕♔'; position: absolute; font-size: 50px; color: rgba(255,215,0,0.1); white-space: nowrap; animation: floatChess 20s linear infinite; pointer-events: none; }
-        .bg-chess-checker { background: repeating-conic-gradient(#fff 0% 25%, #000 0% 50%) 0 0/80px 80px; animation: checkerWave 6s infinite; color: #fff; text-shadow: 2px 2px 0 #000; }
+        /* Poppy Playtime theme with image */
+        .bg-poppyplaytime {
+            background: #1a0b0b;
+            position: relative;
+            color: #ffb6b6;
+            text-shadow: 0 0 5px red;
+        }
+        .bg-poppyplaytime::before {
+            content: "👀👀👀";
+            position: absolute;
+            font-size: 80px;
+            color: rgba(255, 0, 0, 0.1);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: glowEyes 3s infinite;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+        .bg-poppyplaytime::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('./Poppyplaytime.png') no-repeat center/contain;
+            opacity: 0.15;
+            pointer-events: none;
+            animation: floatPoppy 12s infinite;
+        }
+        @keyframes glowEyes {
+            0% { opacity: 0.1; filter: blur(2px); }
+            50% { opacity: 0.4; filter: blur(0); }
+        }
+        @keyframes floatPoppy {
+            0% { transform: scale(1) translate(0, 0); }
+            50% { transform: scale(1.1) translate(10px, -10px); }
+        }
+
+        /* Knight integrated into chess themes */
+        .bg-chess-pieces {
+            background: #2b2b2b;
+            background-image: url('./knight.png'), repeating-linear-gradient(45deg, #fff1 0px, #fff1 20px, #0001 20px, #0001 40px);
+            background-size: 100px 100px, auto;
+            background-blend-mode: overlay;
+            animation: floatKnight 12s infinite;
+            color: #ffd966;
+        }
+        @keyframes floatKnight {
+            0% { background-position: 0 0, 0 0; }
+            50% { background-position: 50px 50px, 0 0; }
+        }
+        /* Chess Parade – smooth, non‑freezing animation */
+        .bg-chess-float {
+            background: #202020;
+            background-image: url('./knight.png');
+            background-repeat: repeat;
+            background-size: 80px 80px;
+            animation: chessFloat 25s linear infinite;
+            color: #ffd966;
+            text-shadow: 0 0 5px gold;
+        }
+        @keyframes chessFloat {
+            0% { background-position: 0 0; }
+            100% { background-position: 100% 100%; }
+        }
+
+        /* New animated themes (20+ added) */
+        .bg-aurora-borealis { background: linear-gradient(135deg, #1b3b4f, #4b7f8c, #a8d8ea); background-size: 300% 300%; animation: aurora 10s ease infinite; color: #e0f2fe; }
+        .bg-sunset-dream { background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fad0c4); background-size: 400% 400%; animation: sunsetGlow 6s ease infinite; color: #4a1e2b; }
+        .bg-cyberpunk { background: #0d0221; background-image: repeating-linear-gradient(90deg, #ff00ff10 0px, #ff00ff10 2px, transparent 2px, transparent 8px), repeating-linear-gradient(0deg, #00ffff10 0px, #00ffff10 2px, transparent 2px, transparent 8px); color: #fff0f0; text-shadow: 0 0 5px magenta; animation: glitch 3s infinite; }
+        .bg-vaporwave { background: linear-gradient(135deg, #ff7eb3, #7f5fff, #2ecc71); background-size: 300% 300%; animation: aurora 12s ease infinite; color: #fff; text-shadow: 2px 2px 0 #ff00ff; }
+        .bg-forest-magic { background: #1a3b2e; background-image: radial-gradient(circle at 20% 30%, #3b8f6e20 10%, transparent 20%), repeating-linear-gradient(45deg, #2e7d5e10 0px, #2e7d5e10 10px, transparent 10px, transparent 20px); animation: forestRustle 10s infinite; color: #e0f2e0; }
+        .bg-ocean-deep { background: linear-gradient(145deg, #002b5c, #1c6e8c, #89cff0); background-size: 400% 400%; animation: oceanWaves 15s infinite; color: #b3eaff; }
+        .bg-lava-flow { background: linear-gradient(45deg, #ff4e00, #ff9a00, #ffd000); background-size: 300% 300%; animation: fire 4s ease infinite; color: #fff3e0; }
+        .bg-ice-cave { background: linear-gradient(135deg, #a8edea, #b3e0ff, #ffffff); background-size: 300% 300%; animation: ice 8s ease infinite; color: #0a2f44; }
+        .bg-midnight-city { background: #0b1a2e; background-image: repeating-linear-gradient(0deg, #ffcc0010 0px, #ffcc0010 1px, transparent 1px, transparent 20px), repeating-linear-gradient(90deg, #ffcc0010 0px, #ffcc0010 1px, transparent 1px, transparent 20px); color: #ffd966; }
+        .bg-rainbow-wave { background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3); background-size: 1800% 1800%; animation: rainbow 10s ease infinite; color: #fff; text-shadow: 0 0 10px black; }
+        .bg-cotton-candy { background: linear-gradient(135deg, #fbc2c2, #c2f0fc, #fbc2c2); background-size: 300% 300%; animation: aurora 8s ease infinite; color: #5a3e3e; }
+        .bg-steampunk { background: #3e2c23; background-image: repeating-linear-gradient(45deg, #b87c4b20 0px, #b87c4b20 2px, transparent 2px, transparent 12px), repeating-linear-gradient(135deg, #d4a37320 0px, #d4a37320 2px, transparent 2px, transparent 12px); color: #ead7b5; text-shadow: 2px 2px 0 #6b4f3a; }
+        .bg-mystic { background: #2e1b4a; background-image: radial-gradient(circle at 30% 40%, #a855f740 5%, transparent 20%), radial-gradient(circle at 70% 60%, #3b82f640 5%, transparent 20%); animation: mysticPulse 6s infinite; color: #f0e6ff; }
+        @keyframes mysticPulse { 0% { filter: brightness(1); } 50% { filter: brightness(1.3); } }
+        .bg-retro { background: #ffd966; background-image: repeating-linear-gradient(45deg, #ffb347 0px, #ffb347 10px, #ff8c42 10px, #ff8c42 20px); color: #2d1b0e; }
+        .bg-monochrome { background: linear-gradient(135deg, #333, #777, #bbb); background-size: 300% 300%; animation: aurora 12s infinite; color: #fff; filter: grayscale(1); }
+        .bg-dawn { background: linear-gradient(135deg, #ffb7b7, #ffd6a5, #fdffb6); color: #2d1b0e; animation: sunrise 10s infinite; }
+        @keyframes sunrise { 0% { filter: brightness(1); } 50% { filter: brightness(1.2); } }
+        .bg-twilight { background: linear-gradient(135deg, #0b1a2e, #4a2c4a, #7f5f7f); color: #f0e0ff; }
+        .bg-dark-forest { background: #0b2b1a; background-image: repeating-linear-gradient(45deg, #2e7d5e20 0px, #2e7d5e20 4px, transparent 4px, transparent 16px); color: #b3d9b3; }
+        .bg-crystal { background: linear-gradient(135deg, #b3e0ff, #e0f2fe, #ffffff); background-size: 300% 300%; animation: ice 8s infinite; color: #1e3b4a; }
+        .bg-nebula2 { background: radial-gradient(circle at 30% 30%, #6a0dad, #000, #1b3b4f); background-size: 200% 200%; animation: galaxyShift 15s infinite alternate; color: #f0e6ff; text-shadow: 0 0 10px #c084fc; }
+        .bg-sunset2 { background: linear-gradient(45deg, #ff4e00, #ff9a00, #ffd000, #fbb034); background-size: 400% 400%; animation: fire 6s infinite; color: #2d1b0e; }
+        .bg-aurora2 { background: linear-gradient(135deg, #00f260, #0575e6, #00f260); background-size: 400% 400%; animation: aurora 12s ease infinite; color: #fff; text-shadow: 0 0 5px #00f260; }
+        .bg-galaxy2 { background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%); position: relative; color: #fff; }
+        .bg-galaxy2::before { content: ''; position: absolute; width: 2px; height: 2px; background: white; border-radius: 50%; box-shadow: 0 0 10px white; animation: stars 50s linear infinite; pointer-events: none; }
+        .bg-space2 { background: radial-gradient(circle at 30% 50%, #ff6ec4, #7873f5, #3b9f9f); background-size: 200% 200%; animation: nebula 15s ease infinite; color: #fff; text-shadow: 0 0 10px black; }
+        .bg-matrix2 { background: black; color: #00ff00; text-shadow: 0 0 5px #00ff00; position: relative; overflow: hidden; }
+        .bg-matrix2::before { content: '01'; position: absolute; font-size: 20px; color: #0f0; opacity: 0.1; white-space: nowrap; animation: matrix 10s linear infinite; pointer-events: none; }
+        .bg-thunder2 { background: #1a1a2e; position: relative; color: #e0e0ff; }
+        .bg-thunder2::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(0deg, #ffff99 0px, #ffff99 2px, transparent 2px, transparent 10px); opacity: 0.3; animation: thunderFlash 2s infinite; pointer-events: none; }
 
         /* Premium logo background theme (10,000 points) */
         .bg-logo { background: #0a0c14; position: relative; color: #fff; }
@@ -114,8 +255,6 @@
         @keyframes aurora { 0% { filter: hue-rotate(0deg); } 100% { filter: hue-rotate(360deg); } }
         @keyframes chessShift { 0% { background-position:0 0; } 100% { background-position:80px 80px; } }
         @keyframes glowPulse { 0% { box-shadow:inset 0 0 50px #ffaa00; } 50% { box-shadow:inset 0 0 150px #ffaa00; } }
-        @keyframes floatPieces { 0% { background-position:0 0; } 100% { background-position:200px 200px; } }
-        @keyframes floatChess { 0% { transform:translateX(-100%); } 100% { transform:translateX(100%); } }
         @keyframes checkerWave { 0% { background-size:80px 80px; } 50% { background-size:100px 100px; } }
 
         body { margin: 0; padding: 15px; transition: background 0.6s ease, color 0.6s ease; min-height: 100vh; display: flex; justify-content: center; align-items: flex-start; font-size: 16px; }
@@ -162,7 +301,8 @@
         /* Responsive tables */
         .table-container { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 -1px; }
         table { width: 100%; border-collapse: collapse; min-width: 300px; }
-        td { padding: 12px 8px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.95rem; }
+        td { padding: 12px 8px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.95rem; vertical-align: middle; }
+        td:first-child { display: flex; align-items: center; gap: 8px; }
 
         .voice-selector { margin-bottom: 15px; }
         .voice-selector select { width: 100%; padding: 14px; }
@@ -190,9 +330,11 @@
         input:checked + .slider:before { transform: translateX(26px); }
 
         .profile-header { display: flex; align-items: center; gap: 20px; margin-bottom: 20px; flex-wrap: wrap; }
-        .avatar-options { display: grid; grid-template-columns: repeat(4,1fr); gap:10px; margin-top:10px; }
-        .avatar-options button { padding:10px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); font-size:1.5rem; }
-        .avatar-options button.selected { border:2px solid var(--success); background:var(--success); }
+        .avatar-options { display: grid; grid-template-columns: repeat(5,1fr); gap:10px; margin-top:10px; }
+        .avatar-options button { padding:10px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); border-radius:16px; font-size:1.8rem; }
+        .avatar-options button.selected { border:3px solid var(--success); background:var(--success); }
+        .avatar-options button img { width:40px; height:40px; object-fit:cover; border-radius:50%; }
+
         .banner-color-options { display: flex; gap:10px; flex-wrap: wrap; }
         .color-swatch { width:40px; height:40px; border-radius:50%; border:2px solid transparent; cursor:pointer; }
         .color-swatch.selected { border-color:white; }
@@ -287,6 +429,81 @@
 
         /* Smart board / touch optimizations */
         button, .tab, .difficulty-btn { touch-action: manipulation; }
+
+        /* Draggable power-up menu (desktop only) */
+        .powerup-drag-menu {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            padding: 10px;
+            border-radius: 50px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+            cursor: grab;
+            border: 1px solid rgba(255,255,255,0.2);
+            user-select: none;
+            touch-action: none;
+        }
+        .powerup-drag-menu:active { cursor: grabbing; }
+        .powerup-drag-menu .powerup-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.3);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .powerup-drag-menu .powerup-icon:hover { transform: scale(1.1); background: var(--primary); }
+        .powerup-drag-menu .powerup-icon.active { background: var(--success); }
+        @media (max-width: 768px) {
+            .powerup-drag-menu { display: none; }
+        }
+
+        /* Challenge recap */
+        .challenge-recap {
+            background: rgba(0,0,0,0.5);
+            border-radius: 16px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .challenge-recap h4 { margin: 0 0 10px 0; }
+        .challenge-recap ul { list-style: none; padding: 0; }
+        .challenge-recap li { padding: 5px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+
+        /* Avatar in leaderboard - ensure image is centered */
+        .leaderboard-avatar {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: #333;
+            margin-right: 5px;
+        }
+        .leaderboard-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .online-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-left: 5px;
+        }
+        .online { background: #22c55e; box-shadow: 0 0 8px #22c55e; }
+        .offline { background: #6b7280; }
 
         @media (max-width: 600px) {
             body { padding: 8px; }
@@ -388,13 +605,14 @@
             <section id="profile-section">
                 <h3 class="section-title">👤 Profile</h3>
                 <div class="profile-header">
-                    <div id="avatar-preview" style="font-size:4rem; border-radius:50%; transition:0.2s;"></div>
+                    <!-- Avatar preview: if avatar === 'pfp' show image, else show emoji -->
+                    <div id="avatar-preview" style="font-size:3rem; width:80px; height:80px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:#333;"></div>
                     <div>
                         <p>Nickname: <span id="profile-username"></span></p>
                         <p>Title: <span id="profile-title">Novice</span></p>
                     </div>
                 </div>
-                <h4>Choose Avatar</h4>
+                <h4>Choose Avatar (Emojis + PFP)</h4>
                 <div class="avatar-options">
                     <button data-avatar="😀">😀</button>
                     <button data-avatar="😎">😎</button>
@@ -404,6 +622,7 @@
                     <button data-avatar="🐨">🐨</button>
                     <button data-avatar="👽">👽</button>
                     <button data-avatar="🤖">🤖</button>
+                    <button data-avatar="pfp"><img src="./pfp.png" style="width:40px; height:40px;"></button>
                 </div>
                 <h4>Banner Color</h4>
                 <div class="banner-color-options">
@@ -448,7 +667,7 @@
             <section id="friends-section">
                 <h3 class="section-title">👥 Friends</h3>
                 <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:15px;">
-                    <input type="text" id="friend-username" placeholder="Enter username">
+                    <input type="text" id="friend-username" placeholder="Enter username" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
                     <button id="add-friend-btn">Add Friend</button>
                 </div>
                 <div id="friend-list" class="friend-list"></div>
@@ -491,12 +710,20 @@
                 <p>Word <span id="live-word-num">1</span>/5</p>
                 <button id="live-hear-btn" class="big-btn">🔊 Hear Word</button>
                 <div class="action-row">
-                    <input type="text" id="live-spell" placeholder="Spell...">
+                    <input type="text" id="live-spell" placeholder="Spell..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
                     <button id="live-submit-btn">Check</button>
                     <button id="live-show-meaning-btn" style="background:var(--info);">📖 Show Meaning</button>
                 </div>
                 <div id="live-meaning-display" class="definition-box hidden"></div>
                 <p id="live-msg" class="msg"></p>
+                <div id="live-score" style="display:flex; justify-content:space-between; margin-top:10px;">
+                    <span>Your score: <span id="live-my-score">0</span></span>
+                    <span>Opponent score: <span id="live-opp-score">0</span></span>
+                </div>
+                <button id="live-quit-btn" style="background:var(--danger);">Quit Game</button>
+            </div>
+            <div id="live-lobby" class="hidden">
+                <p>Finding an opponent... <button id="cancel-matchmaking">Cancel</button></p>
             </div>
             <button id="find-match-btn" class="big-btn">Find Match</button>
         </section>
@@ -510,6 +737,11 @@
                 <div class="powerup-card">⏱️ Extra Time <button id="use-extratime" class="powerup-btn" data-price="75" data-type="extratime" disabled>Use (75 pts)</button></div>
                 <div class="powerup-card">✨ Double XP <button id="use-doublexp" class="powerup-btn" data-price="100" data-type="doublexp" disabled>Use (100 pts)</button></div>
                 <div class="powerup-card">🛡️ Shield <button id="use-shield" class="powerup-btn" data-price="80" data-type="shield" disabled>Use (80 pts)</button></div>
+                <!-- New power-ups -->
+                <div class="powerup-card">❄️ Freeze Time <button id="use-freeze" class="powerup-btn" data-price="120" data-type="freeze" disabled>Use (120 pts)</button></div>
+                <div class="powerup-card">⏭️ Word Skip <button id="use-skip" class="powerup-btn" data-price="60" data-type="skip" disabled>Use (60 pts)</button></div>
+                <div class="powerup-card">💎 Double Points <button id="use-doublepoints" class="powerup-btn" data-price="150" data-type="doublepoints" disabled>Use (150 pts)</button></div>
+                <div class="powerup-card">🔍 Peek <button id="use-peek" class="powerup-btn" data-price="40" data-type="peek" disabled>Use (40 pts)</button></div>
             </div>
         </section>
 
@@ -523,7 +755,7 @@
             <h3 class="section-title">📅 Word of the Day</h3>
             <p>Bonus XP: <span id="word-of-day-bonus">20</span> | Bonus Points: <span id="word-of-day-points">15</span></p>
             <div class="action-row">
-                <input type="text" id="word-of-day-spell" placeholder="Spell the word..." disabled>
+                <input type="text" id="word-of-day-spell" placeholder="Spell the word..." disabled autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
                 <button id="submit-word-of-day-btn" disabled>Submit</button>
             </div>
             <button id="hear-word-of-day-btn" class="big-btn">🔊 Hear Word</button>
@@ -603,7 +835,7 @@
             <div id="classic-mode">
                 <button id="play-word-btn" class="big-btn">🔊 Hear Word</button>
                 <div class="action-row">
-                    <input type="text" id="spell-input" placeholder="Spell it here..." autocomplete="off" autocapitalize="off" spellcheck="false">
+                    <input type="text" id="spell-input" placeholder="Spell it here..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
                     <button id="submit-spell-btn">Check</button>
                 </div>
                 <div class="action-row">
@@ -621,12 +853,17 @@
                 <div>Word <span id="challenge-word-num">1</span>/5</div>
                 <button id="start-challenge-btn" class="big-btn">Start Challenge</button>
                 <div class="action-row">
-                    <input type="text" id="challenge-spell" placeholder="Spell..." disabled>
+                    <input type="text" id="challenge-spell" placeholder="Spell..." disabled autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
                     <button id="submit-challenge-btn" disabled>Submit</button>
                     <button id="challenge-show-meaning-btn" class="hidden" style="background:var(--info);">📖 Show Meaning</button>
                 </div>
                 <div id="challenge-meaning-display" class="definition-box hidden"></div>
                 <p id="challenge-msg" class="msg"></p>
+                <div id="challenge-recap-area" class="challenge-recap hidden">
+                    <h4>Words you spelled:</h4>
+                    <ul id="challenge-words-list"></ul>
+                    <button id="challenge-again-btn" class="big-btn">Play Again</button>
+                </div>
             </div>
 
             <!-- Ranked Mode -->
@@ -637,7 +874,7 @@
                 </div>
                 <button id="play-ranked-btn" class="big-btn">🔊 Hear Word (Ranked)</button>
                 <div class="action-row">
-                    <input type="text" id="ranked-spell" placeholder="Spell...">
+                    <input type="text" id="ranked-spell" placeholder="Spell..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
                     <button id="submit-ranked-btn">Check</button>
                 </div>
                 <p id="ranked-msg" class="msg"></p>
@@ -668,7 +905,7 @@
                 <div id="public-create-panel" class="hidden">
                     <h4>Submit a New Word</h4>
                     <div class="public-word-input">
-                        <input type="text" id="public-new-word" placeholder="Enter a word..." maxlength="30">
+                        <input type="text" id="public-new-word" placeholder="Enter a word..." maxlength="30" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
                         <button id="public-submit-word">Submit</button>
                     </div>
                     <p id="public-create-msg" class="msg"></p>
@@ -678,7 +915,7 @@
                 <div id="public-play-panel">
                     <button id="play-public-word-btn" class="big-btn">🔊 Hear Word</button>
                     <div class="action-row">
-                        <input type="text" id="public-spell" placeholder="Spell it here...">
+                        <input type="text" id="public-spell" placeholder="Spell it here..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
                         <button id="submit-public-btn">Check</button>
                         <button id="public-show-meaning-btn" style="background:var(--info);">📖 Show Meaning</button>
                     </div>
@@ -721,7 +958,7 @@
             <h3 class="section-title">💬 Admin Chat</h3>
             <div id="chat-messages" class="chat-container"></div>
             <div id="chat-input-area" class="chat-input-area hidden">
-                <input type="text" id="chat-message-input" placeholder="Type a message..." maxlength="200">
+                <input type="text" id="chat-message-input" placeholder="Type a message..." maxlength="200" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
                 <button id="chat-send-btn">Send</button>
             </div>
             <p id="chat-msg" class="msg"></p>
@@ -734,9 +971,9 @@
     <!-- Password Modal -->
     <div id="password-modal" class="container hidden" style="position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); z-index:1000; background:#1e1e2f;">
         <h3>Manage Password</h3>
-        <input type="password" id="current-pw" placeholder="Current password">
-        <input type="password" id="new-pw" placeholder="New password">
-        <input type="password" id="confirm-pw" placeholder="Confirm new password">
+        <input type="password" id="current-pw" placeholder="Current password" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+        <input type="password" id="new-pw" placeholder="New password" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+        <input type="password" id="confirm-pw" placeholder="Confirm new password" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
         <div style="display:flex; gap:10px; margin-top:15px;">
             <button id="save-pw-btn">Save</button>
             <button id="cancel-pw-btn">Cancel</button>
@@ -758,6 +995,18 @@
         <p style="margin-top:20px; text-align:center;">Once added, the app will open in its own window, just like a native app!</p>
     </div>
 
+    <!-- Draggable Power-up Menu (desktop only) -->
+    <div class="powerup-drag-menu hidden" id="powerup-drag-menu">
+        <div class="powerup-icon" data-type="hint" title="Hint (50 pts)">💡</div>
+        <div class="powerup-icon" data-type="extratime" title="Extra Time (75 pts)">⏱️</div>
+        <div class="powerup-icon" data-type="doublexp" title="Double XP (100 pts)">✨</div>
+        <div class="powerup-icon" data-type="shield" title="Shield (80 pts)">🛡️</div>
+        <div class="powerup-icon" data-type="freeze" title="Freeze Time (120 pts)">❄️</div>
+        <div class="powerup-icon" data-type="skip" title="Word Skip (60 pts)">⏭️</div>
+        <div class="powerup-icon" data-type="doublepoints" title="Double Points (150 pts)">💎</div>
+        <div class="powerup-icon" data-type="peek" title="Peek (40 pts)">🔍</div>
+    </div>
+
     <script type="module">
         // ---------- Firebase Configuration ----------
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
@@ -776,7 +1025,7 @@
 
         // ---------- Game State ----------
         let currentUser = null;
-        let wordsList = []; // official words
+        let wordsList = [];
         let wordDeck = [];
         let currentWord = "";
         let isAdmin = false;
@@ -794,36 +1043,51 @@
         // Track incorrect attempts
         let incorrectAttempts = 0;
 
-        // Power-ups state
+        // Power-ups state (new ones)
         let doubleXpActive = false;
+        let doublePointsActive = false;
         let shieldActive = false;
-        let extraTimeUsed = false; // for challenge mode
+        let freezeActive = false; // for challenge timer
+        let extraTimeUsed = false;
+        let powerupTimers = {};
 
-        // Power-ups
-        let powerups = {
-            hint: { owned: 0, price: 50 },
-            doubleXP: { owned: 0, price: 100 },
-            extraTime: { owned: 0, price: 75 },
-            shield: { owned: 0, price: 80 }
-        };
-
-        // Achievements list
+        // Achievements list (expanded)
         const achievementsList = [
             { id: "first-word", name: "First Word", desc: "Spell your first word correctly.", xp: 10 },
             { id: "level-10", name: "Level 10", desc: "Reach level 10.", xp: 50 },
             { id: "100-correct", name: "100 Correct", desc: "Spell 100 words correctly.", xp: 100 },
             { id: "30-day-streak", name: "30-Day Streak", desc: "Maintain a 30-day streak.", xp: 200 },
-            { id: "ranked-champ", name: "Ranked Champ", desc: "Reach 500 Rank Points.", xp: 150 }
+            { id: "ranked-champ", name: "Ranked Champ", desc: "Reach 500 Rank Points.", xp: 150 },
+            { id: "word-master", name: "Word Master", desc: "Spell 500 words correctly.", xp: 300 },
+            { id: "perfectionist", name: "Perfectionist", desc: "10 correct in a row.", xp: 100 },
+            { id: "socialite", name: "Socialite", desc: "Add 5 friends.", xp: 50 },
+            { id: "marathon", name: "Marathon", desc: "Complete 10 challenges.", xp: 150 },
+            { id: "unstoppable", name: "Unstoppable", desc: "Reach level 50.", xp: 500 },
+            { id: "collector", name: "Collector", desc: "Unlock 10 themes.", xp: 200 },
+            { id: "power-user", name: "Power User", desc: "Use 10 power-ups.", xp: 100 },
+            { id: "shielder", name: "Shielder", desc: "Use shield 5 times.", xp: 80 },
+            { id: "hint-master", name: "Hint Master", desc: "Use hint 20 times.", xp: 120 },
+            { id: "double-trouble", name: "Double Trouble", desc: "Use double XP 5 times.", xp: 150 }
         ];
 
         // Titles unlocked by achievements
         const titles = [
-            { name: "Novice", achievement: null }, // default
+            { name: "Novice", achievement: null },
             { name: "Word Speller", achievement: "first-word" },
             { name: "Level 10 Master", achievement: "level-10" },
             { name: "Century Club", achievement: "100-correct" },
             { name: "Streak Legend", achievement: "30-day-streak" },
             { name: "Ranked Elite", achievement: "ranked-champ" },
+            { name: "Word Master", achievement: "word-master" },
+            { name: "Perfectionist", achievement: "perfectionist" },
+            { name: "Socialite", achievement: "socialite" },
+            { name: "Marathoner", achievement: "marathon" },
+            { name: "Unstoppable", achievement: "unstoppable" },
+            { name: "Collector", achievement: "collector" },
+            { name: "Power User", achievement: "power-user" },
+            { name: "Shielder", achievement: "shielder" },
+            { name: "Hint Master", achievement: "hint-master" },
+            { name: "Double Trouble", achievement: "double-trouble" },
             { name: "Admin", achievement: null, adminOnly: true },
             { name: "Supreme", achievement: null, adminOnly: true }
         ];
@@ -862,6 +1126,27 @@
         let publicWordDeck = [];
         let currentPublicWord = "";
 
+        // Live Play
+        let liveGameId = null;
+        let liveGameRef = null;
+        let liveUnsubscribe = null;
+        let myTurn = false;
+        let myWords = [];
+        let opponentWords = [];
+        let myScore = 0;
+        let oppScore = 0;
+        let currentWordIndex = 0;
+
+        // Challenge recap
+        let challengeWordsSpelled = [];
+        let challengeCount = 0; // for marathon achievement
+
+        // Power-up usage counters
+        let powerupUseCount = 0;
+        let shieldUseCount = 0;
+        let hintUseCount = 0;
+        let doubleXpUseCount = 0;
+
         // ---------- Helper Functions ----------
         function xpForLevel(level) {
             if (level < 40) return 150;
@@ -895,15 +1180,12 @@
             return "hard";
         }
 
-        // For impossible difficulty, we'll use a special list or criteria
         function isImpossible(word) {
-            // Words with length > 10 or very rare letters
             const rare = /[qzxyjvkw]/gi;
             return word.length > 10 || (word.match(rare) && word.match(rare).length >= 3);
         }
 
-        // Profanity check (simple)
-        const profanityList = ["badword1", "badword2", "profanity"]; // extend as needed
+        const profanityList = ["badword1", "badword2", "profanity"];
         function isInappropriate(word) {
             const lower = word.toLowerCase();
             return profanityList.some(bad => lower.includes(bad));
@@ -934,6 +1216,10 @@
 
         // ---------- Track points ----------
         async function addPoints(amount, reason = "") {
+            if (doublePointsActive) {
+                amount *= 2;
+                // doublePointsActive lasts for one use, then deactivates (handled in power-up)
+            }
             currentUser.points = (currentUser.points || 0) + amount;
             await updateDoc(doc(db, "users", currentUser.id), { points: currentUser.points });
             updateStats();
@@ -956,6 +1242,14 @@
         function pointsForLevel(level) {
             return 5 * (level + 1);
         }
+
+        // ---------- Online Status ----------
+        async function updateLastActive() {
+            if (!currentUser) return;
+            const now = new Date();
+            await updateDoc(doc(db, "users", currentUser.id), { lastActive: now });
+        }
+        setInterval(updateLastActive, 60000); // every minute
 
         // ---------- Streak Functions ----------
         function getTodayDate() {
@@ -1000,6 +1294,7 @@
             checkNotification();
             await updateNetWorth();
             updatePowerupsDisplay();
+            await updateLastActive();
         }
 
         async function incrementDailyWords() {
@@ -1120,9 +1415,7 @@
                 oscillator.connect(audioCtx.destination);
                 oscillator.start();
                 oscillator.stop(audioCtx.currentTime + 0.1);
-            } catch (e) {
-                // Beep not supported, ignore
-            }
+            } catch (e) {}
         }
 
         // ---------- Definition Fetcher ----------
@@ -1202,7 +1495,7 @@
                     if (userSnap.data().password !== pw) { document.getElementById('login-msg').innerText = "Access Denied"; return; }
                     currentUser = { id: username, ...userSnap.data() };
                 } else {
-                    currentUser = { id: username, points: 0, unlockedThemes: ["bg-default"], unlockedBorders: ["none"], unlockedTitles: ["Novice"], password: pw, isAdmin: true, level: 1, xp: 0, rankPoints: 0, powerups: {}, streak: 0, dailyWords: 0, lastLogin: '', friends: [], achievements: {}, avatar: '😀', title: 'Admin', bannerColor: '#0f172a', border: 'none', totalCorrect: 0, wordOfDayAttempt: '', lastBonus: '', pointsSpent: 0 };
+                    currentUser = { id: username, points: 0, unlockedThemes: ["bg-default"], unlockedBorders: ["none"], unlockedTitles: ["Novice"], password: pw, isAdmin: true, level: 1, xp: 0, rankPoints: 0, powerups: {}, streak: 0, dailyWords: 0, lastLogin: '', friends: [], achievements: {}, avatar: 'pfp', title: 'Admin', bannerColor: '#0f172a', border: 'none', totalCorrect: 0, wordOfDayAttempt: '', lastBonus: '', pointsSpent: 0, powerupUseCount:0, shieldUseCount:0, hintUseCount:0, doubleXpUseCount:0, challengeCount:0 };
                     await setDoc(userRef, currentUser);
                 }
                 isAdmin = true;
@@ -1215,7 +1508,7 @@
                     }
                     currentUser = { id: username, ...userData };
                 } else {
-                    currentUser = { id: username, points: 0, unlockedThemes: ["bg-default"], unlockedBorders: ["none"], unlockedTitles: ["Novice"], isAdmin: false, level: 1, xp: 0, rankPoints: 0, powerups: {}, streak: 0, dailyWords: 0, lastLogin: '', friends: [], achievements: {}, avatar: '😀', title: 'Novice', bannerColor: '#0f172a', border: 'none', totalCorrect: 0, wordOfDayAttempt: '', lastBonus: '', pointsSpent: 0 };
+                    currentUser = { id: username, points: 0, unlockedThemes: ["bg-default"], unlockedBorders: ["none"], unlockedTitles: ["Novice"], isAdmin: false, level: 1, xp: 0, rankPoints: 0, powerups: {}, streak: 0, dailyWords: 0, lastLogin: '', friends: [], achievements: {}, avatar: 'pfp', title: 'Novice', bannerColor: '#0f172a', border: 'none', totalCorrect: 0, wordOfDayAttempt: '', lastBonus: '', pointsSpent: 0, powerupUseCount:0, shieldUseCount:0, hintUseCount:0, doubleXpUseCount:0, challengeCount:0 };
                     await setDoc(userRef, currentUser);
                 }
                 isAdmin = currentUser.isAdmin || false;
@@ -1234,7 +1527,7 @@
             if (!currentUser.lastLogin) currentUser.lastLogin = '';
             if (!currentUser.friends) currentUser.friends = [];
             if (!currentUser.achievements) currentUser.achievements = {};
-            if (!currentUser.avatar) currentUser.avatar = '😀';
+            if (!currentUser.avatar) currentUser.avatar = 'pfp';
             if (!currentUser.title) currentUser.title = 'Novice';
             if (!currentUser.bannerColor) currentUser.bannerColor = '#0f172a';
             if (!currentUser.border) currentUser.border = 'none';
@@ -1242,6 +1535,11 @@
             if (!currentUser.wordOfDayAttempt) currentUser.wordOfDayAttempt = '';
             if (!currentUser.lastBonus) currentUser.lastBonus = '';
             if (!currentUser.pointsSpent) currentUser.pointsSpent = 0;
+            if (!currentUser.powerupUseCount) currentUser.powerupUseCount = 0;
+            if (!currentUser.shieldUseCount) currentUser.shieldUseCount = 0;
+            if (!currentUser.hintUseCount) currentUser.hintUseCount = 0;
+            if (!currentUser.doubleXpUseCount) currentUser.doubleXpUseCount = 0;
+            if (!currentUser.challengeCount) currentUser.challengeCount = 0;
 
             // Secret theme
             if (["marina", "layla"].includes(username) && !currentUser.unlockedThemes.includes("bg-secret")) {
@@ -1252,7 +1550,6 @@
                 selectedVoiceURI = currentUser.preferredVoice;
                 document.getElementById('voice-select').value = selectedVoiceURI;
             }
-            // Estimate past spending for existing users (simplified)
             if (!currentUser.pointsSpent) {
                 let estimatedSpent = 0;
                 if (currentUser.unlockedThemes) {
@@ -1333,41 +1630,68 @@
         function updatePowerupsDisplay() {
             const unlockMsg = document.getElementById('powerup-unlock-msg');
             const grid = document.getElementById('powerup-grid');
-            const levelsRemainingSpan = document.getElementById('levels-remaining');
             const level = currentUser.level || 1;
             const powerupBtns = document.querySelectorAll('.powerup-btn');
             if (level >= 35) {
                 unlockMsg.classList.add('hidden');
                 grid.classList.remove('hidden');
-                // Enable buttons (they are still disabled until purchase, but we enable them to be clickable)
                 powerupBtns.forEach(btn => btn.disabled = false);
+                document.getElementById('powerup-drag-menu').classList.remove('hidden');
             } else {
                 unlockMsg.classList.remove('hidden');
                 grid.classList.add('hidden');
                 powerupBtns.forEach(btn => btn.disabled = true);
+                document.getElementById('powerup-drag-menu').classList.add('hidden');
             }
         }
 
-        // Power-up usage
-        document.querySelectorAll('.powerup-btn').forEach(btn => {
-            btn.addEventListener('click', async (e) => {
+        // Draggable menu
+        const dragMenu = document.getElementById('powerup-drag-menu');
+        let offsetX, offsetY;
+        dragMenu.addEventListener('mousedown', (e) => {
+            if (e.target.classList.contains('powerup-icon')) return;
+            e.preventDefault();
+            offsetX = e.clientX - dragMenu.getBoundingClientRect().left;
+            offsetY = e.clientY - dragMenu.getBoundingClientRect().top;
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mouseup', onMouseUp);
+        });
+        function onMouseMove(e) {
+            dragMenu.style.left = (e.clientX - offsetX) + 'px';
+            dragMenu.style.top = (e.clientY - offsetY) + 'px';
+            dragMenu.style.bottom = 'auto';
+            dragMenu.style.right = 'auto';
+        }
+        function onMouseUp() {
+            document.removeEventListener('mousemove', onMouseMove);
+            document.removeEventListener('mouseup', onMouseUp);
+        }
+
+        // Power-up usage from draggable menu
+        document.querySelectorAll('.powerup-drag-menu .powerup-icon').forEach(icon => {
+            icon.addEventListener('click', async (e) => {
                 const type = e.target.dataset.type;
-                const price = parseInt(e.target.dataset.price);
-                // Check if user has enough points
+                const priceMap = { hint: 50, extratime: 75, doublexp: 100, shield: 80, freeze: 120, skip: 60, doublepoints: 150, peek: 40 };
+                const price = priceMap[type];
                 if (!await spendPoints(price, `powerup: ${type}`)) {
                     alert(`Not enough points! Need ${price} points.`);
                     return;
                 }
-                // Apply effect based on type
+                // Increment counters for achievements
+                currentUser.powerupUseCount++;
+                if (type === 'hint') currentUser.hintUseCount++;
+                else if (type === 'shield') currentUser.shieldUseCount++;
+                else if (type === 'doublexp') currentUser.doubleXpUseCount++;
+                await updateDoc(doc(db, "users", currentUser.id), { powerupUseCount: currentUser.powerupUseCount, hintUseCount: currentUser.hintUseCount, shieldUseCount: currentUser.shieldUseCount, doubleXpUseCount: currentUser.doubleXpUseCount });
+                await checkAchievementsForPowerups();
+
                 if (type === 'hint') {
-                    // Show first letter of current word (if any)
                     if (currentWord) {
                         alert(`Hint: The word starts with "${currentWord[0].toUpperCase()}"`);
                     } else {
                         alert("No active word to hint.");
                     }
                 } else if (type === 'extratime') {
-                    // Only works in challenge mode
                     if (challengeTimer) {
                         challengeTimeLeft += 5;
                         document.getElementById('timer-display').innerText = challengeTimeLeft + 's';
@@ -1377,13 +1701,69 @@
                     }
                 } else if (type === 'doublexp') {
                     doubleXpActive = true;
-                    alert("Double XP activated for your next correct answer!");
+                    e.target.classList.add('active');
+                    if (powerupTimers.doublexp) clearTimeout(powerupTimers.doublexp);
+                    powerupTimers.doublexp = setTimeout(() => {
+                        doubleXpActive = false;
+                        e.target.classList.remove('active');
+                    }, 30000);
+                    alert("Double XP activated for 30 seconds!");
                 } else if (type === 'shield') {
                     shieldActive = true;
-                    alert("Shield activated! You won't lose rank points on your next incorrect answer.");
+                    e.target.classList.add('active');
+                    setTimeout(() => {
+                        shieldActive = false;
+                        e.target.classList.remove('active');
+                    }, 60000);
+                    alert("Shield activated for 1 minute!");
+                } else if (type === 'freeze') {
+                    if (challengeTimer) {
+                        freezeActive = true;
+                        e.target.classList.add('active');
+                        setTimeout(() => {
+                            freezeActive = false;
+                            e.target.classList.remove('active');
+                        }, 10000); // freeze for 10 seconds
+                        alert("Timer frozen for 10 seconds!");
+                    } else {
+                        alert("Freeze can only be used during a challenge.");
+                    }
+                } else if (type === 'skip') {
+                    if (currentWord) {
+                        // skip current word without penalty
+                        currentWord = "";
+                        incorrectAttempts = 0;
+                        document.getElementById('game-msg').innerText = "⏩ Skipped! (power-up)";
+                        document.getElementById('spell-input').value = "";
+                        document.getElementById('meaning-display').classList.add('hidden');
+                    } else {
+                        alert("No word to skip.");
+                    }
+                } else if (type === 'doublepoints') {
+                    doublePointsActive = true;
+                    e.target.classList.add('active');
+                    // lasts for one correct answer
+                    alert("Double points for next correct answer!");
+                } else if (type === 'peek') {
+                    if (currentWord) {
+                        if (currentWord.length > 2) {
+                            alert(`Peek: The word starts with "${currentWord.substring(0,2)}"`);
+                        } else {
+                            alert(`Peek: The word is "${currentWord}"`);
+                        }
+                    } else {
+                        alert("No active word to peek.");
+                    }
                 }
             });
         });
+
+        async function checkAchievementsForPowerups() {
+            if (currentUser.powerupUseCount >= 10) await checkAndUnlockAchievement('power-user');
+            if (currentUser.shieldUseCount >= 5) await checkAndUnlockAchievement('shielder');
+            if (currentUser.hintUseCount >= 20) await checkAndUnlockAchievement('hint-master');
+            if (currentUser.doubleXpUseCount >= 5) await checkAndUnlockAchievement('double-trouble');
+        }
 
         // ---------- App Setup ----------
         async function setupApp() {
@@ -1424,16 +1804,11 @@
             setupLeaderboards();
             setupTabs();
 
-            // Daily bonus button
             document.getElementById('claim-daily-bonus-btn').addEventListener('click', claimDailyBonus);
-
-            // Buy XP button
             document.getElementById('buy-xp-btn').addEventListener('click', buyXP);
 
-            // Chat setup
             setupChat();
 
-            // Show meaning buttons (existing)
             document.getElementById('show-meaning-btn').addEventListener('click', async () => {
                 if (!currentWord) {
                     document.getElementById('game-msg').innerText = "No word to show meaning for.";
@@ -1464,9 +1839,8 @@
                 document.getElementById('live-meaning-display').classList.remove('hidden');
             });
 
-            // Public mode
             setupPublicMode();
-
+            setupLivePlay();
             updatePowerupsDisplay();
         }
 
@@ -1481,7 +1855,6 @@
         async function addXP(amount) {
             if (doubleXpActive) {
                 amount *= 2;
-                doubleXpActive = false;
             }
             currentUser.xp += amount;
             let leveled = false;
@@ -1498,6 +1871,9 @@
                 if (currentUser.level === 50) document.getElementById('live-tab').disabled = false;
                 if (currentUser.level >= 10) {
                     await checkAndUnlockAchievement('level-10');
+                }
+                if (currentUser.level >= 50) {
+                    await checkAndUnlockAchievement('unstoppable');
                 }
                 updatePowerupsDisplay();
                 await updateDoc(doc(db, "users", currentUser.id), { 
@@ -1543,7 +1919,11 @@
         // ---------- Profile ----------
         function updateProfilePreview() {
             const preview = document.getElementById('avatar-preview');
-            preview.innerText = currentUser.avatar;
+            if (currentUser.avatar === 'pfp') {
+                preview.innerHTML = `<img src="./pfp.png" style="width:80px; height:80px; border-radius:50%; object-fit:cover;">`;
+            } else {
+                preview.innerText = currentUser.avatar;
+            }
             preview.style.border = 'none';
             preview.style.boxShadow = 'none';
             preview.style.borderImage = 'none';
@@ -1655,7 +2035,12 @@
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.avatar-options button').forEach(b => b.classList.remove('selected'));
                 btn.classList.add('selected');
-                document.getElementById('avatar-preview').innerText = btn.dataset.avatar;
+                // Update preview temporarily (will be saved later)
+                if (btn.dataset.avatar === 'pfp') {
+                    document.getElementById('avatar-preview').innerHTML = `<img src="./pfp.png" style="width:80px; height:80px; border-radius:50%; object-fit:cover;">`;
+                } else {
+                    document.getElementById('avatar-preview').innerText = btn.dataset.avatar;
+                }
             });
         });
         document.querySelectorAll('.color-swatch').forEach(swatch => {
@@ -1665,7 +2050,8 @@
             });
         });
         document.getElementById('save-profile').addEventListener('click', async () => {
-            const avatar = document.querySelector('.avatar-options button.selected')?.dataset.avatar || '😀';
+            const selectedAvatarBtn = document.querySelector('.avatar-options button.selected');
+            const avatar = selectedAvatarBtn ? selectedAvatarBtn.dataset.avatar : 'pfp';
             const bannerColor = document.querySelector('.color-swatch.selected')?.dataset.color || '#0f172a';
             const title = currentUser.title;
             const border = currentUser.border;
@@ -1702,6 +2088,9 @@
                     loadFriends();
                 });
             });
+            if (currentUser.friends?.length >= 5) {
+                checkAndUnlockAchievement('socialite');
+            }
         }
 
         document.getElementById('add-friend-btn').addEventListener('click', async () => {
@@ -1893,7 +2282,12 @@
             if (attempt === currentWord) {
                 const diff = analyzeWordDifficulty(currentWord);
                 const xpGain = xpForDifficulty(diff);
-                const pointsGain = 10;
+                let pointsGain = 10;
+                if (doublePointsActive) {
+                    pointsGain *= 2;
+                    doublePointsActive = false;
+                    document.querySelector('[data-type="doublepoints"]')?.classList.remove('active');
+                }
                 await addPoints(pointsGain);
                 await addXP(xpGain);
                 msg.innerText = `🔥 Correct! +${pointsGain} pts, +${xpGain} XP`;
@@ -1911,14 +2305,20 @@
                 if (currentUser.totalCorrect === 100) {
                     await checkAndUnlockAchievement('100-correct');
                 }
-
-                correctCount++;
+                if (currentUser.totalCorrect === 500) {
+                    await checkAndUnlockAchievement('word-master');
+                }
+                // Check for perfectionist (10 in a row)
+                if (++correctCount === 10) {
+                    await checkAndUnlockAchievement('perfectionist');
+                }
                 if (congratsEnabled && correctCount % 5 === 0) {
                     msg.classList.add('congrats-animation');
                     setTimeout(() => msg.classList.remove('congrats-animation'), 500);
                 }
             } else {
                 incorrectAttempts++;
+                correctCount = 0; // reset streak
                 if (incorrectAttempts >= 3) {
                     msg.innerText = `❌ Three incorrect attempts! The word was: "${currentWord}".`;
                     currentWord = "";
@@ -1944,17 +2344,19 @@
             document.getElementById('meaning-display').classList.add('hidden');
         });
 
-        // ---------- Challenge Mode (simplified) ----------
+        // ---------- Challenge Mode ----------
         let challengeWords = [], challengeIndex = 0, challengeTimer = null, challengeTimeLeft = 15;
         document.getElementById('start-challenge-btn').addEventListener('click', () => {
             if (wordsList.length < 5) { document.getElementById('challenge-msg').innerText = "Need at least 5 words!"; return; }
             challengeWords = [...wordsList].sort(() => 0.5 - Math.random()).slice(0,5);
             challengeIndex = 0;
+            challengeWordsSpelled = [];
             document.getElementById('start-challenge-btn').disabled = true;
             document.getElementById('challenge-spell').disabled = false;
             document.getElementById('submit-challenge-btn').disabled = false;
             document.getElementById('challenge-show-meaning-btn').classList.remove('hidden');
             document.getElementById('challenge-meaning-display').classList.add('hidden');
+            document.getElementById('challenge-recap-area').classList.add('hidden');
             nextChallengeWord();
         });
         function nextChallengeWord() {
@@ -1969,10 +2371,12 @@
             document.getElementById('timer-display').innerText = challengeTimeLeft + 's';
             if (challengeTimer) clearInterval(challengeTimer);
             challengeTimer = setInterval(() => {
+                if (freezeActive) return; // timer frozen
                 challengeTimeLeft--;
                 document.getElementById('timer-display').innerText = challengeTimeLeft + 's';
                 if (challengeTimeLeft <= 0) {
                     clearInterval(challengeTimer);
+                    challengeWordsSpelled.push({ word: currentWord, correct: false });
                     challengeIndex++;
                     if (challengeIndex < challengeWords.length) nextChallengeWord();
                     else endChallenge(false);
@@ -1985,11 +2389,17 @@
                 clearInterval(challengeTimer);
                 const timeBonus = Math.max(0, challengeTimeLeft);
                 const diff = analyzeWordDifficulty(currentWord);
-                const pointsEarned = Math.min(20, Math.max(5, diff * 5 + Math.floor(timeBonus/3)));
-                const xpEarned = diff * 5 + timeBonus;
+                let pointsEarned = Math.min(20, Math.max(5, diff * 5 + Math.floor(timeBonus/3)));
+                let xpEarned = diff * 5 + timeBonus;
+                if (doublePointsActive) {
+                    pointsEarned *= 2;
+                    doublePointsActive = false;
+                    document.querySelector('[data-type="doublepoints"]')?.classList.remove('active');
+                }
                 await addPoints(pointsEarned);
                 await addXP(xpEarned);
                 document.getElementById('challenge-msg').innerText = `✅ +${pointsEarned} pts, +${xpEarned} XP!`;
+                challengeWordsSpelled.push({ word: currentWord, correct: true });
                 challengeIndex++;
                 document.getElementById('challenge-spell').value = '';
                 if (challengeIndex < challengeWords.length) nextChallengeWord();
@@ -2005,7 +2415,25 @@
             document.getElementById('submit-challenge-btn').disabled = true;
             document.getElementById('challenge-show-meaning-btn').classList.add('hidden');
             document.getElementById('challenge-msg').innerText = completed ? "🎉 Challenge complete!" : "⏰ Time's up!";
+            const list = document.getElementById('challenge-words-list');
+            list.innerHTML = '';
+            challengeWordsSpelled.forEach(item => {
+                const li = document.createElement('li');
+                li.innerHTML = `${item.word} - ${item.correct ? '✅' : '❌'}`;
+                list.appendChild(li);
+            });
+            document.getElementById('challenge-recap-area').classList.remove('hidden');
+            if (completed) {
+                currentUser.challengeCount++;
+                updateDoc(doc(db, "users", currentUser.id), { challengeCount: currentUser.challengeCount });
+                if (currentUser.challengeCount >= 10) {
+                    checkAndUnlockAchievement('marathon');
+                }
+            }
         }
+        document.getElementById('challenge-again-btn').addEventListener('click', () => {
+            document.getElementById('start-challenge-btn').click();
+        });
 
         // ---------- Ranked Mode ----------
         let rankedMultiplier = 1.0;
@@ -2026,13 +2454,19 @@
             if (!currentWord) { document.getElementById('ranked-msg').innerText = "Hear a word first!"; return; }
             if (attempt === currentWord) {
                 const diff = analyzeWordDifficulty(currentWord);
-                const rpGain = Math.floor(10 * rankedMultiplier);
+                let rpGain = Math.floor(10 * rankedMultiplier);
+                let pointsGain = 10;
                 const xpGain = diff * 5;
+                if (doublePointsActive) {
+                    pointsGain *= 2;
+                    doublePointsActive = false;
+                    document.querySelector('[data-type="doublepoints"]')?.classList.remove('active');
+                }
                 currentUser.rankPoints += rpGain;
-                await addPoints(10);
+                await addPoints(pointsGain);
                 await addXP(xpGain);
                 await updateDoc(doc(db, "users", currentUser.id), { rankPoints: currentUser.rankPoints });
-                document.getElementById('ranked-msg').innerText = `✅ +${rpGain} RP, +10 pts, +${xpGain} XP`;
+                document.getElementById('ranked-msg').innerText = `✅ +${rpGain} RP, +${pointsGain} pts, +${xpGain} XP`;
                 document.getElementById('rank-points').innerText = currentUser.rankPoints;
                 document.getElementById('ranked-spell').value = '';
                 currentWord = '';
@@ -2054,20 +2488,136 @@
             }
         });
 
-        // ---------- Live Play (placeholder) ----------
-        document.getElementById('find-match-btn')?.addEventListener('click', () => {
-            alert("Live play coming soon! For now, enjoy other modes.");
-        });
-        document.getElementById('find-match-from-tab')?.addEventListener('click', () => {
-            alert("Live play coming soon! For now, enjoy other modes.");
-        });
+        // ---------- Live Play ----------
+        function setupLivePlay() {
+            const findMatchBtn = document.getElementById('find-match-btn');
+            const findMatchFromTab = document.getElementById('find-match-from-tab');
+            const cancelMatchmaking = document.getElementById('cancel-matchmaking');
+            const liveQuitBtn = document.getElementById('live-quit-btn');
+            const liveSubmit = document.getElementById('live-submit-btn');
+            const liveHear = document.getElementById('live-hear-btn');
+
+            findMatchBtn.addEventListener('click', startMatchmaking);
+            findMatchFromTab.addEventListener('click', startMatchmaking);
+            cancelMatchmaking.addEventListener('click', cancelMatchmakingFn);
+            liveQuitBtn.addEventListener('click', quitLiveGame);
+            liveSubmit.addEventListener('click', submitLiveWord);
+            liveHear.addEventListener('click', () => { if (currentWord) speakWord(currentWord); });
+        }
+
+        async function startMatchmaking() {
+            document.getElementById('live-lobby').classList.remove('hidden');
+            document.getElementById('live-room').classList.add('hidden');
+            document.getElementById('find-match-btn').disabled = true;
+            document.getElementById('find-match-from-tab').disabled = true;
+
+            // Check for online players (lastActive within 2 minutes)
+            const twoMinsAgo = new Date(Date.now() - 120000);
+            const usersSnap = await getDocs(query(collection(db, "users"), where("lastActive", ">=", twoMinsAgo)));
+            const onlineUsers = usersSnap.docs.map(d => d.id).filter(id => id !== currentUser.id);
+            if (onlineUsers.length === 0) {
+                alert("No players online. Try again later.");
+                cancelMatchmakingFn();
+                return;
+            }
+
+            // Simulate match found with random online user
+            setTimeout(() => {
+                document.getElementById('live-lobby').classList.add('hidden');
+                document.getElementById('live-room').classList.remove('hidden');
+                document.getElementById('live-opponent').innerText = onlineUsers[Math.floor(Math.random() * onlineUsers.length)];
+                myWords = wordsList.sort(() => 0.5 - Math.random()).slice(0,5);
+                opponentWords = wordsList.sort(() => 0.5 - Math.random()).slice(0,5);
+                myTurn = Math.random() < 0.5;
+                currentWordIndex = 0;
+                myScore = 0;
+                oppScore = 0;
+                updateLiveUI();
+                if (myTurn) nextLiveWord();
+                else {
+                    document.getElementById('live-msg').innerText = "Opponent's turn...";
+                    document.getElementById('live-spell').disabled = true;
+                    document.getElementById('live-submit-btn').disabled = true;
+                }
+            }, 2000);
+        }
+
+        function cancelMatchmakingFn() {
+            document.getElementById('live-lobby').classList.add('hidden');
+            document.getElementById('find-match-btn').disabled = false;
+            document.getElementById('find-match-from-tab').disabled = false;
+        }
+
+        function nextLiveWord() {
+            if (currentWordIndex >= 5) {
+                endLiveGame();
+                return;
+            }
+            currentWord = myWords[currentWordIndex];
+            speakWord(currentWord);
+            document.getElementById('live-word-num').innerText = currentWordIndex+1;
+            document.getElementById('live-spell').disabled = false;
+            document.getElementById('live-submit-btn').disabled = false;
+            document.getElementById('live-msg').innerText = "Your turn!";
+        }
+
+        async function submitLiveWord() {
+            const attempt = document.getElementById('live-spell').value.trim().toLowerCase();
+            if (attempt === currentWord) {
+                myScore++;
+                document.getElementById('live-my-score').innerText = myScore;
+                document.getElementById('live-msg').innerText = "✅ Correct!";
+            } else {
+                document.getElementById('live-msg').innerText = "❌ Incorrect.";
+            }
+            document.getElementById('live-spell').value = '';
+            document.getElementById('live-spell').disabled = true;
+            document.getElementById('live-submit-btn').disabled = true;
+            currentWordIndex++;
+            if (currentWordIndex < 5) {
+                document.getElementById('live-msg').innerText = "Waiting for opponent...";
+                setTimeout(() => {
+                    oppScore++;
+                    document.getElementById('live-opp-score').innerText = oppScore;
+                    myTurn = true;
+                    nextLiveWord();
+                }, 1500);
+            } else {
+                endLiveGame();
+            }
+        }
+
+        function endLiveGame() {
+            if (myScore > oppScore) {
+                alert(`You win! ${myScore} - ${oppScore}`);
+                addPoints(50);
+                addXP(30);
+            } else if (myScore < oppScore) {
+                alert(`You lose! ${myScore} - ${oppScore}`);
+                addPoints(10);
+            } else {
+                alert(`Tie! ${myScore} - ${oppScore}`);
+                addPoints(25);
+            }
+            quitLiveGame();
+        }
+
+        function quitLiveGame() {
+            document.getElementById('live-room').classList.add('hidden');
+            document.getElementById('find-match-btn').disabled = false;
+            document.getElementById('find-match-from-tab').disabled = false;
+        }
+
+        function updateLiveUI() {
+            document.getElementById('live-my-score').innerText = myScore;
+            document.getElementById('live-opp-score').innerText = oppScore;
+        }
 
         // ---------- Tabs ----------
         function setupTabs() {
             const tabs = document.querySelectorAll('.tab[data-mode]');
             tabs.forEach(tab => {
                 tab.addEventListener('click', () => {
-                    // Unseen tab is disabled
                     if (tab.id === 'unseen-tab') {
                         alert('Unseen Mode is coming soon! Stay tuned.');
                         return;
@@ -2089,7 +2639,6 @@
                     else if (mode === 'unseen') document.getElementById('unseen-mode').classList.remove('hidden');
                     else if (mode === 'public') {
                         document.getElementById('public-mode').classList.remove('hidden');
-                        // Default to play panel
                         document.getElementById('public-create-panel').classList.add('hidden');
                         document.getElementById('public-play-panel').classList.remove('hidden');
                         document.getElementById('public-create-btn').classList.remove('active');
@@ -2121,11 +2670,10 @@
                 if (!word) { msg.innerText = "Enter a word."; return; }
                 if (word.length < 2) { msg.innerText = "Word too short."; return; }
                 if (isInappropriate(word)) { msg.innerText = "Word contains inappropriate content."; return; }
-                // Check if already exists in custom words (pending or approved)
                 const q = query(customWordsRef, where("word", "==", word));
                 const snap = await getDocs(q);
                 if (!snap.empty) { msg.innerText = "This word has already been submitted."; return; }
-                const difficulty = analyzeWordDifficulty(word); // 1-3
+                const difficulty = analyzeWordDifficulty(word);
                 let diffLabel = mapDifficultyToLevel(difficulty);
                 if (isImpossible(word)) diffLabel = "impossible";
                 await addDoc(customWordsRef, {
@@ -2171,6 +2719,11 @@
                     if (isImpossible(currentPublicWord)) {
                         pointsGain = Math.floor(Math.random() * 6) + 20;
                         xpGain = Math.floor(Math.random() * 6) + 20;
+                    }
+                    if (doublePointsActive) {
+                        pointsGain *= 2;
+                        doublePointsActive = false;
+                        document.querySelector('[data-type="doublepoints"]')?.classList.remove('active');
                     }
                     await addPoints(pointsGain);
                     await addXP(xpGain);
@@ -2252,6 +2805,14 @@
             return '';
         }
 
+        function formatAvatar(avatar) {
+            if (avatar === 'pfp') {
+                return `<div class="leaderboard-avatar"><img src="./pfp.png"></div>`;
+            } else {
+                return `<span style="font-size:1.5rem;">${avatar}</span>`;
+            }
+        }
+
         function setupLeaderboards() {
             const scoreQ = query(collection(db, "users"), orderBy("points", "desc"), limit(10));
             onSnapshot(scoreQ, (snap) => {
@@ -2259,11 +2820,13 @@
                 body.innerHTML = "";
                 snap.forEach(u => {
                     const data = u.data();
-                    const avatar = data.avatar || '😀';
+                    const avatar = data.avatar || 'pfp';
                     const bannerColor = data.bannerColor || '#0f172a';
                     const borderStyle = getBorderStyle(data.border || 'none');
+                    const isOnline = data.lastActive && (new Date() - data.lastActive.toDate()) < 120000;
+                    const onlineIndicator = `<span class="online-indicator ${isOnline ? 'online' : 'offline'}"></span>`;
                     body.innerHTML += `<tr style="background-color: ${bannerColor}30;">` +
-                        `<td><span style="display:inline-block; border-radius:50%; padding:2px; ${borderStyle}">${avatar}</span> ${u.id}${data.isAdmin ? ' ⭐' : ''}</td>` +
+                        `<td><span style="display:inline-flex; align-items:center; gap:5px; padding:2px; ${borderStyle}">${formatAvatar(avatar)}</span> ${u.id}${data.isAdmin ? ' ⭐' : ''} ${onlineIndicator}</td>` +
                         `<td style="text-align:right;">${data.points || 0}</td></tr>`;
                 });
             });
@@ -2279,11 +2842,13 @@
                 const body = document.getElementById('levelboard-body');
                 body.innerHTML = "";
                 users.slice(0,10).forEach(u => {
-                    const avatar = u.avatar || '😀';
+                    const avatar = u.avatar || 'pfp';
                     const bannerColor = u.bannerColor || '#0f172a';
                     const borderStyle = getBorderStyle(u.border || 'none');
+                    const isOnline = u.lastActive && (new Date() - u.lastActive.toDate()) < 120000;
+                    const onlineIndicator = `<span class="online-indicator ${isOnline ? 'online' : 'offline'}"></span>`;
                     body.innerHTML += `<tr style="background-color: ${bannerColor}30;">` +
-                        `<td><span style="display:inline-block; border-radius:50%; padding:2px; ${borderStyle}">${avatar}</span> ${u.id}</td>` +
+                        `<td><span style="display:inline-flex; align-items:center; gap:5px; padding:2px; ${borderStyle}">${formatAvatar(avatar)}</span> ${u.id} ${onlineIndicator}</td>` +
                         `<td style="text-align:right;">Lv ${u.level || 1}</td>` +
                         `<td style="text-align:right;">${u.xp || 0} XP</td></tr>`;
                 });
@@ -2295,11 +2860,13 @@
                 body.innerHTML = "";
                 snap.forEach(u => {
                     const data = u.data();
-                    const avatar = data.avatar || '😀';
+                    const avatar = data.avatar || 'pfp';
                     const bannerColor = data.bannerColor || '#0f172a';
                     const borderStyle = getBorderStyle(data.border || 'none');
+                    const isOnline = data.lastActive && (new Date() - data.lastActive.toDate()) < 120000;
+                    const onlineIndicator = `<span class="online-indicator ${isOnline ? 'online' : 'offline'}"></span>`;
                     body.innerHTML += `<tr style="background-color: ${bannerColor}30;">` +
-                        `<td><span style="display:inline-block; border-radius:50%; padding:2px; ${borderStyle}">${avatar}</span> ${u.id}</td>` +
+                        `<td><span style="display:inline-flex; align-items:center; gap:5px; padding:2px; ${borderStyle}">${formatAvatar(avatar)}</span> ${u.id} ${onlineIndicator}</td>` +
                         `<td style="text-align:right;">${data.rankPoints || 0} RP</td></tr>`;
                 });
             });
@@ -2310,11 +2877,13 @@
                 body.innerHTML = "";
                 snap.forEach(u => {
                     const data = u.data();
-                    const avatar = data.avatar || '😀';
+                    const avatar = data.avatar || 'pfp';
                     const bannerColor = data.bannerColor || '#0f172a';
                     const borderStyle = getBorderStyle(data.border || 'none');
+                    const isOnline = data.lastActive && (new Date() - data.lastActive.toDate()) < 120000;
+                    const onlineIndicator = `<span class="online-indicator ${isOnline ? 'online' : 'offline'}"></span>`;
                     body.innerHTML += `<tr style="background-color: ${bannerColor}30;">` +
-                        `<td><span style="display:inline-block; border-radius:50%; padding:2px; ${borderStyle}">${avatar}</span> ${u.id}${data.isAdmin ? ' ⭐' : ''}</td>` +
+                        `<td><span style="display:inline-flex; align-items:center; gap:5px; padding:2px; ${borderStyle}">${formatAvatar(avatar)}</span> ${u.id}${data.isAdmin ? ' ⭐' : ''} ${onlineIndicator}</td>` +
                         `<td style="text-align:right;">${data.netWorth || 0}</td></tr>`;
                 });
             });
@@ -2418,7 +2987,7 @@
             if (snap.exists()) {
                 await updateDoc(userRef, { isAdmin: true, password });
             } else {
-                await setDoc(userRef, { points:0, unlockedThemes:["bg-default"], unlockedBorders:["none"], unlockedTitles:["Novice"], isAdmin:true, password, level:1, xp:0, rankPoints:0, streak:0, dailyWords:0, lastLogin:'', friends:[], achievements:{}, avatar:'😀', title:'Admin', bannerColor:'#0f172a', border:'none', totalCorrect:0, wordOfDayAttempt:'', lastBonus:'' });
+                await setDoc(userRef, { points:0, unlockedThemes:["bg-default"], unlockedBorders:["none"], unlockedTitles:["Novice"], isAdmin:true, password, level:1, xp:0, rankPoints:0, streak:0, dailyWords:0, lastLogin:'', friends:[], achievements:{}, avatar:'pfp', title:'Admin', bannerColor:'#0f172a', border:'none', totalCorrect:0, wordOfDayAttempt:'', lastBonus:'' });
             }
             document.getElementById('admin-msg').innerText = `${username} is now Admin.`;
         });
@@ -2454,7 +3023,7 @@
             alert('Rank points reset');
         });
 
-        // ---------- Themes Shop (full list with animated themes) ----------
+        // ---------- Themes Shop (expanded with all new themes) ----------
         function getAllThemes() {
             return [
                 { className: 'bg-default', name: 'Default', cost: 0, default: true },
@@ -2476,7 +3045,6 @@
                 { className: 'bg-candy', name: 'Candy Land', cost: 40 },
                 { className: 'bg-lavender', name: 'Lavender', cost: 30 },
                 { className: 'bg-streak10', name: 'Streak Master', cost: 0, requiresStreak: true },
-                // Animated themes
                 { className: 'bg-rainbow', name: 'Rainbow', cost: 150 },
                 { className: 'bg-fire', name: 'Fire', cost: 180 },
                 { className: 'bg-ice', name: 'Ice', cost: 160 },
@@ -2490,8 +3058,36 @@
                 { className: 'bg-chess-pieces', name: 'Floating Pieces', cost: 120 },
                 { className: 'bg-chess-float', name: 'Chess Parade', cost: 150 },
                 { className: 'bg-chess-checker', name: 'Checker Wave', cost: 90 },
-                // Premium logo theme
-                { className: 'bg-logo', name: '🐝 Logo Premium', cost: 10000 }
+                { className: 'bg-deepseek', name: '🐝 Deepseek Premium', cost: 10000 },
+                { className: 'bg-poppyplaytime', name: '🎈 Poppy Playtime', cost: 5000 },
+                { className: 'bg-logo', name: '🐝 Logo Premium', cost: 10000 },
+                // New themes
+                { className: 'bg-aurora-borealis', name: 'Aurora Borealis', cost: 200 },
+                { className: 'bg-sunset-dream', name: 'Sunset Dream', cost: 150 },
+                { className: 'bg-cyberpunk', name: 'Cyberpunk', cost: 250 },
+                { className: 'bg-vaporwave', name: 'Vaporwave', cost: 180 },
+                { className: 'bg-forest-magic', name: 'Forest Magic', cost: 130 },
+                { className: 'bg-ocean-deep', name: 'Ocean Deep', cost: 140 },
+                { className: 'bg-lava-flow', name: 'Lava Flow', cost: 220 },
+                { className: 'bg-ice-cave', name: 'Ice Cave', cost: 210 },
+                { className: 'bg-midnight-city', name: 'Midnight City', cost: 170 },
+                { className: 'bg-rainbow-wave', name: 'Rainbow Wave', cost: 190 },
+                { className: 'bg-cotton-candy', name: 'Cotton Candy', cost: 120 },
+                { className: 'bg-steampunk', name: 'Steampunk', cost: 240 },
+                { className: 'bg-mystic', name: 'Mystic', cost: 200 },
+                { className: 'bg-retro', name: 'Retro', cost: 110 },
+                { className: 'bg-monochrome', name: 'Monochrome', cost: 80 },
+                { className: 'bg-dawn', name: 'Dawn', cost: 140 },
+                { className: 'bg-twilight', name: 'Twilight', cost: 150 },
+                { className: 'bg-dark-forest', name: 'Dark Forest', cost: 160 },
+                { className: 'bg-crystal', name: 'Crystal', cost: 230 },
+                { className: 'bg-nebula2', name: 'Nebula 2', cost: 270 },
+                { className: 'bg-sunset2', name: 'Sunset 2', cost: 150 },
+                { className: 'bg-aurora2', name: 'Aurora 2', cost: 220 },
+                { className: 'bg-galaxy2', name: 'Galaxy 2', cost: 280 },
+                { className: 'bg-space2', name: 'Space 2', cost: 290 },
+                { className: 'bg-matrix2', name: 'Matrix 2', cost: 260 },
+                { className: 'bg-thunder2', name: 'Thunder 2', cost: 200 }
             ];
         }
 
@@ -2523,6 +3119,10 @@
                         document.getElementById('main-body').className = t;
                         await updateDoc(doc(db, "users", currentUser.id), { unlockedThemes: currentUser.unlockedThemes });
                         renderShop();
+                        // Check collector achievement
+                        if (currentUser.unlockedThemes.length >= 10) {
+                            await checkAndUnlockAchievement('collector');
+                        }
                     } else {
                         alert("Not enough points!");
                     }
